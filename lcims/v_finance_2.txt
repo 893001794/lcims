@@ -1,0 +1,57 @@
+create view v_finance_2 as
+
+select
+(SELECT count( * ) FROM `t_quotation` WHERE month( NOW( ) ) - month( dcreatetime ) =1 and vpid like 'LCQ1%')as MonthLCQ_1,
+(SELECT sum(ftotalprice)  FROM `t_quotation` WHERE month( NOW( ) ) - month( dcreatetime ) =1 and vpid like 'LCQ1%')as MoneyLCQ_1,
+(SELECT count( * ) FROM `t_quotation` WHERE month( NOW( ) ) - month( dcreatetime ) =2 and vpid like 'LCQ1%')as MonthLCQ_2,
+(SELECT sum(ftotalprice)  FROM `t_quotation` WHERE month( NOW( ) ) - month( dcreatetime ) =2 and vpid like 'LCQ1%')as MoneyLCQ_2,
+(SELECT count( * ) FROM `t_quotation` WHERE month( NOW( ) ) - month( dcreatetime ) =3 and vpid like 'LCQ1%')as MonthLCQ_3,
+(SELECT sum(ftotalprice)  FROM `t_quotation` WHERE month( NOW( ) ) - month( dcreatetime ) =3 and vpid like 'LCQ1%')as MoneyLCQ_3,
+(SELECT count( * ) FROM `t_quotation` WHERE month( NOW( ) ) - month( dcreatetime ) =4 and vpid like 'LCQ1%')as MonthLCQ_4,
+(SELECT sum(ftotalprice)  FROM `t_quotation` WHERE month( NOW( ) ) - month( dcreatetime ) =4 and vpid like 'LCQ1%')as MoneyLCQ_4,
+(SELECT count( * ) FROM `t_quotation` WHERE month( NOW( ) ) - month( dcreatetime ) =5 and vpid like 'LCQ1%')as MonthLCQ_5,
+(SELECT sum(ftotalprice)  FROM `t_quotation` WHERE month( NOW( ) ) - month( dcreatetime ) =5 and vpid like 'LCQ1%')as MoneyLCQ_5,
+(SELECT count( * ) FROM `t_quotation` WHERE month( NOW( ) ) - month( dcreatetime ) =6 and vpid like 'LCQ1%')as MonthLCQ_6,
+(SELECT sum(ftotalprice)  FROM `t_quotation` WHERE month( NOW( ) ) - month( dcreatetime ) =6 and vpid like 'LCQ1%')as MoneyLCQ_6 union
+
+select
+(SELECT count( * ) FROM `t_quotation` WHERE month( NOW( ) ) - month( dcreatetime ) =1 and vpid like 'LCQ2%'),
+(SELECT sum(ftotalprice)  FROM `t_quotation` WHERE month( NOW( ) ) - month( dcreatetime ) =1 and vpid like 'LCQ2%'),
+(SELECT count( * ) FROM `t_quotation` WHERE month( NOW( ) ) - month( dcreatetime ) =2 and vpid like 'LCQ2%'),
+(SELECT sum(ftotalprice)  FROM `t_quotation` WHERE month( NOW( ) ) - month( dcreatetime ) =2 and vpid like 'LCQ2%'),
+(SELECT count( * ) FROM `t_quotation` WHERE month( NOW( ) ) - month( dcreatetime ) =3 and vpid like 'LCQ2%'),
+(SELECT sum(ftotalprice)  FROM `t_quotation` WHERE month( NOW( ) ) - month( dcreatetime ) =3 and vpid like 'LCQ2%'),
+(SELECT count( * ) FROM `t_quotation` WHERE month( NOW( ) ) - month( dcreatetime ) =4 and vpid like 'LCQ2%'),
+(SELECT sum(ftotalprice)  FROM `t_quotation` WHERE month( NOW( ) ) - month( dcreatetime ) =4 and vpid like 'LCQ2%'),
+(SELECT count( * ) FROM `t_quotation` WHERE month( NOW( ) ) - month( dcreatetime ) =5 and vpid like 'LCQ2%'),
+(SELECT sum(ftotalprice)  FROM `t_quotation` WHERE month( NOW( ) ) - month( dcreatetime ) =5 and vpid like 'LCQ2%'),
+(SELECT count( * ) FROM `t_quotation` WHERE month( NOW( ) ) - month( dcreatetime ) =6 and vpid like 'LCQ2%'),
+(SELECT sum(ftotalprice)  FROM `t_quotation` WHERE month( NOW( ) ) - month( dcreatetime ) =6 and vpid like 'LCQ2%') union
+
+select
+(SELECT count( * ) FROM `t_quotation` WHERE month( NOW( ) ) - month( dcreatetime ) =1 and vpid like 'LCQD%'),
+(SELECT sum(ftotalprice)  FROM `t_quotation` WHERE month( NOW( ) ) - month( dcreatetime ) =1 and vpid like 'LCQD%'),
+(SELECT count( * ) FROM `t_quotation` WHERE month( NOW( ) ) - month( dcreatetime ) =2 and vpid like 'LCQD%'),
+(SELECT sum(ftotalprice)  FROM `t_quotation` WHERE month( NOW( ) ) - month( dcreatetime ) =2 and vpid like 'LCQD%'),
+(SELECT count( * ) FROM `t_quotation` WHERE month( NOW( ) ) - month( dcreatetime ) =3 and vpid like 'LCQD%'),
+(SELECT sum(ftotalprice)  FROM `t_quotation` WHERE month( NOW( ) ) - month( dcreatetime ) =3 and vpid like 'LCQD%'),
+(SELECT count( * ) FROM `t_quotation` WHERE month( NOW( ) ) - month( dcreatetime ) =4 and vpid like 'LCQD%'),
+(SELECT sum(ftotalprice)  FROM `t_quotation` WHERE month( NOW( ) ) - month( dcreatetime ) =4 and vpid like 'LCQD%'),
+(SELECT count( * ) FROM `t_quotation` WHERE month( NOW( ) ) - month( dcreatetime ) =5 and vpid like 'LCQD%'),
+(SELECT sum(ftotalprice)  FROM `t_quotation` WHERE month( NOW( ) ) - month( dcreatetime ) =5 and vpid like 'LCQD%'),
+(SELECT count( * ) FROM `t_quotation` WHERE month( NOW( ) ) - month( dcreatetime ) =6 and vpid like 'LCQD%'),
+(SELECT sum(ftotalprice)  FROM `t_quotation` WHERE month( NOW( ) ) - month( dcreatetime ) =6 and vpid like 'LCQD%') union
+
+select
+(SELECT count( * ) FROM `t_quotation` WHERE month( NOW( ) ) - month( dcreatetime ) =1 and vpid like 'LCQG%'),
+(SELECT sum(ftotalprice)  FROM `t_quotation` WHERE month( NOW( ) ) - month( dcreatetime ) =1 and vpid like 'LCQG%'),
+(SELECT count( * ) FROM `t_quotation` WHERE month( NOW( ) ) - month( dcreatetime ) =2 and vpid like 'LCQG%'),
+(SELECT sum(ftotalprice)  FROM `t_quotation` WHERE month( NOW( ) ) - month( dcreatetime ) =2 and vpid like 'LCQG%'),
+(SELECT count( * ) FROM `t_quotation` WHERE month( NOW( ) ) - month( dcreatetime ) =3 and vpid like 'LCQG%'),
+(SELECT sum(ftotalprice)  FROM `t_quotation` WHERE month( NOW( ) ) - month( dcreatetime ) =3 and vpid like 'LCQG%'),
+(SELECT count( * ) FROM `t_quotation` WHERE month( NOW( ) ) - month( dcreatetime ) =4 and vpid like 'LCQG%'),
+(SELECT sum(ftotalprice)  FROM `t_quotation` WHERE month( NOW( ) ) - month( dcreatetime ) =4 and vpid like 'LCQG%'),
+(SELECT count( * ) FROM `t_quotation` WHERE month( NOW( ) ) - month( dcreatetime ) =5 and vpid like 'LCQG%'),
+(SELECT sum(ftotalprice)  FROM `t_quotation` WHERE month( NOW( ) ) - month( dcreatetime ) =5 and vpid like 'LCQG%'),
+(SELECT count( * ) FROM `t_quotation` WHERE month( NOW( ) ) - month( dcreatetime ) =6 and vpid like 'LCQG%'),
+(SELECT sum(ftotalprice)  FROM `t_quotation` WHERE month( NOW( ) ) - month( dcreatetime ) =6 and vpid like 'LCQG%')

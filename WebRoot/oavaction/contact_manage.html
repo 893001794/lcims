@@ -1,0 +1,30 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<script type="text/javascript">
+		var url =window.location.search;
+			var args = url.split("?");
+			var retval = ""; 
+			var str = args[1]; 
+			args = str.split("&"); 
+			//alert(args);
+				for(var i = 0; i < args.length; i++ ) {
+					str= args[i]; 
+					retval+=str+"&"
+					//var arg = str.split("="); 
+					//if(arg.length <= 1) continue; 
+					//retval=arg[1];
+				}
+				retval=retval.substring(0, retval.length-1);
+				window.onload=function(){
+				document.getElementById("frame1").src="addContact.jsp?"+retval;
+				document.getElementById("frame2").src="contact.jsp?"+retval;
+				}
+	</script>
+</head>
+<frameset rows="50%,*" framespacing="0" frameborder="0" border="0">
+	<frame src="" id ="frame1" name="frame1">
+	<frame src="" id ="frame2" name ="frame2">
+</frameset>
+</html>
+

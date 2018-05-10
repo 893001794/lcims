@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/activation.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/c3p0-0.9.1.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/commons-email-1.2.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/csvjdbc.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/dom4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/filterbuilder.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/htmllexer.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/htmlparser.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/jaxen-1.1-beta-6.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/jcom.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/js.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/jspsmart.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/jxl-2.6.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/log4j-1.2.15.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/mail.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/msbase.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/mssqlserver.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/msutil.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/mysql-connector-java-5.0.8-bin.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/poi-3.5-FINAL-20090928.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/poi-contrib-3.5-FINAL-20090928.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/poi-ooxml-3.5-FINAL-20090928.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/poi-scratchpad-3.5-FINAL-20090928.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/RmiJdbc.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/sitecapturer.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/thumbelina.jar"/>
+	<classpathentry kind="con" path="melibrary.com.genuitec.eclipse.j2eedt.core.MYECLIPSE_JAVAEE_6_CONTAINER"/>
+	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
+</classpath>
