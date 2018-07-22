@@ -541,7 +541,7 @@
 						</td>
 						<td>
 							<select name="invtype" style="width: 300px">
-							<option value="发票" selected>
+							<%--<option value="发票" selected>
 									发票
 								</option>
 								<option value="全额">
@@ -552,6 +552,15 @@
 								</option>
 								<option value="借开">
 									借开
+								</option>
+								<option value="收据">
+									收据
+								</option>--%>
+								<option value="普通发票">
+									普通发票
+								</option>
+								<option value="专用发票">
+									专用发票
 								</option>
 								<option value="收据">
 									收据

@@ -114,79 +114,81 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
 		 %>
 		支付分包费A日期：<select name ="dsubcosttime" id ="dsubcosttime">
 			<option value="" selected="selected">请选择月份</option>
-			<option value="1">1</option>
-			<option value="2">2</option>
-			<option value="3">3</option>
-			<option value="4">4</option>
-			<option value="5">5</option>
-			<option value="6">6</option>
-			<option value="7">7</option>
-			<option value="8">8</option>
-			<option value="9">9</option>
-			<option value="10">10</option>
-			<option value="11">11</option>
-			<option value="12">12</option>
+			<option value="1" <%=("1").equals(dsubcosttime)?"selected":"" %>>1</option>
+			<option value="2" <%=("2").equals(dsubcosttime)?"selected":"" %>>2</option>
+			<option value="3" <%=("3").equals(dsubcosttime)?"selected":"" %>>3</option>
+			<option value="4" <%=("4").equals(dsubcosttime)?"selected":"" %>>4</option>
+			<option value="5" <%=("5").equals(dsubcosttime)?"selected":"" %>>5</option>
+			<option value="6" <%=("6").equals(dsubcosttime)?"selected":"" %>>6</option>
+			<option value="7" <%=("7").equals(dsubcosttime)?"selected":"" %>>7</option>
+			<option value="8" <%=("8").equals(dsubcosttime)?"selected":"" %>>8</option>
+			<option value="9" <%=("9").equals(dsubcosttime)?"selected":"" %>>9</option>
+			<option value="10" <%=("10").equals(dsubcosttime)?"selected":"" %>>10</option>
+			<option value="11" <%=("11").equals(dsubcosttime)?"selected":"" %>>11</option>
+			<option value="12" <%=("12").equals(dsubcosttime)?"selected":"" %>>12</option>
 		</select>
 		支付分包费B日期：<select name ="dsubcosttime2" id ="dsubcosttime2">
 			<option value="" selected="selected">请选择月份</option>
-			<option value="1">1</option>
-			<option value="2">2</option>
-			<option value="3">3</option>
-			<option value="4">4</option>
-			<option value="5">5</option>
-			<option value="6">6</option>
-			<option value="7">7</option>
-			<option value="8">8</option>
-			<option value="9">9</option>
-			<option value="10">10</option>
-			<option value="11">11</option>
-			<option value="12">12</option>
+			<option value="1" <%=("1").equals(dsubcosttime2)?"selected":"" %>>1</option>
+			<option value="2" <%=("2").equals(dsubcosttime2)?"selected":"" %>>2</option>
+			<option value="3" <%=("3").equals(dsubcosttime2)?"selected":"" %>>3</option>
+			<option value="4" <%=("4").equals(dsubcosttime2)?"selected":"" %>>4</option>
+			<option value="5" <%=("5").equals(dsubcosttime2)?"selected":"" %>>5</option>
+			<option value="6" <%=("6").equals(dsubcosttime2)?"selected":"" %>>6</option>
+			<option value="7" <%=("7").equals(dsubcosttime2)?"selected":"" %>>7</option>
+			<option value="8" <%=("8").equals(dsubcosttime2)?"selected":"" %>>8</option>
+			<option value="9" <%=("9").equals(dsubcosttime2)?"selected":"" %>>9</option>
+			<option value="10" <%=("10").equals(dsubcosttime2)?"selected":"" %>>10</option>
+			<option value="11" <%=("11").equals(dsubcosttime2)?"selected":"" %>>11</option>
+			<option value="12" <%=("12").equals(dsubcosttime2)?"selected":"" %>>12</option>
 		</select>
 		机构费用支付日期：<select name ="dagtime" id ="dagtime">
 			<option value="" selected="selected">请选择月份</option>
-			<option value="1">1</option>
-			<option value="2">2</option>
-			<option value="3">3</option>
-			<option value="4">4</option>
-			<option value="5">5</option>
-			<option value="6">6</option>
-			<option value="7">7</option>
-			<option value="8">8</option>
-			<option value="9">9</option>
-			<option value="10">10</option>
-			<option value="11">11</option>
-			<option value="12">12</option>
+			<option value="1" <%=("1").equals(dagtime)?"selected":"" %>>1</option>
+			<option value="2" <%=("2").equals(dagtime)?"selected":"" %>>2</option>
+			<option value="3" <%=("3").equals(dagtime)?"selected":"" %>>3</option>
+			<option value="4" <%=("4").equals(dagtime)?"selected":"" %>>4</option>
+			<option value="5" <%=("5").equals(dagtime)?"selected":"" %>>5</option>
+			<option value="6" <%=("6").equals(dagtime)?"selected":"" %>>6</option>
+			<option value="7" <%=("7").equals(dagtime)?"selected":"" %>>7</option>
+			<option value="8" <%=("8").equals(dagtime)?"selected":"" %>>8</option>
+			<option value="9" <%=("9").equals(dagtime)?"selected":"" %>>9</option>
+			<option value="10" <%=("10").equals(dagtime)?"selected":"" %>>10</option>
+			<option value="11" <%=("11").equals(dagtime)?"selected":"" %>>11</option>
+			<option value="12" <%=("12").equals(dagtime)?"selected":"" %>>12</option>
 		</select>
 		特殊接待费支付日期：<select name ="spefundtime" id ="spefundtime">
 			<option value="" selected="selected">请选择月份</option>
-			<option value="1">1</option>
-			<option value="2">2</option>
-			<option value="3">3</option>
-			<option value="4">4</option>
-			<option value="5">5</option>
-			<option value="6">6</option>
-			<option value="7">7</option>
-			<option value="8">8</option>
-			<option value="9">9</option>
-			<option value="10">10</option>
-			<option value="11">11</option>
-			<option value="12">12</option>
+			<option value="" selected="selected">请选择月份</option>
+			<option value="1" <%=("1").equals(spefundtime)?"selected":"" %>>1</option>
+			<option value="2" <%=("2").equals(spefundtime)?"selected":"" %>>2</option>
+			<option value="3" <%=("3").equals(spefundtime)?"selected":"" %>>3</option>
+			<option value="4" <%=("4").equals(spefundtime)?"selected":"" %>>4</option>
+			<option value="5" <%=("5").equals(spefundtime)?"selected":"" %>>5</option>
+			<option value="6" <%=("6").equals(spefundtime)?"selected":"" %>>6</option>
+			<option value="7" <%=("7").equals(spefundtime)?"selected":"" %>>7</option>
+			<option value="8" <%=("8").equals(spefundtime)?"selected":"" %>>8</option>
+			<option value="9" <%=("9").equals(spefundtime)?"selected":"" %>>9</option>
+			<option value="10" <%=("10").equals(spefundtime)?"selected":"" %>>10</option>
+			<option value="11" <%=("11").equals(spefundtime)?"selected":"" %>>11</option>
+			<option value="12" <%=("12").equals(spefundtime)?"selected":"" %>>12</option>
 		</select>
 		
 		支付分包费A/B/机构日期：<select name ="counttime" id ="counttime">
 			<option value="" selected="selected">请选择月份</option>
-			<option value="1">1</option>
-			<option value="2">2</option>
-			<option value="3">3</option>
-			<option value="4">4</option>
-			<option value="5">5</option>
-			<option value="6">6</option>
-			<option value="7">7</option>
-			<option value="8">8</option>
-			<option value="9">9</option>
-			<option value="10">10</option>
-			<option value="11">11</option>
-			<option value="12">12</option>
+			<option value="" selected="selected">请选择月份</option>
+			<option value="1" <%=("1").equals(counttime)?"selected":"" %>>1</option>
+			<option value="2" <%=("2").equals(counttime)?"selected":"" %>>2</option>
+			<option value="3" <%=("3").equals(counttime)?"selected":"" %>>3</option>
+			<option value="4" <%=("4").equals(counttime)?"selected":"" %>>4</option>
+			<option value="5" <%=("5").equals(counttime)?"selected":"" %>>5</option>
+			<option value="6" <%=("6").equals(counttime)?"selected":"" %>>6</option>
+			<option value="7" <%=("7").equals(counttime)?"selected":"" %>>7</option>
+			<option value="8" <%=("8").equals(counttime)?"selected":"" %>>8</option>
+			<option value="9" <%=("9").equals(counttime)?"selected":"" %>>9</option>
+			<option value="10" <%=("10").equals(counttime)?"selected":"" %>>10</option>
+			<option value="11" <%=("11").equals(counttime)?"selected":"" %>>11</option>
+			<option value="12" <%=("12").equals(counttime)?"selected":"" %>>12</option>
 		</select>
 		<%
 		}
@@ -278,9 +280,9 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
     for(int i=0;i<list.size();i++) {
     	Quotation qt = list.get(i);
     	String str="";
-    	if(qt.getQuotype().equals("flu")){
+    	/*if(qt.getQuotype().equals("flu")){
     	str="-";
-    	}
+    	}*/
     	UserForm sales = UserAction.getInstance().getUserByName(qt.getSales());
 		String dept = "";
 		if("中山".equals(sales.getCompany())) {

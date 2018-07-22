@@ -117,10 +117,9 @@ public class FinanceQuotationExport extends HttpServlet {
 				row.createCell(6).setCellValue(qt.getProjectcontent());
 				//如果是冲红就为负数
 				String str  ="";
-				
-				if(qt.getQuotype().equals("flu")){
+				/*if(qt.getQuotype().equals("flu")){
 					str="-";
-				}
+				}*/
 				row.createCell(7).setCellValue(str+qt.getTotalprice());
 				row.createCell(8).setCellValue(qt.getInvtype());
 			

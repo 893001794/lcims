@@ -424,9 +424,9 @@
 						</td>
 					</tr>
 					<tr>
-						<td>机构费用备注</td>
-						<td>
-						<textarea name="agremarks" rows="3" cols="80"><%=p.getAgremarks()==null?"":p.getAgremarks() %></textarea>
+						<td width="160">机构费用备注</td>
+						<td colspan="3">
+						<textarea name="agremarks" rows="6" cols="140"><%=p.getAgremarks()==null?"":p.getAgremarks() %></textarea>
 						</td>
 					</tr>
 					<tr>

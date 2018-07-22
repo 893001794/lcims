@@ -48,7 +48,7 @@ UserForm user = (UserForm)session.getAttribute("user");
 		f=FinanceQuotationAction.getInstance().getFinanceProject2(year,month,command,list,"",area,quostart,quoend,acceptstart,acceptend,paytimestart,paytimeend);
 }else{
 		
-		f = FinanceQuotationAction.getInstance().getFinanceProject2(year,month,command,list,"",area,quostart,quoend,acceptstart,acceptend,paytimestart,paytimeend);
+		f=FinanceQuotationAction.getInstance().getFinanceProject2(year,month,command,list,"",area,quostart,quoend,acceptstart,acceptend,paytimestart,paytimeend);
 
 }
 session.setAttribute("financequotation2",list);
@@ -223,6 +223,7 @@ function searchsales(){
 	  <td  align="center" valign="middle">业绩小计</td>
 	  <td  align="center" valign="middle">业绩系数</td>
 	  <td  align="center" valign="middle">实计业绩</td>
+	  <td  align="center" valign="middle">结案时间</td>
     </tr>
     
     <%
@@ -278,6 +279,7 @@ function searchsales(){
       <td><%=FinanceQuotationAction.getInstance().getFourToFive1(b-qt.getTotalprice()*0.08 *c-qt.getPresubcost()*c-qt.getSpefund()*c)%></td>
       <td><%=qt.getAdvarceFactor()+","+qt.getSepayFactor()+","+qt.getBalanceFactor() %></td>
       <td>222</td>
+	  <td><%=qt.getFinish()==null?"":qt.getFinish()%></td>
     </tr>
     
     <%

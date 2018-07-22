@@ -244,7 +244,7 @@ function delpay()
 		<table width="100%" border="0" cellpadding="2" cellspacing="0"
 			align="center" class=TableBorder>
 			<tr height="22" valign="middle" align="center">
-				<th height="25" colspan="14">
+				<th height="25" colspan="16">
 					报价清单搜索结果
 				</th>
 			</tr>
@@ -285,6 +285,11 @@ function delpay()
 						已收金额(元)
 					</div>
 				</td>
+				<td  class=forumrow >
+					<div align="center">
+						未收金额(元)
+					</div>
+				</td>
 				<td class=forumrow>
 					<div align="center">
 						收款方式
@@ -305,12 +310,22 @@ function delpay()
 						收单日期
 					</div>
 				</td>
+				<td class=forumrow width="6%">
+					<div align="center">
+						票据类型
+					</div>
+				</td>
+				<td class=forumrow width="6%">
+					<div align="center">
+						票据编号
+					</div>
+				</td>
 				<td class=forumrow>
 					<div align="center">
 						状态
 					</div>
 				</td>
-				<td class=forumrow width="15%">
+				<td class=forumrow width="9%">
 					<div align="center">
 						操作
 					</div>
@@ -384,6 +399,14 @@ function delpay()
 							: new DecimalFormat("##,###,###,###.00").format(preprice)%>
 					</div>
 				</td>
+				<td >
+					<div align="right">
+						<%
+							float noPay =qt.getTotalprice()-preprice;
+						%>
+						<%=noPay == 0 ? "0.00" : new DecimalFormat("##,###,###,###.00").format(noPay)%>
+					</div>
+				</td>
 				<td>
 					<div align="center">
 						<%=qt.getAdvancetype() == null ? "" : qt
@@ -405,6 +428,16 @@ function delpay()
 						<%=qt.getConfirmtime() == null ? ""
 							: new SimpleDateFormat("yyyy-MM-dd HH:mm")
 									.format(qt.getConfirmtime())%>
+					</div>
+				</td>
+				<td>
+					<div align="center">
+						<%=(qt.getPaynotes()==null||"".equals(qt.getPaynotes()))?"":qt.getPaynotes()%>
+					</div>
+				</td>
+				<td>
+					<div align="center">
+						<%=(qt.getInvcode()==null||"".equals(qt.getInvcode()))?"":qt.getInvcode()%>
 					</div>
 				</td>
 				<td>
@@ -442,12 +475,10 @@ function delpay()
 					<%
 					}
 					 %>
-					 <!-- <a
-							href="../../cashcount/fincome.jsp?pid=<%=qt.getPid()%>"
-							style="color: blue">入账</a> -->
-							 <a
+					 <!--  <a
 							href="../../cashcount/editfincome.jsp?pid=<%=qt.getPid()%>"
-							style="color: blue">修改入账</a>
+							style="color: blue">修改入账</a>-->
+
 					</div>
 					
 				</td>
@@ -457,7 +488,7 @@ function delpay()
 			}
 			%>
 			<tr style="background-color: #E0F8E0">
-				<td height="25" colspan="12" align="left">
+				<td height="25" colspan="16" align="left">
 					<div align="center">
 						记录总条数：<%=pm.getTotalRecords()%>
 						当前页/总页数:<%=pm.getPageNo()%>/<%=pm.getTotalPages()%>

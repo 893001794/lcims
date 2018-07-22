@@ -9,7 +9,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.jms.Topic;
+
 
 import com.lccert.crm.chemistry.util.DB;
 import com.lccert.crm.dao.ChemTestDao;
@@ -18,7 +18,8 @@ import com.lccert.crm.vo.TestParents;
 import com.lccert.crm.vo.TestPlan;
 import com.lccert.crm.vo.TopLevel;
 /***
- * »¯Ñ§²âÊÔµÄÏÖÊµÀà
+ * import javax.jms.Topic;
+ * ï¿½ï¿½Ñ§ï¿½ï¿½ï¿½Ôµï¿½ï¿½ï¿½Êµï¿½ï¿½
  * @author tangzp
  *
  */
@@ -33,7 +34,7 @@ private static ChemTestDaoImpl soi =null;
 		return soi;
 	}
 	/**
-	 * ²éÑ¯²âÊÔÒªÇóµÄËùÒÔÃû³Æ
+	 * ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * 
 	 */
 	public List findChemTestChild() {
@@ -71,7 +72,7 @@ private static ChemTestDaoImpl soi =null;
 
 	
 	/**
-	 * ²éÑ¯²âÊÔÏîÄ¿µÄËùÒÔÃû³Æ
+	 * ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * 
 	 */
 	public List findChemTestParent() {
@@ -107,7 +108,7 @@ private static ChemTestDaoImpl soi =null;
 	}
 	
 	/**
-	 * Ìí¼Ó¶þ¼¶·ÖÀà
+	 * ï¿½ï¿½Ó¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	public boolean addChild(TestChildParent tp) {
 		Connection conn = null;
@@ -150,7 +151,7 @@ private static ChemTestDaoImpl soi =null;
 	}
 	
 	/**
-	 * Ìí¼ÓÒ»¼¶·ÖÀà
+	 * ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	
 	
@@ -196,7 +197,7 @@ private static ChemTestDaoImpl soi =null;
 
 	}
 	/**
-	 *¸ü¸ÄÒ»¼¶·ÖÀà
+	 *ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	public boolean upParent(TestParents tp) {
 
@@ -241,7 +242,7 @@ private static ChemTestDaoImpl soi =null;
 	}
 	
 	/**
-	 * ÐÞ¸Ä¶þ¼¶·ÖÀà
+	 * ï¿½Þ¸Ä¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	public boolean upChild(TestChildParent tp) {
 		Connection conn = null;
@@ -285,7 +286,7 @@ private static ChemTestDaoImpl soi =null;
 	}
 	
 	/**
-	 * ¸ü¸ÄÈý¼¶·ÖÀà
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	public boolean upPlan(TestPlan tp) {
 		Connection conn = null;
@@ -334,7 +335,7 @@ private static ChemTestDaoImpl soi =null;
 		return isok;
 	}
 	/**
-	 * Ìí¼ÓÈý¼¶·ÖÀà
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	public boolean addPlan(TestPlan tp) {
 		Connection conn = null;
@@ -383,7 +384,7 @@ private static ChemTestDaoImpl soi =null;
 	}
 	
 	/**
-	 * ¸ù¾ÝÌõ¼þ²éÑ¯ËùÒÔ²âÊÔÒªÇóÖµ
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½Ô²ï¿½ï¿½ï¿½Òªï¿½ï¿½Öµ
 	 */
 	public List findChemTestChild(String type) {
 		String sql ="select ctc.id as id ,ctc.name as name,ctc.type as type,ctc.vstatus as vstatus ,ctp.name as parentname  from t_chem_test_child as ctc , t_chem_test_parent as ctp   where ctc.id>=101 and ctc.vstatus ='y' and ctp.id = ctc.category and ctc.type ='"+type+"' order by ctc.vstatus,ctp.id asc";
@@ -547,7 +548,7 @@ private static ChemTestDaoImpl soi =null;
 	
 	
 	/**
-	 * ¸ù¾Ýid ²éÑ¯Ò»¼¶·ÖÀà
+	 * ï¿½ï¿½ï¿½ï¿½id ï¿½ï¿½Ñ¯Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	public TestParents getParentsById(int id) {
 		String sql ="select * from t_chem_test_parent where id>=101 and vstatus ='y'and id="+id+" order by id asc";
@@ -651,7 +652,7 @@ private static ChemTestDaoImpl soi =null;
 	}
 	
 	/***
-	 * Ìí¼Ó¶¥¼¶µÄÐÅÏ¢
+	 * ï¿½ï¿½Ó¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
 	 */
 	public boolean addTopLevel(String levelName,String chemteststatus) {
 //		System.out.println(levelName+":levelName--"+chemteststatus+"---");

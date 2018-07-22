@@ -893,9 +893,9 @@ try{
 								<%
 								if(oldPid !=null && !"".equals(oldPid )){
 								%>
-								<option value="不含机构费用"  <%=order.getInvtype().equals("不含机构费用")?"selected":"" %>>
+								<%--<option value="不含机构费用"  <%=order.getInvtype().equals("不含机构费用")?"selected":"" %>>
 									不含机构费用
-								</option>
+								</option>--%>
 								<option value="专用发票"  <%=order.getInvtype().equals("专用发票")?"selected":"" %>>专用发票</option>
 								<!-- <option value="借开"  <%=order.getInvtype().equals("借开")?"selected":"" %>>
 									借开
@@ -903,20 +903,26 @@ try{
 								<option value="收据"  <%=order.getInvtype().equals("收据")?"selected":"" %>>
 									收据
 								</option>
+								<option value="形式发票"  <%=order.getInvtype().equals("形式发票")?"selected":"" %>>
+									形式发票
+								</option>
 								<%
 								}
 								else{
 								%>
-								
-								<option value="不含机构费用" >
+
+								<!--<option value="不含机构费用" >
 									不含机构费用
 								</option>
-								<!-- <option value="借开" >
+								 <option value="借开" >
 									借开
 								</option> -->
 								<option value="专用发票" selected>专用发票</option>
 								<option value="收据" >
 									收据
+								</option>
+								<option value="形式发票" >
+									形式发票
 								</option>
 								<%
 								}

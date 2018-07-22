@@ -141,6 +141,8 @@ public class FinanceQuotationAction {
 				qt.setAudittime(rs.getTimestamp("daudittime"));
 				qt.setSepay(rs.getFloat("fsepay"));
 				qt.setBalance(rs.getFloat("fbalance"));
+				qt.setPaynotes(rs.getString("vpaynotes"));
+				qt.setInvcode(rs.getString("vinvcode"));
 				list.add(qt);
 			}
 			String tsql=null;
@@ -478,28 +480,28 @@ public class FinanceQuotationAction {
 		
 		 //支付分包费A日期
 	 if (dsubcosttime != null && !"".equals(dsubcosttime)) {
-			sql ="select distinct(a.vpid),a.Fothercost,a.dconfirmtime,a.vsales,a.vclient,a.ftotalprice,a.einvtype,a.fpreadvance,a.vcreditcard,a.dpaytime,a.fsepay,a.fprebalance,a.fpresubcost,a.fpreagcost,a.fspefund,a.ftax,a.fsubcost,a.vcollremarks,a.vprojectcontent,a.voldpid,a.equotype,p.dsubcosttime,p.dsubcosttime2,p.dagtime  from t_quotation  as a,t_project  as p  where 1=1 and p.vpid =a.vpid and  year(p.dsubcosttime)=year(now()) and month(p.dsubcosttime)='"+dsubcosttime+"' and p.dsubcosttime is not null and ((p.Fagcost > 0) or (p.Fsubcost > 0) or(p.Fsubcost2 >0) or (a.Fspefund >0))   group by a.vpid  order by a.dcreatetime desc";
+			sql ="select distinct(a.vpid),a.fbalance,a.fsepayFactor,a.fadvarceFactor,a.fbalanceFactor,a.Fothercost,a.dconfirmtime,a.vsales,a.vclient,a.ftotalprice,a.einvtype,a.fpreadvance,a.vcreditcard,a.dpaytime,a.fsepay,a.fprebalance,a.fpresubcost,a.fpreagcost,a.fspefund,a.ftax,a.fsubcost,a.vcollremarks,a.vprojectcontent,a.voldpid,a.equotype,p.dsubcosttime,p.dsubcosttime2,p.dagtime  from t_quotation  as a,t_project  as p  where 1=1 and p.vpid =a.vpid and  year(p.dsubcosttime)=year(now()) and month(p.dsubcosttime)='"+dsubcosttime+"' and p.dsubcosttime is not null and ((p.Fagcost > 0) or (p.Fsubcost > 0) or(p.Fsubcost2 >0) or (a.Fspefund >0))   group by a.vpid  order by a.dcreatetime desc";
 		}
 	 //支付分包费B日期
 		else if (dsubcosttime2 != null && !"".equals(dsubcosttime2)) {
-			sql ="select distinct(a.vpid),a.Fothercost,a.dconfirmtime,a.vsales,a.vclient,a.ftotalprice,a.einvtype,a.fpreadvance,a.vcreditcard,a.dpaytime,a.fsepay,a.fprebalance,a.fpresubcost,a.fpreagcost,a.fspefund,a.ftax,a.fsubcost,a.vcollremarks,a.vprojectcontent,a.voldpid,a.equotype,p.dsubcosttime,p.dsubcosttime2,p.dagtime  from t_quotation  as a,t_project  as p  where 1=1 and p.vpid =a.vpid and  year(p.dsubcosttime2)=year(now()) and month(p.dsubcosttime2)='"+dsubcosttime2+"' and p.dsubcosttime2 is not null and ((p.Fagcost > 0) or (p.Fsubcost > 0) or(p.Fsubcost2 >0) or (a.Fspefund >0)) group by a.vpid    order by a.dcreatetime desc";
+			sql ="select distinct(a.vpid),a.fbalance,a.fsepayFactor,a.fadvarceFactor,a.fbalanceFactor,a.Fothercost,a.dconfirmtime,a.vsales,a.vclient,a.ftotalprice,a.einvtype,a.fpreadvance,a.vcreditcard,a.dpaytime,a.fsepay,a.fprebalance,a.fpresubcost,a.fpreagcost,a.fspefund,a.ftax,a.fsubcost,a.vcollremarks,a.vprojectcontent,a.voldpid,a.equotype,p.dsubcosttime,p.dsubcosttime2,p.dagtime  from t_quotation  as a,t_project  as p  where 1=1 and p.vpid =a.vpid and  year(p.dsubcosttime2)=year(now()) and month(p.dsubcosttime2)='"+dsubcosttime2+"' and p.dsubcosttime2 is not null and ((p.Fagcost > 0) or (p.Fsubcost > 0) or(p.Fsubcost2 >0) or (a.Fspefund >0)) group by a.vpid    order by a.dcreatetime desc";
 		}
 	// 机构费用支付日期
 		else if (dagtime != null && !"".equals(dagtime)) {
-			sql ="select distinct(a.vpid),a.Fothercost,a.dconfirmtime,a.vsales,a.vclient,a.ftotalprice,a.einvtype,a.fpreadvance,a.vcreditcard,a.dpaytime,a.fsepay,a.fprebalance,a.fpresubcost,a.fpreagcost,a.fspefund,a.ftax,a.fsubcost,a.vcollremarks,a.vprojectcontent,a.voldpid,a.equotype,p.dsubcosttime,p.dsubcosttime2,p.dagtime  from t_quotation  as a,t_project  as p  where 1=1 and p.vpid =a.vpid and  year(p.dagtime)=year(now()) and month(p.dagtime)='"+dagtime+"' and p.dagtime is not null and ((p.Fagcost > 0) or (p.Fsubcost > 0) or(p.Fsubcost2 >0) or (a.Fspefund >0))  group by a.vpid   order by a.dcreatetime desc";
+			sql ="select distinct(a.vpid),a.fbalance,a.fsepayFactor,fsepayFactor,a.fadvarceFactor,a.fbalanceFactor,a.Fothercost,a.dconfirmtime,a.vsales,a.vclient,a.ftotalprice,a.einvtype,a.fpreadvance,a.vcreditcard,a.dpaytime,a.fsepay,a.fprebalance,a.fpresubcost,a.fpreagcost,a.fspefund,a.ftax,a.fsubcost,a.vcollremarks,a.vprojectcontent,a.voldpid,a.equotype,p.dsubcosttime,p.dsubcosttime2,p.dagtime  from t_quotation  as a,t_project  as p  where 1=1 and p.vpid =a.vpid and  year(p.dagtime)=year(now()) and month(p.dagtime)='"+dagtime+"' and p.dagtime is not null and ((p.Fagcost > 0) or (p.Fsubcost > 0) or(p.Fsubcost2 >0) or (a.Fspefund >0))  group by a.vpid   order by a.dcreatetime desc";
 		}
 	// 特殊接待费支付日期
 		else if(spefundtime !=null && !"".equals(spefundtime)){
-			sql ="select distinct(a.vpid),a.Fothercost,a.dconfirmtime,a.vsales,a.vclient,a.ftotalprice,a.einvtype,a.fpreadvance,a.vcreditcard,a.dpaytime,a.fsepay,a.fprebalance,a.fpresubcost,a.fpreagcost,a.fspefund,a.ftax,a.fsubcost,a.vcollremarks,a.vprojectcontent,a.voldpid,a.equotype,p.dsubcosttime,p.dsubcosttime2,p.dagtime  from t_quotation  as a,t_project  as p  where 1=1 and p.vpid =a.vpid and  year(dspefundtime)=year(now()) and month(dspefundtime)='"+spefundtime+"' and dspefundtime is not null  and ((p.Fagcost > 0) or (p.Fsubcost > 0) or(p.Fsubcost2 >0) or (a.Fspefund >0))   group by a.vpid   order by a.dcreatetime desc";
+			sql ="select distinct(a.vpid),a.fbalance,a.fsepayFactor,a.fadvarceFactor,a.fbalanceFactor,a.Fothercost,a.dconfirmtime,a.vsales,a.vclient,a.ftotalprice,a.einvtype,a.fpreadvance,a.vcreditcard,a.dpaytime,a.fsepay,a.fprebalance,a.fpresubcost,a.fpreagcost,a.fspefund,a.ftax,a.fsubcost,a.vcollremarks,a.vprojectcontent,a.voldpid,a.equotype,p.dsubcosttime,p.dsubcosttime2,p.dagtime  from t_quotation  as a,t_project  as p  where 1=1 and p.vpid =a.vpid and  year(dspefundtime)=year(now()) and month(dspefundtime)='"+spefundtime+"' and dspefundtime is not null  and ((p.Fagcost > 0) or (p.Fsubcost > 0) or(p.Fsubcost2 >0) or (a.Fspefund >0))   group by a.vpid   order by a.dcreatetime desc";
 		}
 		else if(counttime !=null && !"".equals(counttime)){
-			sql ="select distinct(a.vpid),a.Fothercost,a.dconfirmtime,a.vsales,a.vclient,a.ftotalprice,a.einvtype,a.fpreadvance,a.vcreditcard,a.dpaytime,a.fsepay,a.fprebalance,a.fpresubcost,a.fpreagcost,a.fspefund,a.ftax,a.fsubcost,a.vcollremarks,a.vprojectcontent,a.voldpid,a.equotype,p.dsubcosttime,p.dsubcosttime2,p.dagtime  from t_quotation  as a,t_project  as p  where 1=1 and p.vpid =a.vpid and ( (year(p.dsubcosttime)=year(now())) or (year(p.dsubcosttime2)=year(now())) or(year(p.dagtime)=year(now()))) and ((month(p.dsubcosttime)='"+counttime+"') or (month(p.dsubcosttime2)='"+counttime+"') or ( month(p.dagtime)='"+counttime+"' )) and  ((p.Fagcost > 0) or (p.Fsubcost > 0) or(p.Fsubcost2 >0) or (a.Fspefund >0))   group by a.vpid  order by a.dcreatetime desc";
+			sql ="select distinct(a.vpid),a.fbalance,a.fsepayFactor,a.fadvarceFactor,a.fbalanceFactor,a.Fothercost,a.dconfirmtime,a.vsales,a.vclient,a.ftotalprice,a.einvtype,a.fpreadvance,a.vcreditcard,a.dpaytime,a.fsepay,a.fprebalance,a.fpresubcost,a.fpreagcost,a.fspefund,a.ftax,a.fsubcost,a.vcollremarks,a.vprojectcontent,a.voldpid,a.equotype,p.dsubcosttime,p.dsubcosttime2,p.dagtime  from t_quotation  as a,t_project  as p  where 1=1 and p.vpid =a.vpid and ( (year(p.dsubcosttime)=year(now())) or (year(p.dsubcosttime2)=year(now())) or(year(p.dagtime)=year(now()))) and ((month(p.dsubcosttime)='"+counttime+"') or (month(p.dsubcosttime2)='"+counttime+"') or ( month(p.dagtime)='"+counttime+"' )) and  ((p.Fagcost > 0) or (p.Fsubcost > 0) or(p.Fsubcost2 >0) or (a.Fspefund >0))   group by a.vpid  order by a.dcreatetime desc";
 		}
 		else{
 		sql= "select * from t_quotation  where 1=1" + str.toString()
 				+ " order by dcreatetime desc";
 		}
-//System.out.println(sql+":sql");
+		System.out.println(sql+":sql");
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -537,13 +539,10 @@ public class FinanceQuotationAction {
 				qt.setAdvarceFactor(rs.getFloat("fadvarceFactor"));
 				qt.setSepayFactor(rs.getFloat("fsepayFactor"));
 				qt.setBalanceFactor(rs.getFloat("fbalanceFactor"));
-				qt.setSubcost(getTotalSubCost(qt.getPid(), "fsubcost",
-						"fsubcost2"));
-				qt.setPresubcost(getTotalSubCost(qt.getPid(),
-						"fpresubcost", "fpresubcost2"));
+				qt.setSubcost(getTotalSubCost(qt.getPid(), "fsubcost", "fsubcost2"));
+				qt.setPresubcost(getTotalSubCost(qt.getPid(), "fpresubcost", "fpresubcost2"));
 				qt.setAgcost(getTotalAgCost(qt.getPid(),"fagcost"));
-				totalperformence += qt.getPreadvance() + qt.getSepay()
-						+ qt.getBalance();
+				totalperformence += qt.getPreadvance() + qt.getSepay() + qt.getBalance();
 				total += qt.getTotalprice();
 				list.add(qt);
 			}
@@ -568,18 +567,19 @@ public class FinanceQuotationAction {
 	 */
 	public float[] getFinanceProject(String type ,String acceptstart,String acceptend,String year, String month,String dept, String group,List<Quotation> list) {
 		StringBuffer str = new StringBuffer();
+		String param="";
 		float[] f = new float[2];
 		float totalperformence = 0;
 		float total = 0;
 			if(acceptstart !=null && acceptstart !="" && acceptend !="" && acceptend !=null){
 				if(acceptstart !="" && acceptend ==""){
-				acceptstart+=" 00:00:00";
+				acceptstart+=" 00:00:00 ";
 				 str.append(" and q.dconfirmtime is not null and (q.dconfirmtime='"+acceptstart+"' or(q.dpaytime='"+acceptstart+"') or ( q.Dsepaytime= '"+acceptstart+"') or (q.dbalancetime= '"+acceptstart+"'))");
 				}else if(acceptstart =="" && acceptend !=""){
-				acceptend+=" 59:59:59";
+				acceptend+=" 23:59:59 ";
 				 str.append(" and q.dconfirmtime is not null and (q.dconfirmtime='"+acceptend+"' or(q.dpaytime= '"+acceptend+"') or (q.Dsepaytime= '"+acceptend+"') or(q.dbalancetime = '"+acceptend+"'))");	
 				}else if(acceptstart !="" && acceptend !=""){
-				acceptstart+=" 00:00:00";acceptend+=" 59:59:59";
+				acceptstart+=" 00:00:00 ";acceptend+=" 23:59:59 ";
 				 str.append(" and q.dconfirmtime is not null and ((q.dconfirmtime>='"+acceptstart+"' and q.dconfirmtime<='"+acceptend+"') or (q.dpaytime >= '"+acceptstart+"' and q.dpaytime <= '"+acceptend+"') or (q.Dsepaytime>= '"+acceptstart+"' and q.Dsepaytime<= '"+acceptend+"') or(q.dbalancetime >= '"+acceptstart+"' and q.dbalancetime <= '"+acceptend+"'))");	
 				}
 			}
@@ -590,6 +590,8 @@ public class FinanceQuotationAction {
 				if(dept.equals("1")){
 					str.append(" and q.vpid like 'LCQ1%' ");
 				}else if(dept.equals("2")){
+					param=" ,(select count(*) from t_phy_project where  vpid=q.vpid and dendtime is null GROUP BY vpid  ) as isNotFishCount ";
+					param+=" ,(select dendtime from t_phy_project  where  vpid=q.vpid GROUP BY vpid  ORDER BY dendtime desc ) as dendtime ";
 					str.append(" and q.vpid like 'LCQ2%'");
 				}
 				if(dept.equals("3")){
@@ -606,7 +608,7 @@ public class FinanceQuotationAction {
 		//} 
 			//未加排单人员2012-03-26
 	//	String sql= "select q.* from t_quotation  as q ,t_user as u where u.name  =q.vsales" + str.toString()+ " order by q.dcreatetime desc";
-		String sql= "select q.*,cp.vcreatename,u.groupid from t_quotation   as q left join (select  distinct(vpid),vcreatename  from t_chem_project  ) as cp on q.vpid =cp.vpid,t_user as u  where u.name  =q.vsales and u.estatus='有效'  " + str.toString()+ "  order by q.dcreatetime desc";
+		String sql= "select q.*,cp.vcreatename,u.groupid "+param+" from t_quotation   as q left join (select  distinct(vpid),vcreatename  from t_chem_project  ) as cp on q.vpid =cp.vpid,t_user as u  where u.name  =q.vsales and u.estatus='有效'  " + str.toString()+ "  order by q.dcreatetime desc";
 	System.out.println(sql);
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -655,6 +657,7 @@ public class FinanceQuotationAction {
 				qt.setFinish(rs.getTimestamp("dfinish"));
 				qt.setBadDebt(rs.getString("badDebt"));
 				qt.setGroupId(rs.getInt("groupId"));
+
 				if(qt.getPid().indexOf("LCQ2")==-1&&dept !=null && !"G".equals(dept)){
 					qt.setCreatename(rs.getString("cp.vcreatename"));
 				}else{
@@ -664,6 +667,15 @@ public class FinanceQuotationAction {
 			    	if(phyProject !=null){
 			    		qt.setCreatename(PhyProjectAction.getInstance().findByConditions(pp).getServname());
 			    	}
+				}
+				if(dept.equals("2")){
+					String isNotFishCount=rs.getString("isNotFishCount");
+					if(isNotFishCount ==null || Integer.parseInt(isNotFishCount)==0){
+						qt.setFinish(rs.getTimestamp("dendtime"));
+					}
+				}
+				if(dept.equals("3")){
+					qt.setFinish(rs.getTimestamp("dreceipt"));
 				}
 				totalperformence += qt.getPreadvance() + qt.getSepay()
 				+ qt.getBalance();
@@ -828,7 +840,7 @@ public class FinanceQuotationAction {
 				str.append("     AND  q.vpid like 'LCQG%'");
 			}
 	}
-		String sql="select q.*,oq.remark as remark ,(oq.count*oq.saleprice) as a  from t_quotation as q ,t_sales_order as o,t_sales_order_quoitem as oq  where 1=1   and oq.orderid =o.id and o.vpid =q.vpid "+str;
+		String sql="select q.*,oq.remark as remark ,(oq.count*oq.saleprice) as a ,(select dendtime from t_phy_project  where  vpid=q.vpid GROUP BY vpid  ORDER BY dendtime desc ) as dendtime  from t_quotation as q ,t_sales_order as o,t_sales_order_quoitem as oq  where 1=1   and oq.orderid =o.id and o.vpid =q.vpid "+str;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -903,6 +915,7 @@ public class FinanceQuotationAction {
 				qt.setBalanceFactor(rs.getFloat("fbalanceFactor"));
 				qt.setDeductions(rs.getFloat("fdeductions"));
 				qt.setChannel(rs.getFloat("fchannel"));
+				qt.setFinish(rs.getTimestamp("dendtime"));
 				list.add(qt);
 			}
 				String sql1="select  sum(q.ftotalprice) as totalprice,sum((q.fpreadvance+q.fsepay+q.fbalance)) as totalperformence from t_quotation as q where 1=1 and equotype !='flu' and year(q.dcreatetime)=year(now())    "+str;

@@ -514,7 +514,7 @@
 						</td>
 						<td>
 							<select name="invtype" id="invtype" style="width: 300px">
-								<option value="全额">
+								<%--<option value="全额">
 									全额
 								</option>
 								<option value="不含机构费用">
@@ -525,7 +525,16 @@
 								</option>
 								<option value="收据">
 									收据
-								</option>
+								</option>--%>
+									<option value="普通发票">
+										普通发票
+									</option>
+									<option value="专用发票">
+										专用发票
+									</option>
+									<option value="收据">
+										收据
+									</option>
 							</select>
 							<script type="text/javascript">
 								var ops = document.getElementById("invtype").options;

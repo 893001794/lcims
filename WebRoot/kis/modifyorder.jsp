@@ -639,10 +639,11 @@
 								 -->
 								
 								<option value="普通发票" selected>普通发票</option>
+								<option value="形式发票" selected>形式发票</option>
 								<option value="专用发票" selected>专用发票</option>
-								<option value="不含机构费用">
+								<%--<option value="不含机构费用">
 									不含机构费用
-								</option>
+								</option>--%>
 								
 								<option value="收据">
 									收据

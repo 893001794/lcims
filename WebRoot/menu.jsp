@@ -171,7 +171,7 @@
 			);
 			OutBarFolder8=new Array("电子电器管理"
 			<%
-		if(user.getTicketid().matches("\\d\\d1\\d\\d\\d\\d\\d")) {//权限为01000000属于销售权限能排单
+		if(user.getTicketid().matches("\\d\\d1\\d\\d\\d\\d\\d")||user.getId()==110||user.getId()==123) {//权限为01000000属于销售权限能排单
 		%>
 			,"images/admin.gif","项目排单","physical/project/phyproject_paidan.jsp","parent.parent.main"
 			 ,"images/admin.gif","管理安规项目","physical/project/phyproject_manage.jsp","parent.parent.main"

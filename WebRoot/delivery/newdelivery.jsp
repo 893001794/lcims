@@ -411,33 +411,33 @@ function printorder()
 				<td width="161" style="vertical-align: bottom;">&nbsp;&nbsp;&nbsp;&nbsp; <%=userName%></td>
 				<td  colspan="2" style="vertical-align: bottom">&nbsp;&nbsp;&nbsp;&nbsp;0760-22833366</td>
 				<td colspan="3"></td>
-				<td width="145">小榄</td>
+				<td width="145" style="padding-bottom:10px">小榄</td>
 			</tr>
 			<tr height="33.3">
 				<td colspan="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;立创检测</td>
 				<td width="58.8" style="vertical-align: bottom;"><%=freightcollect%></td>
 				<td width="55.8" style="vertical-align: bottom;"></td>
 				<td width="65.8" style="vertical-align: bottom;"><%=monthly%></td>
-				<td width="145" style="vertical-align: bottom;" align="left">&nbsp;&nbsp;<%=bigTotalprice%></td>
+				<td width="145" style="vertical-align: bottom;padding-right:50px;" align="left">&nbsp;&nbsp;<%=bigTotalprice%></td>
 				
 			</tr>
-			<tr height="29.6"  >
+			<tr height="20.6"  >
 				<td colspan="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;广东省中山市小榄镇广源路段</td>
 				<td  colspan="3"></td>
 				<td width="145"></td>
 			</tr>
-			<tr height="29.6">
+			<tr height="20.6">
 				<td width="161" style="vertical-align: bottom;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=recipient%></td>
 				<td  colspan="2" style="vertical-align: bottom;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=contactTEL%></td>
 				<td colspan="3"></td>
 				<td width="145">&nbsp;&nbsp;&nbsp;&nbsp;<%=price==0.00?"":price%></td>
 			</tr>
-			<tr height="44.4">
+			<tr height="30.4">
 				<td  colspan="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=consigneeC%></td>
 				<td colspan="3"></td>
 				<td width="145"></td>
 			</tr>
-			<tr height="60"><!--height="29.6"  -->
+			<tr height="40"><!--height="29.6"  -->
 				<td colspan="3" style="vertical-align: bottom;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=contactAdd%></td>
 				<td colspan="3"></td>
 				<td width="145" style="vertical-align: bottom;" align="left"></td>

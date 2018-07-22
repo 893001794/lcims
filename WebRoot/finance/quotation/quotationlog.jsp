@@ -521,7 +521,16 @@
 							<option value="发票" selected="selected">发票</option>		
 							<%
 							}
-							if("普通发票".equals(paynotes)){
+							if("形式发票".equals(paynotes)){
+							%>
+						<option value="形式发票" selected="selected">形式发票</option>
+						<%
+							}else{
+						%>
+						<option value="形式发票">形式发票</option>
+						<%
+						}
+						if("普通发票".equals(paynotes)){
 							%>
 							<option value="普通发票" selected="selected">普通发票</option>		
 							<%
@@ -684,7 +693,16 @@
 							<option value="发票" selected="selected">发票</option>		
 							<%
 							}
-							if("普通发票".equals(sepaynotes)){
+						 if("形式发票".equals(sepaynotes)){
+							%>
+						<option value="形式发票" selected="selected">形式发票</option>
+						<%
+						}else{
+						%>
+						<option value="形式发票">形式发票</option>
+						<%
+						}
+						if("普通发票".equals(sepaynotes)){
 							%>
 							<option value="普通发票" selected="selected">普通发票</option>		
 							<%
@@ -842,13 +860,13 @@
 					<td width="116">
 							收款备注：
 						</td>
-						<td width="593">
+						<td width="593" colspan="3">
 						<!-- onfocus="addtextarea();" -->
-							<textarea name="collRemarks" id ="collRemarks" rows="6" cols="40" onfocus="addtextarea();"><%=qt.getCollRemarks()==null?"":qt.getCollRemarks()%></textarea>
+							<textarea name="collRemarks" id ="collRemarks" rows="6" cols="120" onfocus="addtextarea();"><%=qt.getCollRemarks()==null?"":qt.getCollRemarks()%></textarea>
 						</td>
 					</tr>
 					<tr>
-						
+
 						<td>
 							项目退款金额：
 						</td>
@@ -871,6 +889,15 @@
 					  		 if("发票".equals(balancenotes)){
 							%>
 							<option value="发票" selected="selected">发票</option>		
+							<%
+							}
+							if("形式发票".equals(balancenotes)){
+							%>
+							<option value="形式发票" selected="selected">形式发票</option>
+							<%
+							}else{
+							%>
+							<option value="形式发票">形式发票</option>
 							<%
 							}
 							if("普通发票".equals(balancenotes)){
@@ -1000,14 +1027,17 @@
 						</td>
 						<td width="168">
 							<select name="invtype" style="width: 300px">
-								<option value="发票" <%=qt.getInvtype().equals("发票")?"selected":"" %>>
+								<option value="专用发票" <%=qt.getInvtype().equals("专用发票")?"selected":"" %>>
+									专用发票
+								</option>
+								<%--<option value="发票" <%=qt.getInvtype().equals("发票")?"selected":"" %>>
 										发票
+								</option>--%>
+								<option value="普通发票" <%=qt.getInvtype().equals("普通发票")?"selected":"" %> >
+									普通发票
 								</option>
-								<option value="不含机构费用" <%=qt.getInvtype().equals("不含机构费用")?"selected":"" %> >
-									不含机构费用
-								</option>
-								<option value="借开" <%=qt.getInvtype().equals("借开")?"selected":"" %> >
-									借开
+								<option value="形式发票" <%=qt.getInvtype().equals("形式发票")?"selected":"" %> >
+									形式发票
 								</option>
 								<option value="收据"  <%=qt.getInvtype().equals("收据")?"selected":"" %>>
 									收据

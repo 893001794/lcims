@@ -908,10 +908,12 @@ public class PhyProjectDaoImplMySql implements PhyProjectDao {
 				pstmt.executeUpdate();
 			}
 			if ("结案".equals(type)) {
-				sql = "update t_phy_project  set estatus = '结案',istatus = 9,isfinish = 'y' where vrid = ?";
+				sql = "update t_phy_project  set estatus = '结案',istatus = 9,isfinish = 'y',dendtime=now() where vsid = ?";
 				pstmt = DB.prepareStatement(conn, sql);
-				pstmt.setString(1, rid);
+				pstmt.setString(1, vsid);
 				pstmt.executeUpdate();
+
+
 				ChemProjectAction.getInstance().sendProjectStatus(sid);
 				//更新网站数据
 				UpdateWebSite up = new UpdateWebSite();

@@ -38,13 +38,15 @@
 	//else if(flag == true){
 	//fqu.setStatus("LCQG");
 	//}
-	
+
 	pm = FinanceQuotationAction.getInstance().searchQuotations(fqu,"");
 	
 
 	if (pm == null) {
 		pm = new PageModel();
 	}
+
+
 %>
 
 <html>
@@ -67,6 +69,11 @@
 		//alert(first);
 		self.location="confirmdialog.jsp";
 		//window.open("confirmdialog.jsp");
+	}
+	function lock1(Object,lock){//加锁
+		var myForm =document.getElementById("form1");
+		// var lock =document.getElementById("lock").value;
+		self.location="quotationlog.jsp?pid="+Object+"&type=1&pageNo=1";
 	}
 </script>
 		<%--@ include file="date.jsp" --%>
@@ -137,7 +144,7 @@
         <input name="button" type="button" onclick="popUpCalendar(this, form1.rptime, 'yyyy-mm-dd')" value="请选择日期"></td>
       --%>
 					<td>
-						<input type="button"" onclick="detail()"  value="收单确认">
+						<input type="button" onclick="detail()"  value="收单确认">
 						<input type="submit" name="Submit" value="提交">
 						
 						<input type="reset" name="Submit2" value="重置">
@@ -210,6 +217,12 @@
 				if (list != null) {
 					for (int i = 0; i < list.size(); i++) {
 						Quotation qt = list.get(i);
+						String lockStr="加锁";
+						if(qt.getLock() !=null && qt.getLock() !=""){
+							if(qt.getLock().equals("y")){
+								lockStr="解锁";
+							}
+						}
 			%>
 
 			<tr>
@@ -281,6 +294,7 @@
 							style="color: blue">确认</a>
 					</div>
 				<%} %>
+
 				</td>
 			</tr>
 			<%

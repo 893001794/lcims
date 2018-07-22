@@ -17,7 +17,7 @@
  <%@ include file="../../comman.jsp"  %>
 <%
 	int pageNo = 1;
-	int pageSize = 10;
+	int pageSize = 20;
 	PageModel pm = null;
 	String pid = "";
 	String rid = "";
@@ -343,6 +343,9 @@
 					<td class="rd6" >
 						状态
 					</td>
+					<td class="rd6" >
+						结案时间
+					</td>
 					<td class="rd6">
 						操作
 					</td>
@@ -401,6 +404,9 @@
 					</td>
 					<td class="rd8">
 						<%=str == null?pp.getStatus():str%>
+					</td>
+					<td class="rd8">
+						&nbsp;<%=pp.getEndtime()==null?"":new SimpleDateFormat("yyyy-MM-dd HH:mm").format(pp.getEndtime()) %>
 					</td>
 					<td class="rd8">
 					&nbsp;

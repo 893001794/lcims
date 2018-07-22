@@ -41,7 +41,9 @@
 	if(month ==null){
 	SimpleDateFormat sdf =new SimpleDateFormat("MM");
 	month=sdf.format(new Date());
+
 }
+	int clientid = 0;
 //System.out.println(status);
 	if(status !=null && !"".equals(status)){
 	//在t_quotation表中将authorization改为y和将当时登录人添加到acthorizer字段中
@@ -50,11 +52,16 @@
 	return ;
 	}
 	}else if(command !=null){
-		pm = OrderAction.getInstance().getAllOrders(pageNo,pageSize,"",pid,uid,year,month);
-	
+		if(client != null && !"".equals(client)) {
+			ClientForm cf = ClientAction.getInstance().getClientByName(client);
+			if(cf != null) {
+				clientid = cf.getId();
+			}
+		}
+		pm = OrderAction.getInstance().getAllOrders(pageNo,pageSize,"",pid,uid,clientid,year,month);
 	}
 	else{
-	pm = OrderAction.getInstance().getAllOrders(pageNo,pageSize,"EMC",pid,uid,year,month);
+	pm = OrderAction.getInstance().getAllOrders(pageNo,pageSize,"EMC",pid,uid,clientid,year,month);
 	session.setAttribute("financeEMC",pm.getList());
 	}
  %>
@@ -65,11 +72,10 @@
 		<title>销售报价单</title>
 		<link rel="stylesheet" href="../css/drp.css">
 		<link rel="stylesheet" type="text/css" href="../css/jquery.autocomplete.css" />   
-<script src="../javascript/jquery.js"></script>
-<script src="../javascript/jquery.autocomplete.min.js"></script>
-    <script src="../javascript/jquery.autocomplete.js"></script> 
+		<script src="../javascript/jquery.js"></script>
+		<script src="../javascript/jquery.autocomplete.min.js"></script>
+		<script src="../javascript/jquery.autocomplete.js"></script>
 		<script type="text/javascript">
-	
 	function printorder() {
 		var count = 0;
 		var j = 0;
@@ -252,6 +258,26 @@ function exportEMC() {
 							<input type=submit name=Submit value=搜索>
 						</td>
 					</tr>
+					<tr>
+						<td width="50%">
+							<font color="red">请输入客户名称：&nbsp;&nbsp;</font>
+							<input id="client" type="text" name="client" size="40" />
+							<input type=submit name=Submit value=搜索>
+							<script>
+								$("#client").autocomplete("../client_ajax.jsp",{
+									delay:10,
+									minChars:1,
+									matchSubset:1,
+									matchContains:1,
+									cacheLength:10,
+									matchContains: true,
+									scrollHeight: 250,
+									width:250,
+									autoFill:false
+								});
+							</script>
+						</td>
+					</tr>
 				<tr>
 					<td >
 					年份：<select name ="year" id ="year" onchange="searchsales();">
@@ -304,9 +330,9 @@ function exportEMC() {
 					<%
 					if(user.getName().equals("欧婉雯")||user.getId()==103){
 					%>
-					<td width="27%" nowrap  class="rd19" align="left"">
+					<td width="27%" nowrap  class="r19" align="left" height="33px;">
 						
-						<font color="#FFFFFF" size="2pt"><a href="addorder.jsp" style="size: 2pt;text-align: left;">添加EMC报价单</a></font>
+						<font color="#FFFFFF" size="2pt"><a href="addorder.jsp" style="font-size: 15pt;text-align: left;">添加EMC报价单</a></font>
 					</td>
 					<%} %>
 					<td width="49%" class="rd19">
@@ -328,7 +354,7 @@ function exportEMC() {
 					<td class="rd6" >
 						二部报价单编号
 					</td>
-					<td class="rd6" width="20%" style="text-align: center;" >
+					<td class="rd6" width="15%" style="text-align: center;" >
 						客户名称
 					</td>
 					<td class="rd6" >
@@ -337,9 +363,9 @@ function exportEMC() {
 					<td class="rd6" >
 						测试项目
 					</td>
-					<td class="rd6" >
+					<%--<td class="rd6" >
 						收单时间
-					</td>
+					</td>--%>
 					<td class="rd6" >
 						测试日期
 					</td>
@@ -369,9 +395,12 @@ function exportEMC() {
 					<td class="rd6">
 						金额
 					</td>
-					<%if(user.getTicketid().matches("\\d\\d\\d1\\d\\d\\d\\d")||user.getId()==103){ %>
+					<%if(user.getTicketid().matches("\\d\\d\\d1\\d\\d\\d\\d")||user.getId()==103||user.getId()==254){ %>
 					<td class="rd6">
 						已收金额
+					</td>
+					<td class="rd6">
+						未收金额
 					</td>
 					<%} %>
 					<td class="rd6">
@@ -414,9 +443,9 @@ function exportEMC() {
 					<td class="rd8" width="30%" style="width: 30%">
 						<%=order.getProjectcontent() %>
 					</td>
-					<td class="rd8">
+				<%--	<td class="rd8">
 						<%=order.getCollection()!=null?new SimpleDateFormat("yyyy.MM.dd").format(order.getCollection()):""%>
-					</td>
+					</td>--%>
 					<td class="rd8">
 						<%=order.getTest()!=null?new SimpleDateFormat("yyyy.MM.dd").format(order.getTest()):""%>
 					</td>
@@ -459,10 +488,14 @@ function exportEMC() {
 					 %>
 					 <%=order.getTotalprice()%>
 					 </td>
-					<%if(user.getTicketid().matches("\\d\\d\\d1\\d\\d\\d\\d")||user.getId()==103){ %>
+					<%if(user.getTicketid().matches("\\d\\d\\d1\\d\\d\\d\\d")||user.getId()==103||user.getId()==254){
+					%>
 					 <td class="rd8" width="1%">
 					 	<%=preprice == 0 ? "0.00": new DecimalFormat("##,###,###,###.00").format(preprice)%>
 					 </td>
+					<td class="rd8" width="1%">
+						<%=order.getTotalprice()-preprice%>
+					</td>
 					 <%}%>
 					 <td class="rd8" width="5%">
 						<font color="<%="n".equals(order.getStatus())?"red":"green" %>"><%="n".equals(order.getStatus())?"未审核":"已审核" %></font>

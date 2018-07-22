@@ -37,6 +37,7 @@
 		salesid = Integer.parseInt(strsalesid);
 	}
 	String strservid = request.getParameter("servid");
+	System.out.println("strservid========"+strservid);
 	int servid = 0;
 	if(strservid != null && !"".equals(strservid)) {
 		servid = Integer.parseInt(strservid);

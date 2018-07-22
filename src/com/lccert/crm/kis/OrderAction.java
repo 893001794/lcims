@@ -22,7 +22,7 @@ import com.lccert.crm.user.UserAction;
 import com.lccert.crm.user.UserForm;
 
 /**
- * ±¨¼Ûµ¥¹ÜÀíÀà£¨°üÀ¨service²ãºÍdao²ã£©
+ * ï¿½ï¿½ï¿½Ûµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½à£¨ï¿½ï¿½ï¿½ï¿½serviceï¿½ï¿½ï¿½daoï¿½ã£©
  * @author Eason
  *
  */
@@ -42,8 +42,8 @@ public class OrderAction {
 	}
 	
 	/**
-	 * ×Ô¶¯Éú³É±¨¼Ûµ¥ºÅ
-	 * @param order ±¨¼Ûµ¥
+	 * ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½É±ï¿½ï¿½Ûµï¿½ï¿½ï¿½
+	 * @param order ï¿½ï¿½ï¿½Ûµï¿½
 	 * @return
 	 */
 	private String makePid(Order order) {
@@ -56,19 +56,19 @@ public class OrderAction {
 			str.append("LCQ");
 		if(companyid == 1) {
 			String dept = order.getSales().getDept();
-			if("ÏúÊÛ¶þ²¿".equals(dept)) {
-				str.append("2");//ÖÐÉ½ÏúÊÛ¶þ²¿
+			if("ï¿½ï¿½ï¿½Û¶ï¿½ï¿½ï¿½".equals(dept)) {
+				str.append("2");//ï¿½ï¿½É½ï¿½ï¿½ï¿½Û¶ï¿½ï¿½ï¿½
 			} else {
-				str.append("1");//ÖÐÉ½ÏúÊÛÒ»²¿
+				str.append("1");//ï¿½ï¿½É½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½
 			}
 		} else if(companyid == 2) {
-			str.append("G");//¹ãÖÝ
+			str.append("G");//ï¿½ï¿½ï¿½ï¿½
 		} else if(companyid == 3) {
-			str.append("D");//¶«Ý¸
+			str.append("D");//ï¿½ï¿½Ý¸
 		} else if(companyid == 4) {
-			str.append("S");//Ë³µÂ
+			str.append("S");//Ë³ï¿½ï¿½
 		} else if(companyid == 5) {
-			str.append("J");//½­ÃÅ
+			str.append("J");//ï¿½ï¿½ï¿½ï¿½
 		}
 		}else{
 			str.append("LCDE");
@@ -181,7 +181,7 @@ public class OrderAction {
 	}
 	
 	/**
-	 * Ìí¼Ó±¨¼Ûµ¥
+	 * ï¿½ï¿½Ó±ï¿½ï¿½Ûµï¿½
 	 * @param order
 	 * @return
 	 */
@@ -327,7 +327,7 @@ public class OrderAction {
 	
 	
 	/**
-	 * ÐÞ¸Ä±¨¼Ûµ¥
+	 * ï¿½Þ¸Ä±ï¿½ï¿½Ûµï¿½
 	 * @param order
 	 * @return
 	 */
@@ -428,7 +428,7 @@ public class OrderAction {
 				}
 			}
 			
-			//ÃæÏòÒì³£±à³Ì
+			//ï¿½ï¿½ï¿½ï¿½ï¿½ì³£ï¿½ï¿½ï¿½
 			if("y".equals(order.getStatus())) {
 				if(!modifyquotation(order.getId())) {
 					throw new SQLException();
@@ -461,7 +461,7 @@ public class OrderAction {
 	
 	
 	/**
-	 * ÐÞ¸Ä±¨¼Ûµ¥±àºÅ
+	 * ï¿½Þ¸Ä±ï¿½ï¿½Ûµï¿½ï¿½ï¿½ï¿½
 	 * @param order
 	 * @return
 	 */
@@ -505,10 +505,10 @@ public class OrderAction {
 	}
 	
 	
-	//²éÑ¯×î´óµÄ±àºÅ
+	//ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½Ä±ï¿½ï¿½
 	
 	/**
-	 * ¸ù¾ÝÓÃ»§ÃûÈ¡µÃÓÃ»§ÐÅÏ¢
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½Ï¢
 	 * @param name
 	 * @return
 	 */
@@ -549,7 +549,7 @@ public class OrderAction {
 		return pid;
 	}
 	/**
-	 * µÃµ½ÏúÊÛ±¾ÈËËùÓÐ¶©µ¥
+	 * ï¿½Ãµï¿½ï¿½ï¿½ï¿½Û±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½ï¿½ï¿½
 	 * @param pageNo
 	 * @param pageSize
 	 * @param salesid
@@ -646,13 +646,13 @@ public class OrderAction {
 	}
 	
 	/**
-	 * µÃµ½ËùÓÐÏúÊÛ¶©µ¥
+	 * ï¿½Ãµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Û¶ï¿½ï¿½ï¿½
 	 * @param pageNo
 	 * @param pageSize
-	 * @param salesid
+	 * @param clientid
 	 * @return
 	 */
-	public PageModel getAllOrders(int pageNo, int pageSize,String status,String pid,String uid,String year,String month) {
+	public PageModel getAllOrders(int pageNo, int pageSize,String status,String pid,String uid,Integer clientid,String year,String month) {
 		//System.out.println(pageNo+"---"+pageSize);
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -669,6 +669,9 @@ public class OrderAction {
 		}
 		if(uid !=null && !"".equals(uid)){
 			str+=" and UI like '%"+uid+"%'";
+		}
+		if(clientid != 0) {
+			str+=" and clientid = " + clientid;
 		}
 		//System.out.println(pid+"----"+uid);
 		if((pid ==null || "".equals(pid)) && (uid ==null||"".equals(uid))){
@@ -763,7 +766,7 @@ public class OrderAction {
 		return pm;
 	}
 	/**
-	 * µÃµ½¸öÈË¶©µ¥ÊýÁ¿
+	 * ï¿½Ãµï¿½ï¿½ï¿½ï¿½Ë¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * @param conn
 	 * @param salesid
 	 * @return
@@ -789,7 +792,7 @@ public class OrderAction {
 	
 	
 	/**
-	 * ¸ù¾Ý±¨¼Ûµ¥ºÅÀ´²éÑ¯ÑùÆ·Ãû³Æ
+	 * ï¿½ï¿½ï¿½Ý±ï¿½ï¿½Ûµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¯ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½
 	 * @param companyid
 	 * @return
 	 */
@@ -799,7 +802,7 @@ public class OrderAction {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		boolean auto = false;
-		String samplename=""; //ÑùÆ·Ãû³Æ
+		String samplename=""; //ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½
 		String sql = "select soq.samplename from t_quotation as q,t_sales_order as so,t_sales_order_quoitem as soq  where so.vpid =q.vpid and so.id =soq.orderid  and  q.vpid =?";
 		try {
 			conn = DB.getConn();
@@ -836,7 +839,7 @@ public class OrderAction {
 	
 
 	/**
-	 * ¸ù¾ÝIDµÃµ½¹«Ë¾ÏêÏ¸ÐÅÏ¢
+	 * ï¿½ï¿½ï¿½ï¿½IDï¿½Ãµï¿½ï¿½ï¿½Ë¾ï¿½ï¿½Ï¸ï¿½ï¿½Ï¢
 	 * @param companyid
 	 * @return
 	 */
@@ -888,7 +891,7 @@ public class OrderAction {
 	}
 	
 	/**
-	 * ¸ù¾Ýid²éÕÒÒøÐÐÕËºÅÏêÏ¸ÐÅÏ¢
+	 * ï¿½ï¿½ï¿½ï¿½idï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ëºï¿½ï¿½ï¿½Ï¸ï¿½ï¿½Ï¢
 	 * @param bankid
 	 * @return
 	 */
@@ -938,7 +941,7 @@ public class OrderAction {
 	}
 	
 	/**
-	 * ¸ù¾Ýid²éÕÒ¸¶¿î·½Ê½ÏêÏ¸ÐÅÏ¢
+	 * ï¿½ï¿½ï¿½ï¿½idï¿½ï¿½ï¿½Ò¸ï¿½ï¿½î·½Ê½ï¿½ï¿½Ï¸ï¿½ï¿½Ï¢
 	 * @param advancetypeid
 	 * @return
 	 */
@@ -985,7 +988,7 @@ public class OrderAction {
 	}
 	
 	/**
-	 * ¸ù¾Ý¶©µ¥ºÅÈ¡µÃ²âÊÔÏîÄ¿
+	 * ï¿½ï¿½ï¿½Ý¶ï¿½ï¿½ï¿½ï¿½ï¿½È¡ï¿½Ã²ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿
 	 * @param orderid
 	 * @return
 	 */
@@ -1042,7 +1045,7 @@ public class OrderAction {
 	}
 	
 	/***
-	 * ¸ù¾Ýid»ñÈ¡Ãû³Æ
+	 * ï¿½ï¿½ï¿½ï¿½idï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½
 	 * @param orderid
 	 * @return
 	 */
@@ -1094,7 +1097,7 @@ public class OrderAction {
 	}
 	
 	/**
-	 * ¸ù¾Ý²âÊÔIDÈ¡µÃ²âÊÔ¾ßÌåÄÚÈÝ
+	 * ï¿½ï¿½ï¿½Ý²ï¿½ï¿½ï¿½IDÈ¡ï¿½Ã²ï¿½ï¿½Ô¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * @param itemid
 	 * @return
 	 */
@@ -1145,7 +1148,7 @@ public class OrderAction {
 	}
 	
 	/**
-	 * ËÑË÷¸öÈË¶©µ¥
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë¶ï¿½ï¿½ï¿½
 	 * @param pageNo
 	 * @param pageSize
 	 * @param salesid
@@ -1244,7 +1247,7 @@ public class OrderAction {
 	}
 	
 	/**
-	 * ËÑË÷ËùÓÐÏúÊÛ¶©µ¥
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Û¶ï¿½ï¿½ï¿½
 	 * @param pageNo
 	 * @param pageSize
 	 * @param salesid
@@ -1290,7 +1293,7 @@ public class OrderAction {
 				order.setPid(rs.getString("vpid"));
 				order.setQuotype(rs.getString("quotype"));
 				order.setCompany(getCompanyById(rs.getInt("companyid")));
-				//System.out.println(rs.getInt("salesid")+"-----ÏúÊÛid");
+				//System.out.println(rs.getInt("salesid")+"-----ï¿½ï¿½ï¿½ï¿½id");
 				order.setSales(UserAction.getInstance().getUserById(rs.getInt("salesid")));
 				//System.out.println(UserAction.getInstance().getUserById(rs.getInt("salesid"))+"------------------");
 				order.setService(UserAction.getInstance().getUserById(rs.getInt("servid")));
@@ -1361,7 +1364,7 @@ public class OrderAction {
 	}
 	
 	/**
-	 * ¸ù¾ÝIDµÃµ½¶©µ¥
+	 * ï¿½ï¿½ï¿½ï¿½IDï¿½Ãµï¿½ï¿½ï¿½ï¿½ï¿½
 	 * @param id
 	 * @return
 	 */
@@ -1453,7 +1456,7 @@ public class OrderAction {
 	
 	
 	/**
-	 * ¸ù¾ÝpidµÃµ½¶©µ¥id
+	 * ï¿½ï¿½ï¿½ï¿½pidï¿½Ãµï¿½ï¿½ï¿½ï¿½ï¿½id
 	 * @param id
 	 * @return
 	 */
@@ -1495,7 +1498,7 @@ public class OrderAction {
 		return id;
 	}
 	/**
-	 * ÉóºË¶©µ¥
+	 * ï¿½ï¿½Ë¶ï¿½ï¿½ï¿½
 	 * @param id
 	 * @return
 	 */
@@ -1541,12 +1544,12 @@ public class OrderAction {
 	
 	
 	/**
-	 * ÉóºË¶©µ¥ºó£¬Ìí¼Ó±¨¼Ûµ¥
+	 * ï¿½ï¿½Ë¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó±ï¿½ï¿½Ûµï¿½
 	 * @param id
 	 * @return
 	 */
 	public boolean createquotation(int id,String auditor) {
-	//	System.out.println("ÉóºËÈË:"+auditor);
+	//	System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½:"+auditor);
 		Order order = getOrderById(id);
 		Quotation qt = new Quotation();
 		qt.setPid(order.getPid());
@@ -1576,7 +1579,7 @@ public class OrderAction {
 		qt.setRpclient(order.getRpclient());
 		qt.setGreenchannel(order.getGreenchannel());
 		qt.setConfirmid(order.getConfirmid());
-		qt.setStatus("½¨Á¢");
+		qt.setStatus("ï¿½ï¿½ï¿½ï¿½");
 		qt.setAuditman(auditor);
 		qt.setAmstart(order.getAmstart());
 		qt.setAmend(order.getAmend());
@@ -1600,7 +1603,7 @@ public class OrderAction {
 	}
 	
 	/**
-	 * ÐÞ¸Ä±¨¼Ûµ¥
+	 * ï¿½Þ¸Ä±ï¿½ï¿½Ûµï¿½
 	 * @param id
 	 * @return
 	 */
@@ -1641,7 +1644,7 @@ public class OrderAction {
 	}
 	
 	/**
-	 * É¾³ý²âÊÔÏî
+	 * É¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * @param quoitemid
 	 * @return
 	 */
@@ -1685,7 +1688,7 @@ public class OrderAction {
 	}
 	
 	
-	//¸ù¾Ý±¨¼Ûµ«ÀÏ²éÑ¯¹À¼ÆµÄ²âÊÔµãÊý
+	//ï¿½ï¿½ï¿½Ý±ï¿½ï¿½Ûµï¿½ï¿½Ï²ï¿½Ñ¯ï¿½ï¿½ï¿½ÆµÄ²ï¿½ï¿½Ôµï¿½ï¿½ï¿½
 	public int getEstimateSpoints(String pid ){
 		String sql = "select estimatespoints from t_sales_order where vpid = ?";
 		Connection conn = null;
