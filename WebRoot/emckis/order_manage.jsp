@@ -294,6 +294,7 @@ function exportEMC() {
 							<option value="2020" <%=("2020").equals(year)?"selected":"" %>>2020</option>
 						</select>
 						月份：<select name ="month" id ="month" onchange="searchsales();">
+							<option value="" <%="".equals(month)?"selected":""%>>全部</option>
 							<option value="01" <%="01".equals(month)?"selected":""%>>1</option>
 							<option value="02" <%="02".equals(month)?"selected":""%>>2</option>
 							<option value="03" <%="03".equals(month)?"selected":""%>>3</option>
