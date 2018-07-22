@@ -1,3 +1,0 @@
-create view v_synthesis as
-select b.id AS id,b.vsid AS vsid,b.vrid AS vrid,b.vpid AS vpid,b.drptime AS drptime,b.dendtime AS dendtime,b.dcreatetime AS dcreatetime,a.vlevel AS vlevel,a.vtestcontent AS vtestcontent,b.vservname AS vservname,b.vengineer AS vengineer,b.estatus AS estatus from t_project a,t_chem_project b 
-where a.vsid = b.vsid  and b.vstart !='ÔÝÍ£' 

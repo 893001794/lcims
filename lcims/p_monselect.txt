@@ -1,3 +1,0 @@
-CREATE PROCEDURE monselect @name varchar(28) , @date varchar(28) AS
-select SUBSTRING(CONVERT(varchar(100), a.checktime, 24),0,6)as checktime from checkinout as a,userinfo as b where a.userid = b.userid and b.name=@name and CONVERT(varchar(100), a.checktime, 23)=@date
-GO
