@@ -22,12 +22,12 @@ import com.lccert.crm.user.UserAction;
 import com.lccert.crm.user.UserForm;
 
 /**
- * ���۵������ࣨ����service���dao�㣩
+ * 报价单管理类（包括service层和dao层）
  * @author Eason
  *
  */
 public class OrderAction {
-	
+
 	private static OrderAction instance = null;
 
 	private OrderAction() {
@@ -40,36 +40,36 @@ public class OrderAction {
 		}
 		return instance;
 	}
-	
+
 	/**
-	 * �Զ����ɱ��۵���
-	 * @param order ���۵�
+	 * 自动生成报价单号
+	 * @param order 报价单
 	 * @return
 	 */
 	private String makePid(Order order) {
-		
+
 		StringBuffer str = new StringBuffer();
 		String last = "";
-	
+
 		int companyid = order.getCompany().getId();
 		if(companyid!=4){
 			str.append("LCQ");
-		if(companyid == 1) {
-			String dept = order.getSales().getDept();
-			if("���۶���".equals(dept)) {
-				str.append("2");//��ɽ���۶���
-			} else {
-				str.append("1");//��ɽ����һ��
+			if(companyid == 1) {
+				String dept = order.getSales().getDept();
+				if("销售二部".equals(dept)) {
+					str.append("2");//中山销售二部
+				} else {
+					str.append("1");//中山销售一部
+				}
+			} else if(companyid == 2) {
+				str.append("G");//广州
+			} else if(companyid == 3) {
+				str.append("D");//东莞
+			} else if(companyid == 4) {
+				str.append("S");//顺德
+			} else if(companyid == 5) {
+				str.append("J");//江门
 			}
-		} else if(companyid == 2) {
-			str.append("G");//����
-		} else if(companyid == 3) {
-			str.append("D");//��ݸ
-		} else if(companyid == 4) {
-			str.append("S");//˳��
-		} else if(companyid == 5) {
-			str.append("J");//����
-		}
 		}else{
 			str.append("LCDE");
 		}
@@ -78,7 +78,7 @@ public class OrderAction {
 		String month = new SimpleDateFormat("MM").format(date);
 		String key = str.toString() + year;
 		str.append(year + month);
-		
+
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -136,18 +136,18 @@ public class OrderAction {
 		String month = new SimpleDateFormat("MM").format(date);
 		String key = str.toString() + year;
 		str.append(year + month);
-		
+
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		boolean auto = false;
 		String sql = "select * from t_sales_order where vpid like '%" + key + "%'" +
-		" order by substring(vpid,9,12) desc";
+				" order by substring(vpid,9,12) desc";
 		try {
 			conn = DB.getConn();
 			auto = conn.getAutoCommit();
 			conn.setAutoCommit(false);
-			
+
 			pstmt = DB.prepareStatement(conn, sql);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
@@ -179,9 +179,9 @@ public class OrderAction {
 		}
 		return str.toString();
 	}
-	
+
 	/**
-	 * ��ӱ��۵�
+	 * 添加报价单
 	 * @param order
 	 * @return
 	 */
@@ -215,9 +215,9 @@ public class OrderAction {
 			if(order.getCompletetime()== null){
 				pstmt.setTimestamp(6,null);
 			}else{
-			pstmt.setTimestamp(6, new Timestamp(order.getCompletetime().getTime()));
+				pstmt.setTimestamp(6, new Timestamp(order.getCompletetime().getTime()));
 			}
-			
+
 			pstmt.setInt(7, order.getClient().getId());
 			pstmt.setString(8, order.getCircle());
 			pstmt.setInt(9, order.getBank().getId());
@@ -279,9 +279,9 @@ public class OrderAction {
 			rs = pstmt.getGeneratedKeys();
 			rs.next();
 			int key = rs.getInt(1);
-			
+
 			List<QuoItem> list = order.getQuoitems();
-		
+
 			sql = "insert into t_sales_order_quoitem(orderid,itemid,count,saleprice,remark,samplename,planeid,childid,price) values(?,?,?,?,?,?,?,?,?)";
 			pstmt = DB.prepareStatement(conn, sql);
 			for(int i=0;i<list.size();i++) {
@@ -321,13 +321,13 @@ public class OrderAction {
 		}
 		return isok;
 	}
-	
-	
-	
-	
-	
+
+
+
+
+
 	/**
-	 * �޸ı��۵�
+	 * 修改报价单
 	 * @param order
 	 * @return
 	 */
@@ -340,7 +340,7 @@ public class OrderAction {
 				"servid=?,completetime=?,clientid=?,circle=?,bankid=?,quotime=?,advancetypeid=?," +
 				"invmethod=?,invtype=?,invcount=?,invhead=?,invcontent=?,prespefund=?,tag=?,product=?," +
 				"productsample=?,detail=?,totalprice=?,standprice=?,voldpid=? ,rpclient=?,greenchannel=?,vsampleplan=?,vsampleNo=?,voldpid=?,UI=?,vedmprojectuserid=?,vsampling=?,dsampltime=? where id=?";
-		
+
 		try {
 			conn = DB.getConn();
 			auto = conn.getAutoCommit();
@@ -361,7 +361,7 @@ public class OrderAction {
 			pstmt.setInt(7, order.getClient().getId());
 			pstmt.setString(8, order.getCircle());
 			pstmt.setInt(9, order.getBank().getId());
-			
+
 			if(order.getQuotime()==null){
 				pstmt.setTimestamp(10, null);
 			}else{
@@ -392,10 +392,10 @@ public class OrderAction {
 			if(order.getSampltime()==null){
 				pstmt.setTimestamp(33, null);
 			}else{
-			pstmt.setTimestamp(33, new Timestamp(order.getSampltime().getTime()));
+				pstmt.setTimestamp(33, new Timestamp(order.getSampltime().getTime()));
 			}
 			pstmt.setInt(34, order.getId());
-			
+
 			pstmt.executeUpdate();
 			List<QuoItem> list = order.getQuoitems();
 			for(int i=0;i<list.size();i++) {
@@ -427,15 +427,15 @@ public class OrderAction {
 					pstmt.executeUpdate();
 				}
 			}
-			
-			//�����쳣���
+
+			//面向异常编程
 			if("y".equals(order.getStatus())) {
 				if(!modifyquotation(order.getId())) {
 					throw new SQLException();
 				}
 			}
-			
-			
+
+
 			conn.commit();
 			isok = true;
 		} catch (SQLException e) {
@@ -457,11 +457,11 @@ public class OrderAction {
 		}
 		return isok;
 	}
-	
-	
-	
+
+
+
 	/**
-	 * �޸ı��۵����
+	 * 修改报价单编号
 	 * @param order
 	 * @return
 	 */
@@ -470,14 +470,14 @@ public class OrderAction {
 		PreparedStatement pstmt = null;
 		boolean auto = false;
 		boolean isok = false;
-		
+
 		String sql = "update t_sales_order set vpid=? where vpid=?";
-		
+
 		try {
 			conn = DB.getConn();
 			auto = conn.getAutoCommit();
 			conn.setAutoCommit(false);
-			
+
 			pstmt = DB.prepareStatement(conn, sql);
 			pstmt.setString(1, newPid);
 			pstmt.setString(2, oldPid);
@@ -503,12 +503,12 @@ public class OrderAction {
 		}
 		return isok;
 	}
-	
-	
-	//��ѯ���ı��
-	
+
+
+	//查询最大的编号
+
 	/**
-	 * �����û���ȡ���û���Ϣ
+	 * 根据用户名取得用户信息
 	 * @param name
 	 * @return
 	 */
@@ -526,7 +526,7 @@ public class OrderAction {
 			pstmt = DB.prepareStatement(conn, sql);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
-				 pid=rs.getString("vpid");
+				pid=rs.getString("vpid");
 			}
 			conn.commit();
 		} catch (SQLException e) {
@@ -549,7 +549,7 @@ public class OrderAction {
 		return pid;
 	}
 	/**
-	 * �õ����۱������ж���
+	 * 得到销售本人所有订单
 	 * @param pageNo
 	 * @param pageSize
 	 * @param salesid
@@ -588,7 +588,7 @@ public class OrderAction {
 				order.setId(rs.getInt("id"));
 				order.setPid(rs.getString("vpid"));
 				order.setQuotype(rs.getString("quotype"));
-				
+
 				order.setCompany(getCompanyById(rs.getInt("companyid")));
 				order.setSales(UserAction.getInstance().getUserById(rs.getInt("salesid")));
 				order.setService(UserAction.getInstance().getUserById(rs.getInt("servid")));
@@ -614,7 +614,7 @@ public class OrderAction {
 				order.setCreatetime(rs.getTimestamp("createtime"));
 				order.setStatus(rs.getString("status"));
 				order.setQuoitems(getQuoItems(order.getId()));
-				
+
 				list.add(order);
 			}
 			int totalRecords = getSalesTotalRecords(conn, "select count(*) from t_sales_order where 1=1 "+str.toString()+"");
@@ -644,12 +644,12 @@ public class OrderAction {
 		}
 		return pm;
 	}
-	
+
 	/**
-	 * �õ��������۶���
+	 * 得到所有销售订单
 	 * @param pageNo
 	 * @param pageSize
-	 * @param clientid
+	 * @param salesid
 	 * @return
 	 */
 	public PageModel getAllOrders(int pageNo, int pageSize,String status,String pid,String uid,Integer clientid,String year,String month) {
@@ -677,7 +677,7 @@ public class OrderAction {
 		if((pid ==null || "".equals(pid)) && (uid ==null||"".equals(uid))){
 			if (month != null && !"".equals(month)) {
 				str+=" and month(dreceipt)="+month+"";
-				}
+			}
 			if(year !=null && !"".equals(year)){
 				str+=" and year (dreceipt)="+year+"";
 			}
@@ -766,7 +766,7 @@ public class OrderAction {
 		return pm;
 	}
 	/**
-	 * �õ����˶�������
+	 * 得到个人订单数量
 	 * @param conn
 	 * @param salesid
 	 * @return
@@ -789,10 +789,10 @@ public class OrderAction {
 		}
 		return totalRecords;
 	}
-	
-	
+
+
 	/**
-	 * ���ݱ��۵�������ѯ��Ʒ����
+	 * 根据报价单号来查询样品名称
 	 * @param companyid
 	 * @return
 	 */
@@ -802,13 +802,13 @@ public class OrderAction {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		boolean auto = false;
-		String samplename=""; //��Ʒ����
+		String samplename=""; //样品名称
 		String sql = "select soq.samplename from t_quotation as q,t_sales_order as so,t_sales_order_quoitem as soq  where so.vpid =q.vpid and so.id =soq.orderid  and  q.vpid =?";
 		try {
 			conn = DB.getConn();
 			auto = conn.getAutoCommit();
 			conn.setAutoCommit(false);
-			
+
 			pstmt = DB.prepareStatement(conn, sql);
 			pstmt.setString(1, pid);
 			rs = pstmt.executeQuery();
@@ -836,10 +836,10 @@ public class OrderAction {
 		}
 		return samplename;
 	}
-	
+
 
 	/**
-	 * ����ID�õ���˾��ϸ��Ϣ
+	 * 根据ID得到公司详细信息
 	 * @param companyid
 	 * @return
 	 */
@@ -855,7 +855,7 @@ public class OrderAction {
 			conn = DB.getConn();
 			auto = conn.getAutoCommit();
 			conn.setAutoCommit(false);
-			
+
 			pstmt = DB.prepareStatement(conn, sql);
 			pstmt.setInt(1, companyid);
 			rs = pstmt.executeQuery();
@@ -889,9 +889,9 @@ public class OrderAction {
 		}
 		return company;
 	}
-	
+
 	/**
-	 * ����id���������˺���ϸ��Ϣ
+	 * 根据id查找银行账号详细信息
 	 * @param bankid
 	 * @return
 	 */
@@ -906,7 +906,7 @@ public class OrderAction {
 			conn = DB.getConn();
 			auto = conn.getAutoCommit();
 			conn.setAutoCommit(false);
-			
+
 			pstmt = DB.prepareStatement(conn, sql);
 			pstmt.setInt(1, bankid);
 			rs = pstmt.executeQuery();
@@ -939,9 +939,9 @@ public class OrderAction {
 		}
 		return bank;
 	}
-	
+
 	/**
-	 * ����id���Ҹ��ʽ��ϸ��Ϣ
+	 * 根据id查找付款方式详细信息
 	 * @param advancetypeid
 	 * @return
 	 */
@@ -956,7 +956,7 @@ public class OrderAction {
 			conn = DB.getConn();
 			auto = conn.getAutoCommit();
 			conn.setAutoCommit(false);
-			
+
 			pstmt = DB.prepareStatement(conn, sql);
 			pstmt.setInt(1, advancetypeid);
 			rs = pstmt.executeQuery();
@@ -986,9 +986,9 @@ public class OrderAction {
 		}
 		return advancetype;
 	}
-	
+
 	/**
-	 * ���ݶ�����ȡ�ò�����Ŀ
+	 * 根据订单号取得测试项目
 	 * @param orderid
 	 * @return
 	 */
@@ -1043,9 +1043,9 @@ public class OrderAction {
 		}
 		return list;
 	}
-	
+
 	/***
-	 * ����id��ȡ����
+	 * 根据id获取名称
 	 * @param orderid
 	 * @return
 	 */
@@ -1058,9 +1058,9 @@ public class OrderAction {
 		String str ="";
 		String sql ="";
 		if(status.equals("plane")){
-			 sql = "select * from t_edm_test_plan where id = ? order by id";
+			sql = "select * from t_edm_test_plan where id = ? order by id";
 		}else if (status.equals("child")){
-			 sql = "select * from t_edm_test_child where id = ? order by id";
+			sql = "select * from t_edm_test_child where id = ? order by id";
 		}
 //		System.out.println(sql);
 		try {
@@ -1072,7 +1072,7 @@ public class OrderAction {
 			pstmt.setInt(1, orderid);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
-					str=rs.getString("vname");
+				str=rs.getString("vname");
 			}
 
 			conn.commit();
@@ -1095,9 +1095,9 @@ public class OrderAction {
 		}
 		return str;
 	}
-	
+
 	/**
-	 * ���ݲ���IDȡ�ò��Ծ�������
+	 * 根据测试ID取得测试具体内容
 	 * @param itemid
 	 * @return
 	 */
@@ -1112,7 +1112,7 @@ public class OrderAction {
 			conn = DB.getConn();
 			auto = conn.getAutoCommit();
 			conn.setAutoCommit(false);
-			
+
 			pstmt = DB.prepareStatement(conn, sql);
 			pstmt.setInt(1, itemid);
 			rs = pstmt.executeQuery();
@@ -1146,9 +1146,9 @@ public class OrderAction {
 		}
 		return item;
 	}
-	
+
 	/**
-	 * �������˶���
+	 * 搜索个人订单
 	 * @param pageNo
 	 * @param pageSize
 	 * @param salesid
@@ -1173,7 +1173,7 @@ public class OrderAction {
 			str.append(" and status = 'y'");
 		}
 		str.append(" order by id desc ");
-	     sql = sql+str.toString();
+		sql = sql+str.toString();
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -1245,9 +1245,9 @@ public class OrderAction {
 		}
 		return pm;
 	}
-	
+
 	/**
-	 * �����������۶���
+	 * 搜索所有销售订单
 	 * @param pageNo
 	 * @param pageSize
 	 * @param salesid
@@ -1293,7 +1293,7 @@ public class OrderAction {
 				order.setPid(rs.getString("vpid"));
 				order.setQuotype(rs.getString("quotype"));
 				order.setCompany(getCompanyById(rs.getInt("companyid")));
-				//System.out.println(rs.getInt("salesid")+"-----����id");
+				//System.out.println(rs.getInt("salesid")+"-----销售id");
 				order.setSales(UserAction.getInstance().getUserById(rs.getInt("salesid")));
 				//System.out.println(UserAction.getInstance().getUserById(rs.getInt("salesid"))+"------------------");
 				order.setService(UserAction.getInstance().getUserById(rs.getInt("servid")));
@@ -1362,9 +1362,9 @@ public class OrderAction {
 		}
 		return pm;
 	}
-	
+
 	/**
-	 * ����ID�õ�����
+	 * 根据ID得到订单
 	 * @param id
 	 * @return
 	 */
@@ -1452,11 +1452,11 @@ public class OrderAction {
 		}
 		return order;
 	}
-	
-	
-	
+
+
+
 	/**
-	 * ����pid�õ�����id
+	 * 根据pid得到订单id
 	 * @param id
 	 * @return
 	 */
@@ -1498,7 +1498,7 @@ public class OrderAction {
 		return id;
 	}
 	/**
-	 * ��˶���
+	 * 审核订单
 	 * @param id
 	 * @return
 	 */
@@ -1540,16 +1540,16 @@ public class OrderAction {
 		}
 		return isok;
 	}
-	
-	
-	
+
+
+
 	/**
-	 * ��˶�������ӱ��۵�
+	 * 审核订单后，添加报价单
 	 * @param id
 	 * @return
 	 */
 	public boolean createquotation(int id,String auditor) {
-	//	System.out.println("�����:"+auditor);
+		//	System.out.println("审核人:"+auditor);
 		Order order = getOrderById(id);
 		Quotation qt = new Quotation();
 		qt.setPid(order.getPid());
@@ -1579,7 +1579,7 @@ public class OrderAction {
 		qt.setRpclient(order.getRpclient());
 		qt.setGreenchannel(order.getGreenchannel());
 		qt.setConfirmid(order.getConfirmid());
-		qt.setStatus("����");
+		qt.setStatus("建立");
 		qt.setAuditman(auditor);
 		qt.setAmstart(order.getAmstart());
 		qt.setAmend(order.getAmend());
@@ -1591,19 +1591,19 @@ public class OrderAction {
 		qt.setProduct(order.getProduct());
 		qt.setSampling(order.getSampling());
 		qt.setSampltime(order.getSampltime());
-		
+
 		if(!QuotationAction.getInstance().addQuotation(qt)) {
 			return false;
 		}
 		if(!confirmorder(id)) {
 			return false;
 		}
-		
+
 		return true;
 	}
-	
+
 	/**
-	 * �޸ı��۵�
+	 * 修改报价单
 	 * @param id
 	 * @return
 	 */
@@ -1615,13 +1615,13 @@ public class OrderAction {
 		qt.setCompany(order.getCompany().getName());
 		qt.setSales(order.getSales().getName());
 		qt.setClient(order.getClient().getName());
-		
+
 		StringBuffer projectcontent = new StringBuffer();
 		for(int i=0;i<order.getQuoitems().size();i++) {
 			projectcontent.append(order.getQuoitems().get(i).getItem().getName());
 			projectcontent.append(";");
 		}
-		
+
 		qt.setProjectcontent(projectcontent.toString());
 		qt.setCompletetime(order.getCompletetime());
 		qt.setTotalprice(order.getTotalprice());
@@ -1635,16 +1635,16 @@ public class OrderAction {
 		qt.setTag(order.getTag());
 		qt.setCreateuser(order.getCreateuser());
 		qt.setStandprice(order.getStandprice());
-		
+
 		if(!QuotationAction.getInstance().updateQuotation(qt)) {
 			return false;
 		}
-		
+
 		return true;
 	}
-	
+
 	/**
-	 * ɾ��������
+	 * 删除测试项
 	 * @param quoitemid
 	 * @return
 	 */
@@ -1686,16 +1686,16 @@ public class OrderAction {
 		}
 		return isok;
 	}
-	
-	
-	//���ݱ��۵��ϲ�ѯ���ƵĲ��Ե���
+
+
+	//根据报价但老查询估计的测试点数
 	public int getEstimateSpoints(String pid ){
 		String sql = "select estimatespoints from t_sales_order where vpid = ?";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		int estimatespoints=0;
-		
+
 		try {
 			conn = DB.getConn();
 			pstmt = DB.prepareStatement(conn, sql);
@@ -1703,7 +1703,7 @@ public class OrderAction {
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				estimatespoints=rs.getInt("estimatespoints");
-			
+
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
