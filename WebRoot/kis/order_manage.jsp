@@ -44,7 +44,7 @@
 		}
 		pm = OrderAction.getInstance().searchOrder(pageNo,pageSize,pid,null,clientid,parttype);
 	} else {
-		pm = OrderAction.getInstance().getAllOrders(pageNo,pageSize,null,null,null,null,null);
+		pm = OrderAction.getInstance().getAllOrders(pageNo,pageSize,null,null,null,0,null,null);
 	}
 	
 	}
