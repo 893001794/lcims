@@ -123,7 +123,11 @@
 			alert("一次只能修改一条用户数据！");
 			return;
 		}
-	
+		var statusValue=document.getElementsByName("selectFlag")[j].getAttribute('statusValue');
+		if (statusValue=="y") {
+			alert("该订单已经审核不能修改！");
+			return;
+		}
 		window.self.location = "modiorder.jsp?id=" + document.getElementsByName("selectFlag")[j].value;
 	}
 	
@@ -393,14 +397,14 @@ function exportEMC() {
 					<td class="rd6">
 						标准价
 					</td>-->
-					<td class="rd6">
+					<td class="rd6" width="5%">
 						金额
 					</td>
 					<%if(user.getTicketid().matches("\\d\\d\\d1\\d\\d\\d\\d")||user.getId()==103||user.getId()==254){ %>
-					<td class="rd6">
+					<td class="rd6" width="5%">
 						已收金额
 					</td>
-					<td class="rd6">
+					<td class="rd6" width="5%">
 						未收金额
 					</td>
 					<%} %>
@@ -427,7 +431,7 @@ function exportEMC() {
 				<tr>
 					<td class="rd8">
 						<input type="checkbox" name="selectFlag" class="checkbox1"
-							value="<%=order.getId()%>">
+							value="<%=order.getId()%>" statusValue="<%=order.getStatus()%>">
 					</td>
 					<td class="rd8">
 						<a href="orderdetail.jsp?id=<%=order.getId() %>"><%=order.getPid() %></a>
