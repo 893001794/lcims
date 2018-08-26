@@ -104,6 +104,8 @@
 	String[] itemcounts = request.getParameterValues("itemcount");
 	String[] saleprices = request.getParameterValues("saleprice");
 	String[] remarks = request.getParameterValues("remark");
+	//添加实际价格
+	String[] prices = request.getParameterValues("price");
 	for(int i=0;i<itemnames.length;i++) {
 		if(itemnames[i] != null && !"".equals(itemnames[i])) {
 		System.out.println("itemcounts:"+itemcounts[i]);
@@ -117,7 +119,8 @@
 			quoitem.setSamplename(samplenames[i]);
 			quoitem.setRemark(remarks[i]);
 			quoitem.setSaleprice(Float.parseFloat(saleprices[i]));
-			totalprice += quoitem.getCount()*quoitem.getSaleprice();
+			quoitem.setPrice(Float.parseFloat(prices[i]));
+			totalprice += quoitem.getCount()*quoitem.getPrice();
 			quoitemlist.add(quoitem);
 		} else if(quoitemids[i] != null && !"".equals(quoitemids[i])) {
 			int quoitemid = Integer.parseInt(quoitemids[i]);

@@ -400,10 +400,11 @@ public class OrderAction {
 			List<QuoItem> list = order.getQuoitems();
 			for(int i=0;i<list.size();i++) {
 				QuoItem quoitem = list.get(i);
+				System.out.println("====="+quoitem.getPrice());
 				if(quoitem.getId()==0) {
-					sql = "insert into t_sales_order_quoitem(orderid,itemid,count,saleprice,remark,samplename,planeid,childid) values(?,?,?,?,?,?,?,?)";
+					sql = "insert into t_sales_order_quoitem(orderid,itemid,count,saleprice,remark,samplename,planeid,childid,price) values(?,?,?,?,?,?,?,?,?)";
 				} else {
-					sql = "update t_sales_order_quoitem set orderid=?,itemid=?,count=?,saleprice=?,remark=?,samplename=?,planeid=?,childid=? where id=" + quoitem.getId();
+					sql = "update t_sales_order_quoitem set orderid=?,itemid=?,count=?,saleprice=?,remark=?,samplename=?,planeid=?,childid=?,price=? where id=" + quoitem.getId();
 				}
 				pstmt = DB.prepareStatement(conn, sql);
 				pstmt.setInt(1, order.getId());
@@ -414,6 +415,7 @@ public class OrderAction {
 				pstmt.setString(6, quoitem.getSamplename());
 				pstmt.setInt(7, quoitem.getPlaneId());
 				pstmt.setInt(8, quoitem.getChildId());
+				pstmt.setFloat(9,quoitem.getPrice());
 				pstmt.executeUpdate();
 			}
 			Quotation quo=QuotationAction.getInstance().getQuotationByPid(order.getPid());

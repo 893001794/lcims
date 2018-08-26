@@ -439,7 +439,7 @@
 						</td>
 						<td>
 							<div align="center">
-								<input type="text" id="itemcount<%=i+1%>" name="itemcount" size="13" onBlur="getTotal('<%=i %>');" value="<%=quoitem.getCount()%>">
+								<input type="text" id="itemcount<%=i+1%>" name="itemcount" size="13" onBlur="getTotal('<%=i+1%>');" value="<%=quoitem.getCount()%>">
 							</div>
 						</td>
 						<td>
@@ -491,13 +491,13 @@
 						</td>
 						<td>
 							<div align="center">
-								<input type="text" id="standprice<%=i+1%>" name="price" size="13" readonly="readonly"
+								<input type="text" id="price<%=i+1%>" name="price" size="13" readonly="readonly" onBlur="getTotal('<%=i+1 %>');"
 									style="background-color: #FFCC99">
 							</div>
 						</td>
 						<td>
 							<div align="center">
-								<input type="text" id="itemcount<%=i+1%>" name="itemcount" size="13" onBlur="getTotal('<%=i %>');">
+								<input type="text" id="itemcount<%=i+1%>" name="itemcount" size="13" onBlur="getTotal('<%=i+1 %>');">
 							</div>
 						</td>
 						<td>
@@ -588,7 +588,7 @@
 						</td>
 						<td width="33%">
 							<input name="invcount" id="invcount" type="text" size="40"
-								value="<%=order.getTotalprice()%>" onFocus="getinvprice(this);"  />
+								value="<%=order.getTotalprice()%>" onFocus="getinvprice(this);" />
 						</td>
 					</tr>
 				</table>
