@@ -413,6 +413,11 @@
 						</td>
 						<td>
 							<div align="center">
+								<input type="text" id="price<%=i%>" name="price" size="13"  value="<%=quoitem.getPrice()%>">
+							</div>
+						</td>
+						<td>
+							<div align="center">
 								<input type="text" id="itemcount<%=i%>" name="itemcount" size="13" onBlur="getTotal('<%=i %>');" value="<%=quoitem.getCount()%>">
 							</div>
 						</td>
