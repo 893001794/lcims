@@ -18,10 +18,10 @@ import com.lccert.crm.vo.SalesOrderItem;
 import com.lccert.oa.db.ImsDB;
 
 /**
- * ²ÆÎñ¶©µ¥¹ÜÀíÀà
- * 
+ * è´¢åŠ¡è®¢å•ç®¡ç†ç±»
+ *
  * @author eason
- * 
+ *
  */
 public class FinanceQuotationAction {
 
@@ -36,8 +36,8 @@ public class FinanceQuotationAction {
 	}
 
 	/**
-	 * ËÑË÷±¨¼Ûµ¥£¨·ÖÒ³Ä£Ê½£©
-	 * 
+	 * æœç´¢æŠ¥ä»·å•ï¼ˆåˆ†é¡µæ¨¡å¼ï¼‰
+	 *
 	 * @param pageNo
 	 * @param pageSize
 	 * @param pid
@@ -53,7 +53,7 @@ public class FinanceQuotationAction {
 		StringBuffer str = new StringBuffer();
 		String sql=null;
 
-		
+
 		if (fqu.getPid() != null && !"".equals(fqu.getPid())) {
 			str.append(" and vpid like '%" + fqu.getPid() + "%'");
 		}
@@ -70,7 +70,7 @@ public class FinanceQuotationAction {
 			float totalprice = Float.parseFloat(fqu.getPrice());
 			str.append(" and ftotalprice = " + totalprice);
 		}
-		
+
 		if (fqu.getClient() != null && !"".equals(fqu.getClient())&& !"null".equals(fqu.getClient())) {
 			str.append(" and vclient like '%" + fqu.getClient() + "%'");
 		}
@@ -78,29 +78,29 @@ public class FinanceQuotationAction {
 		if(fqu.getStatus() !=null && !"".equals(fqu.getStatus())){
 			str.append(" and  vpid like '"+fqu.getStatus()+"%' ");
 		}
-		//Ö»ÏÔÊ¾¹ãÖİĞÅÏ¢
+		//åªæ˜¾ç¤ºå¹¿å·ä¿¡æ¯
 		if(start !=null && start.equals("G") && str.length() == 0){
 			sql = "select * from t_quotation where 1=1 and  vpid like '"+fqu.getStatus()+"%'   order by dcreatetime desc limit "
-			+ (fqu.getPageNo() - 1) * fqu.getPageSize() + ", " + fqu.getPageSize();
-		}else if(start !=null && start.equals("G")){
-				 sql = "select * from t_quotation where 1=1 and vpid like '"+fqu.getStatus()+"%'"  + str.toString() + " order by dcreatetime desc limit "
 					+ (fqu.getPageNo() - 1) * fqu.getPageSize() + ", " + fqu.getPageSize();
-			
+		}else if(start !=null && start.equals("G")){
+			sql = "select * from t_quotation where 1=1 and vpid like '"+fqu.getStatus()+"%'"  + str.toString() + " order by dcreatetime desc limit "
+					+ (fqu.getPageNo() - 1) * fqu.getPageSize() + ", " + fqu.getPageSize();
+
 		}
-//		//Ö»ÏÔÊ¾¶«İ¸ĞÅÏ¢
+//		//åªæ˜¾ç¤ºä¸œèä¿¡æ¯
 //		if(start !=null && start.equals("D") && str.length() == 0){
 //			sql = "select * from t_quotation where 1=1 and  vpid like 'LCQD%'  order by dcreatetime desc limit "
 //				+ (fqu.getPageNo() - 1) * fqu.getPageSize() + ", " + fqu.getPageSize();
 //		}else if(start !=null && start.equals("D")){
 //			sql = "select * from t_quotation where 1=1 and vpid like 'LCQD%' " + str.toString() + " order by dcreatetime desc limit "
 //			+ (fqu.getPageNo() - 1) * fqu.getPageSize() + ", " + fqu.getPageSize();
-//			
+//
 //		}
 		else{
-		
-		 sql = "select * from t_quotation where 1=1 " + str.toString() + " order by dcreatetime desc limit "
-			+ (fqu.getPageNo() - 1) * fqu.getPageSize() + ", " + fqu.getPageSize();
-		 
+
+			sql = "select * from t_quotation where 1=1 " + str.toString() + " order by dcreatetime desc limit "
+					+ (fqu.getPageNo() - 1) * fqu.getPageSize() + ", " + fqu.getPageSize();
+
 		}
 		System.out.println(sql);
 		try {
@@ -146,7 +146,7 @@ public class FinanceQuotationAction {
 				list.add(qt);
 			}
 			String tsql=null;
-		
+
 			if(start !=null && start.equals("G") && str.length() == 0){
 				tsql= "select count(*) from t_quotation where 1=1 and  vpid like 'LCQG%' " + str.toString();
 			}else{
@@ -181,12 +181,12 @@ public class FinanceQuotationAction {
 	}
 
 	/**
-	 * È¡µÃËùÓĞµÄ¼ÇÂ¼Êı
-	 * 
+	 * å–å¾—æ‰€æœ‰çš„è®°å½•æ•°
+	 *
 	 * @param conn
 	 *            connection
 	 * @param createuser
-	 * @return ËùÓĞµÄ¼ÇÂ¼Êı
+	 * @return æ‰€æœ‰çš„è®°å½•æ•°
 	 */
 	private int getTotalRecords(Connection conn,String sql) {
 		int totalRecords = 0;
@@ -208,8 +208,8 @@ public class FinanceQuotationAction {
 	}
 
 	/**
-	 * ²éÕÒËùÓĞµÄ±¨¼Ûµ¥
-	 * 
+	 * æŸ¥æ‰¾æ‰€æœ‰çš„æŠ¥ä»·å•
+	 *
 	 * @param pageNo
 	 * @param pageSize
 	 * @return
@@ -288,11 +288,11 @@ public class FinanceQuotationAction {
 		return pm;
 	}
 
-	
+
 
 	/**
-	 * ²ÆÎñ¿îÏîµÇ¼Ç¸üĞÂ
-	 * 
+	 * è´¢åŠ¡æ¬¾é¡¹ç™»è®°æ›´æ–°
+	 *
 	 * @param qt
 	 * @return
 	 */
@@ -357,7 +357,7 @@ public class FinanceQuotationAction {
 			pstmt.setString(37, qt.getPid());
 			pstmt.executeUpdate();
 			if (qt.getAcount() != 0) {
-				sql = "update t_quotation set vstatus='ÒÑ½áËã' where vpid=?";
+				sql = "update t_quotation set vstatus='å·²ç»“ç®—' where vpid=?";
 				pstmt = DB.prepareStatement(conn, sql);
 				pstmt.setString(1, qt.getPid());
 				pstmt.executeUpdate();
@@ -386,8 +386,8 @@ public class FinanceQuotationAction {
 	}
 
 	/**
-	 * ½âËøºÍ¼ÏËø
-	 * 
+	 * è§£é”å’Œæ·é”
+	 *
 	 * @param qt
 	 * @return
 	 */
@@ -428,46 +428,48 @@ public class FinanceQuotationAction {
 		return isok;
 	}
 	/**
-	 * ²ÆÎñ±¨¼Ûµ¥Í³¼Æ
-	 * 
+	 * è´¢åŠ¡æŠ¥ä»·å•ç»Ÿè®¡
+	 *
 	 * @param start
 	 * @param end
 	 * @param type
 	 * @return
 	 */
 	public float[] getFinanceProject(String quostart, String quoend,
-			String acceptstart, String acceptend,String paytimestart,String paytimend, String dsubcosttime,String dsubcosttime2,String dagtime,String spefundtime, String counttime,String type,
-			List<Quotation> list,String start) {
+									 String acceptstart, String acceptend,String paytimestart,String paytimend, String dsubcosttime,String dsubcosttime2,String dagtime,String spefundtime, String counttime,String type,
+									 List<Quotation> list,String start) {
 		StringBuffer str = new StringBuffer();
 		float[] f = new float[2];
 		float totalperformence = 0;
 		float total = 0;
+		String timeStr=" 00:00:00 ";acceptend+=" 23:59:59 ";
 		if ("search".equals(type)) {
-			//±¨¼ÛÊ±¼ä
+
+			//æŠ¥ä»·æ—¶é—´
 			if (quostart != null && !"".equals(quostart)
 					&& quoend != null && !"".equals(quoend)) {
-				str.append(" and dcreatetime >= '" + quostart
-						+ "' and dcreatetime <= '" + quoend + "'");
+				str.append(" and dcreatetime >= '" + quostart +timeStr
+						+ "' and dcreatetime <= '" + quoend+timeStr + "'");
 			}
-			//ÊÕµ¥Ê±¼ä
+			//æ”¶å•æ—¶é—´
 			if (acceptstart != null && !"".equals(acceptstart)
 					&& acceptend != null && !"".equals(acceptend)) {
-				str.append(" and dconfirmtime is not null and dconfirmtime >= '" + acceptstart
-						+ "' and dconfirmtime <= '" + acceptend + "'");
+				str.append(" and dconfirmtime is not null and dconfirmtime >= '" + acceptstart+timeStr
+						+ "' and dconfirmtime <= '" + acceptend+timeStr + "'");
 			}
-		//ÊÕ¿îÊ±¼ä
+			//æ”¶æ¬¾æ—¶é—´
 			if (paytimestart != null && !"".equals(paytimestart)
 					&& paytimend != null && !"".equals(paytimend)) {
-				str.append(" and dpaytime is not null and dpaytime >= '" + paytimestart
-						+ "' and dpaytime <= '" + paytimend + "'");
+				str.append(" and dpaytime is not null and dpaytime >= '" + paytimestart+timeStr
+						+ "' and dpaytime <= '" + paytimend+timeStr + "'");
 			}
 			if(start !=null && !"".equals(start)){
 				str.append(" and  vpid like '"+start+"%' ");
 			}
-			
-			
-		} 
-		//ÏµÍ³µ±ÌìµÄÊ±¼ä
+
+
+		}
+		//ç³»ç»Ÿå½“å¤©çš„æ—¶é—´
 		else {
 			Date date = new Date();
 			str.append(" and dcreatetime > '"
@@ -477,20 +479,20 @@ public class FinanceQuotationAction {
 					+ "'");
 		}
 		String sql ="";
-		
-		 //Ö§¸¶·Ö°ü·ÑAÈÕÆÚ
-	 if (dsubcosttime != null && !"".equals(dsubcosttime)) {
+
+		//æ”¯ä»˜åˆ†åŒ…è´¹Aæ—¥æœŸ
+		if (dsubcosttime != null && !"".equals(dsubcosttime)) {
 			sql ="select distinct(a.vpid),a.fbalance,a.fsepayFactor,a.fadvarceFactor,a.fbalanceFactor,a.Fothercost,a.dconfirmtime,a.vsales,a.vclient,a.ftotalprice,a.einvtype,a.fpreadvance,a.vcreditcard,a.dpaytime,a.fsepay,a.fprebalance,a.fpresubcost,a.fpreagcost,a.fspefund,a.ftax,a.fsubcost,a.vcollremarks,a.vprojectcontent,a.voldpid,a.equotype,p.dsubcosttime,p.dsubcosttime2,p.dagtime  from t_quotation  as a,t_project  as p  where 1=1 and p.vpid =a.vpid and  year(p.dsubcosttime)=year(now()) and month(p.dsubcosttime)='"+dsubcosttime+"' and p.dsubcosttime is not null and ((p.Fagcost > 0) or (p.Fsubcost > 0) or(p.Fsubcost2 >0) or (a.Fspefund >0))   group by a.vpid  order by a.dcreatetime desc";
 		}
-	 //Ö§¸¶·Ö°ü·ÑBÈÕÆÚ
+		//æ”¯ä»˜åˆ†åŒ…è´¹Bæ—¥æœŸ
 		else if (dsubcosttime2 != null && !"".equals(dsubcosttime2)) {
 			sql ="select distinct(a.vpid),a.fbalance,a.fsepayFactor,a.fadvarceFactor,a.fbalanceFactor,a.Fothercost,a.dconfirmtime,a.vsales,a.vclient,a.ftotalprice,a.einvtype,a.fpreadvance,a.vcreditcard,a.dpaytime,a.fsepay,a.fprebalance,a.fpresubcost,a.fpreagcost,a.fspefund,a.ftax,a.fsubcost,a.vcollremarks,a.vprojectcontent,a.voldpid,a.equotype,p.dsubcosttime,p.dsubcosttime2,p.dagtime  from t_quotation  as a,t_project  as p  where 1=1 and p.vpid =a.vpid and  year(p.dsubcosttime2)=year(now()) and month(p.dsubcosttime2)='"+dsubcosttime2+"' and p.dsubcosttime2 is not null and ((p.Fagcost > 0) or (p.Fsubcost > 0) or(p.Fsubcost2 >0) or (a.Fspefund >0)) group by a.vpid    order by a.dcreatetime desc";
 		}
-	// »ú¹¹·ÑÓÃÖ§¸¶ÈÕÆÚ
+		// æœºæ„è´¹ç”¨æ”¯ä»˜æ—¥æœŸ
 		else if (dagtime != null && !"".equals(dagtime)) {
 			sql ="select distinct(a.vpid),a.fbalance,a.fsepayFactor,fsepayFactor,a.fadvarceFactor,a.fbalanceFactor,a.Fothercost,a.dconfirmtime,a.vsales,a.vclient,a.ftotalprice,a.einvtype,a.fpreadvance,a.vcreditcard,a.dpaytime,a.fsepay,a.fprebalance,a.fpresubcost,a.fpreagcost,a.fspefund,a.ftax,a.fsubcost,a.vcollremarks,a.vprojectcontent,a.voldpid,a.equotype,p.dsubcosttime,p.dsubcosttime2,p.dagtime  from t_quotation  as a,t_project  as p  where 1=1 and p.vpid =a.vpid and  year(p.dagtime)=year(now()) and month(p.dagtime)='"+dagtime+"' and p.dagtime is not null and ((p.Fagcost > 0) or (p.Fsubcost > 0) or(p.Fsubcost2 >0) or (a.Fspefund >0))  group by a.vpid   order by a.dcreatetime desc";
 		}
-	// ÌØÊâ½Ó´ı·ÑÖ§¸¶ÈÕÆÚ
+		// ç‰¹æ®Šæ¥å¾…è´¹æ”¯ä»˜æ—¥æœŸ
 		else if(spefundtime !=null && !"".equals(spefundtime)){
 			sql ="select distinct(a.vpid),a.fbalance,a.fsepayFactor,a.fadvarceFactor,a.fbalanceFactor,a.Fothercost,a.dconfirmtime,a.vsales,a.vclient,a.ftotalprice,a.einvtype,a.fpreadvance,a.vcreditcard,a.dpaytime,a.fsepay,a.fprebalance,a.fpresubcost,a.fpreagcost,a.fspefund,a.ftax,a.fsubcost,a.vcollremarks,a.vprojectcontent,a.voldpid,a.equotype,p.dsubcosttime,p.dsubcosttime2,p.dagtime  from t_quotation  as a,t_project  as p  where 1=1 and p.vpid =a.vpid and  year(dspefundtime)=year(now()) and month(dspefundtime)='"+spefundtime+"' and dspefundtime is not null  and ((p.Fagcost > 0) or (p.Fsubcost > 0) or(p.Fsubcost2 >0) or (a.Fspefund >0))   group by a.vpid   order by a.dcreatetime desc";
 		}
@@ -498,8 +500,8 @@ public class FinanceQuotationAction {
 			sql ="select distinct(a.vpid),a.fbalance,a.fsepayFactor,a.fadvarceFactor,a.fbalanceFactor,a.Fothercost,a.dconfirmtime,a.vsales,a.vclient,a.ftotalprice,a.einvtype,a.fpreadvance,a.vcreditcard,a.dpaytime,a.fsepay,a.fprebalance,a.fpresubcost,a.fpreagcost,a.fspefund,a.ftax,a.fsubcost,a.vcollremarks,a.vprojectcontent,a.voldpid,a.equotype,p.dsubcosttime,p.dsubcosttime2,p.dagtime  from t_quotation  as a,t_project  as p  where 1=1 and p.vpid =a.vpid and ( (year(p.dsubcosttime)=year(now())) or (year(p.dsubcosttime2)=year(now())) or(year(p.dagtime)=year(now()))) and ((month(p.dsubcosttime)='"+counttime+"') or (month(p.dsubcosttime2)='"+counttime+"') or ( month(p.dagtime)='"+counttime+"' )) and  ((p.Fagcost > 0) or (p.Fsubcost > 0) or(p.Fsubcost2 >0) or (a.Fspefund >0))   group by a.vpid  order by a.dcreatetime desc";
 		}
 		else{
-		sql= "select * from t_quotation  where 1=1" + str.toString()
-				+ " order by dcreatetime desc";
+			sql= "select * from t_quotation  where 1=1" + str.toString()
+					+ " order by dcreatetime desc";
 		}
 		System.out.println(sql+":sql");
 		Connection conn = null;
@@ -509,7 +511,7 @@ public class FinanceQuotationAction {
 		try {
 			conn = DB.getConn();
 			pstmt = DB.prepareStatement(conn, sql);
-			
+
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				qt = new Quotation();
@@ -558,8 +560,8 @@ public class FinanceQuotationAction {
 		return f;
 	}
 	/**
-	 * ²ÆÎñ±¨¼Ûµ¥Í³¼Æ
-	 * 
+	 * è´¢åŠ¡æŠ¥ä»·å•ç»Ÿè®¡
+	 *
 	 * @param start
 	 * @param end
 	 * @param type
@@ -571,50 +573,50 @@ public class FinanceQuotationAction {
 		float[] f = new float[2];
 		float totalperformence = 0;
 		float total = 0;
-			if(acceptstart !=null && acceptstart !="" && acceptend !="" && acceptend !=null){
-				if(acceptstart !="" && acceptend ==""){
+		if(acceptstart !=null && acceptstart !="" && acceptend !="" && acceptend !=null){
+			if(acceptstart !="" && acceptend ==""){
 				acceptstart+=" 00:00:00 ";
-				 str.append(" and q.dconfirmtime is not null and (q.dconfirmtime='"+acceptstart+"' or(q.dpaytime='"+acceptstart+"') or ( q.Dsepaytime= '"+acceptstart+"') or (q.dbalancetime= '"+acceptstart+"'))");
-				}else if(acceptstart =="" && acceptend !=""){
+				str.append(" and q.dconfirmtime is not null and (q.dconfirmtime='"+acceptstart+"' or(q.dpaytime='"+acceptstart+"') or ( q.Dsepaytime= '"+acceptstart+"') or (q.dbalancetime= '"+acceptstart+"'))");
+			}else if(acceptstart =="" && acceptend !=""){
 				acceptend+=" 23:59:59 ";
-				 str.append(" and q.dconfirmtime is not null and (q.dconfirmtime='"+acceptend+"' or(q.dpaytime= '"+acceptend+"') or (q.Dsepaytime= '"+acceptend+"') or(q.dbalancetime = '"+acceptend+"'))");	
-				}else if(acceptstart !="" && acceptend !=""){
+				str.append(" and q.dconfirmtime is not null and (q.dconfirmtime='"+acceptend+"' or(q.dpaytime= '"+acceptend+"') or (q.Dsepaytime= '"+acceptend+"') or(q.dbalancetime = '"+acceptend+"'))");
+			}else if(acceptstart !="" && acceptend !=""){
 				acceptstart+=" 00:00:00 ";acceptend+=" 23:59:59 ";
-				 str.append(" and q.dconfirmtime is not null and ((q.dconfirmtime>='"+acceptstart+"' and q.dconfirmtime<='"+acceptend+"') or (q.dpaytime >= '"+acceptstart+"' and q.dpaytime <= '"+acceptend+"') or (q.Dsepaytime>= '"+acceptstart+"' and q.Dsepaytime<= '"+acceptend+"') or(q.dbalancetime >= '"+acceptstart+"' and q.dbalancetime <= '"+acceptend+"'))");	
-				}
+				str.append(" and q.dconfirmtime is not null and ((q.dconfirmtime>='"+acceptstart+"' and q.dconfirmtime<='"+acceptend+"') or (q.dpaytime >= '"+acceptstart+"' and q.dpaytime <= '"+acceptend+"') or (q.Dsepaytime>= '"+acceptstart+"' and q.Dsepaytime<= '"+acceptend+"') or(q.dbalancetime >= '"+acceptstart+"' and q.dbalancetime <= '"+acceptend+"'))");
 			}
-			else if (year != null && !"".equals(year)) {
-				str.append(" and q.dconfirmtime is not null and (year(q.dconfirmtime)= '"+year+"'  and month(q.dconfirmtime)= '"+month+"'  or( year(q.dpaytime) = '"+year+"') and month(q.dpaytime)= '"+month+"' or year(q.Dsepaytime)= '"+year+"'  and month(q.Dsepaytime)= '"+month+"'  or( year(q.dbalancetime) = '"+year+"') and month(q.dbalancetime)= '"+month+"'  ) ");
+		}
+		else if (year != null && !"".equals(year)) {
+			str.append(" and q.dconfirmtime is not null and (year(q.dconfirmtime)= '"+year+"'  and month(q.dconfirmtime)= '"+month+"'  or( year(q.dpaytime) = '"+year+"') and month(q.dpaytime)= '"+month+"' or year(q.Dsepaytime)= '"+year+"'  and month(q.Dsepaytime)= '"+month+"'  or( year(q.dbalancetime) = '"+year+"') and month(q.dbalancetime)= '"+month+"'  ) ");
+		}
+		if(dept !=null && !"".equals(dept)){
+			if(dept.equals("1")){
+				str.append(" and q.vpid like 'LCQ1%' ");
+			}else if(dept.equals("2")){
+				param=" ,(select count(*) from t_phy_project where  vpid=q.vpid and dendtime is null GROUP BY vpid  ) as isNotFishCount ";
+				param+=" ,(select dendtime from t_phy_project  where  vpid=q.vpid GROUP BY vpid  ORDER BY dendtime desc ) as dendtime ";
+				str.append(" and q.vpid like 'LCQ2%'");
 			}
-			if(dept !=null && !"".equals(dept)){
-				if(dept.equals("1")){
-					str.append(" and q.vpid like 'LCQ1%' ");
-				}else if(dept.equals("2")){
-					param=" ,(select count(*) from t_phy_project where  vpid=q.vpid and dendtime is null GROUP BY vpid  ) as isNotFishCount ";
-					param+=" ,(select dendtime from t_phy_project  where  vpid=q.vpid GROUP BY vpid  ORDER BY dendtime desc ) as dendtime ";
-					str.append(" and q.vpid like 'LCQ2%'");
-				}
-				if(dept.equals("3")){
-					str.append(" and q.vpid like 'LCQE%'");
-				}if(dept.equals("G")){
-					str.append(" and q.vpid like 'LCQG%'");
-				}if(dept.equals("D")){
-					str.append(" and q.vpid like 'LCQD%'");
-				}
+			if(dept.equals("3")){
+				str.append(" and q.vpid like 'LCQE%'");
+			}if(dept.equals("G")){
+				str.append(" and q.vpid like 'LCQG%'");
+			}if(dept.equals("D")){
+				str.append(" and q.vpid like 'LCQD%'");
 			}
-			if(group !=null && !"".equals(group)){
-					str.append(" and u.groupid ='"+group+"'");
-			}
-		//} 
-			//Î´¼ÓÅÅµ¥ÈËÔ±2012-03-26
-	//	String sql= "select q.* from t_quotation  as q ,t_user as u where u.name  =q.vsales" + str.toString()+ " order by q.dcreatetime desc";
-		String sql= "select q.*,cp.vcreatename,u.groupid "+param+" from t_quotation   as q left join (select  distinct(vpid),vcreatename  from t_chem_project  ) as cp on q.vpid =cp.vpid,t_user as u  where u.name  =q.vsales and u.estatus='ÓĞĞ§'  " + str.toString()+ "  order by q.dcreatetime desc";
-	System.out.println(sql);
+		}
+		if(group !=null && !"".equals(group)){
+			str.append(" and u.groupid ='"+group+"'");
+		}
+		//}
+		//æœªåŠ æ’å•äººå‘˜2012-03-26
+		//	String sql= "select q.* from t_quotation  as q ,t_user as u where u.name  =q.vsales" + str.toString()+ " order by q.dcreatetime desc";
+		String sql= "select q.*,cp.vcreatename,u.groupid "+param+" from t_quotation   as q left join (select  distinct(vpid),vcreatename  from t_chem_project  ) as cp on q.vpid =cp.vpid,t_user as u  where u.name  =q.vsales and u.estatus='æœ‰æ•ˆ'  " + str.toString()+ "  order by q.dcreatetime desc";
+		System.out.println(sql);
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		Quotation qt = null;
-		PhyProject pp =new PhyProject(); 
+		PhyProject pp =new PhyProject();
 		try {
 			conn = DB.getConn();
 			pstmt = DB.prepareStatement(conn, sql);
@@ -661,12 +663,12 @@ public class FinanceQuotationAction {
 				if(qt.getPid().indexOf("LCQ2")==-1&&dept !=null && !"G".equals(dept)){
 					qt.setCreatename(rs.getString("cp.vcreatename"));
 				}else{
-					//°²¹æµÄÅÅµ¥ÈËÔ±
+					//å®‰è§„çš„æ’å•äººå‘˜
 					pp.setPid(qt.getPid());
-			    	PhyProject phyProject= PhyProjectAction.getInstance().findByConditions(pp);
-			    	if(phyProject !=null){
-			    		qt.setCreatename(PhyProjectAction.getInstance().findByConditions(pp).getServname());
-			    	}
+					PhyProject phyProject= PhyProjectAction.getInstance().findByConditions(pp);
+					if(phyProject !=null){
+						qt.setCreatename(PhyProjectAction.getInstance().findByConditions(pp).getServname());
+					}
 				}
 				if(dept.equals("2")){
 					String isNotFishCount=rs.getString("isNotFishCount");
@@ -678,7 +680,7 @@ public class FinanceQuotationAction {
 					qt.setFinish(rs.getTimestamp("dreceipt"));
 				}
 				totalperformence += qt.getPreadvance() + qt.getSepay()
-				+ qt.getBalance();
+						+ qt.getBalance();
 				total += qt.getTotalprice();
 				list.add(qt);
 				i++;
@@ -695,10 +697,10 @@ public class FinanceQuotationAction {
 		}
 		return f;
 	}
-	
+
 	/**
-	 * ²ÆÎñ±¨¼Ûµ¥Í³¼Æ
-	 * 
+	 * è´¢åŠ¡æŠ¥ä»·å•ç»Ÿè®¡
+	 *
 	 * @param start
 	 * @param end
 	 * @param type
@@ -709,16 +711,16 @@ public class FinanceQuotationAction {
 		float[] f = new float[2];
 		float totalperformence = 0;
 		float total = 0;
-	
-			if(dept !=null && !"".equals(dept)){
-				if(dept.equals("1")){
-					str.append(" and q.vpid like 'LCQ1%'");
-				}
-				if(dept.equals("2")){
-					str.append(" and q.vpid like 'LCQ2%'");
-				}
+
+		if(dept !=null && !"".equals(dept)){
+			if(dept.equals("1")){
+				str.append(" and q.vpid like 'LCQ1%'");
 			}
-			
+			if(dept.equals("2")){
+				str.append(" and q.vpid like 'LCQ2%'");
+			}
+		}
+
 		String sql= "select Dconfirmtime ,vpid ,vsales  ,vclient,ftotalprice,Fpreadvance,Dpaytime,Fsepay,Dsepaytime,Fbalance,dbalancetime   from t_quotation as q where dcreatetime<=now()  and year(dcreatetime) >=2011 and  Dconfirmtime is not null  and (ftotalprice-(Fpreadvance+Fsepay+Fbalance)>10 or equotype ='flu' )" + str.toString()+ " order by q.dcreatetime desc";
 //		System.out.println(sql);
 		Connection conn = null;
@@ -728,7 +730,7 @@ public class FinanceQuotationAction {
 		try {
 			conn = DB.getConn();
 			pstmt = DB.prepareStatement(conn, sql);
-			
+
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				qt = new Quotation();
@@ -756,8 +758,8 @@ public class FinanceQuotationAction {
 		}
 		return f;
 	}
-	
-	//²éÑ¯»ú¹¹¹ÜÀíµÄ±¸×¢
+
+	//æŸ¥è¯¢æœºæ„ç®¡ç†çš„å¤‡æ³¨
 	public String getAgRemarks(String pid){
 		String sql ="select distinct(p.vpid),p.vagremarks from t_quotation q,t_project p where p.vpid =q.vpid  and p.vpid =?";
 		Connection conn = null;
@@ -774,7 +776,7 @@ public class FinanceQuotationAction {
 			while (rs.next()) {
 				agremarks=rs.getString("p.vagremarks");
 			}
-			 
+
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -784,11 +786,11 @@ public class FinanceQuotationAction {
 		}
 
 		return agremarks;
-		
-		
+
+
 	}
 	/***
-	 * ÏúÊÛ¶ş²¿µÄ±¨¼Ûµ¥Í³¼Æ
+	 * é”€å”®äºŒéƒ¨çš„æŠ¥ä»·å•ç»Ÿè®¡
 	 * 2010-9-29
 	 * @param month
 	 * @param type
@@ -797,26 +799,26 @@ public class FinanceQuotationAction {
 	 * @return
 	 */
 	public float[] getFinanceProject2(String year,String month, String type,List<Quotation> list,String start,String area,String quostart, String quoend,
-			String acceptstart, String acceptend,String paytimestart,String paytimend) {
+									  String acceptstart, String acceptend,String paytimestart,String paytimend) {
 		StringBuffer str = new StringBuffer();
 		float[] f = new float[2];
 		float totalperformence = 0;
 		float total = 0;
-		
+
 		if ("search".equals(type)) {
-			//±¨¼ÛÊ±¼ä
+			//æŠ¥ä»·æ—¶é—´
 			if (quostart != null && !"".equals(quostart)
 					&& quoend != null && !"".equals(quoend)) {
 				str.append(" and q.dcreatetime >= '" + quostart
 						+ "' and q.dcreatetime <= '" + quoend + "'");
 			}
-			//ÊÕµ¥Ê±¼ä
+			//æ”¶å•æ—¶é—´
 			if (acceptstart != null && !"".equals(acceptstart)
 					&& acceptend != null && !"".equals(acceptend)) {
 				str.append(" and q.dconfirmtime is not null and dconfirmtime >= '" + acceptstart
 						+ "' and q.dconfirmtime <= '" + acceptend + "'");
 			}
-		//ÊÕ¿îÊ±¼ä
+			//æ”¶æ¬¾æ—¶é—´
 			if (paytimestart != null && !"".equals(paytimestart)
 					&& paytimend != null && !"".equals(paytimend)) {
 				str.append(" and q.dpaytime is not null and dpaytime >= '" + paytimestart
@@ -828,18 +830,18 @@ public class FinanceQuotationAction {
 			}
 			if (month != null && !"".equals(month)) {
 				str.append(" and month(q.dcreatetime)="+month+"");
-				}	
-			
+			}
+
 		}
-		
-		
+
+
 		if(area !=null && !"".equals(area)){
-			if(area.equals("°²¹æ")){
+			if(area.equals("å®‰è§„")){
 				str.append("    AND  q.vpid like 'LCQ2%'");
-			}else if(area.equals("¹ãÖİ")){
+			}else if(area.equals("å¹¿å·")){
 				str.append("     AND  q.vpid like 'LCQG%'");
 			}
-	}
+		}
 		String sql="select q.*,oq.remark as remark ,(oq.count*oq.saleprice) as a ,(select dendtime from t_phy_project  where  vpid=q.vpid GROUP BY vpid  ORDER BY dendtime desc ) as dendtime  from t_quotation as q ,t_sales_order as o,t_sales_order_quoitem as oq  where 1=1   and oq.orderid =o.id and o.vpid =q.vpid "+str;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -905,7 +907,7 @@ public class FinanceQuotationAction {
 				qt.setPresubcost(rs.getFloat("fpresubcost"));
 				qt.setObject(getAgRemarks(qt.getPid()));
 				qt.setSubcost(getTotalSubCost(qt.getPid(), "fsubcost","fsubcost2"));
-				//µ¥¸öÏîÄ¿µÄ½ğ¶î
+				//å•ä¸ªé¡¹ç›®çš„é‡‘é¢
 				qt.setProjectPrice(rs.getFloat("a"));
 				qt.setPresubcost(getTotalSubCost(qt.getPid(),"fpresubcost", "fpresubcost2"));
 				qt.setAgcost(getTotalAgCost(qt.getPid(), "fagcost"));
@@ -918,19 +920,19 @@ public class FinanceQuotationAction {
 				qt.setFinish(rs.getTimestamp("dendtime"));
 				list.add(qt);
 			}
-				String sql1="select  sum(q.ftotalprice) as totalprice,sum((q.fpreadvance+q.fsepay+q.fbalance)) as totalperformence from t_quotation as q where 1=1 and equotype !='flu' and year(q.dcreatetime)=year(now())    "+str;
-				
-				pstmt = DB.prepareStatement(conn, sql1);
-				rs = pstmt.executeQuery();
-				if(rs.next()) {
-					totalperformence=rs.getFloat("totalperformence");
-					total=rs.getFloat("totalprice");
-				}
-				
-				
+			String sql1="select  sum(q.ftotalprice) as totalprice,sum((q.fpreadvance+q.fsepay+q.fbalance)) as totalperformence from t_quotation as q where 1=1 and equotype !='flu' and year(q.dcreatetime)=year(now())    "+str;
+
+			pstmt = DB.prepareStatement(conn, sql1);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				totalperformence=rs.getFloat("totalperformence");
+				total=rs.getFloat("totalprice");
+			}
+
+
 			f[0] = totalperformence;
 			f[1] = total;
-		
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -943,20 +945,20 @@ public class FinanceQuotationAction {
 	public float[] getFinanceProject2(String type ,String year, String month,String dept, String group,List<Object> list) {
 		List<Quotation> listQuotation =new ArrayList<Quotation>();
 		List listFloat=new ArrayList<Object>();
-		
+
 		StringBuffer str = new StringBuffer();
 		float[] f = new float[2];
 		float totalperformence = 0;
 		float total = 0;
 
-			//ÊÕµ¥Ê±¼ä
-			if (year != null && !"".equals(year)&& month != null && !"".equals(month)) {
-				str.append(" and q.dconfirmtime is not null and " +
-						"((year(dconfirmtime) =  '" + year+"' and month(q.dconfirmtime)= '" + month + "') " +
-						"or (year(q.dpaytime)='" + year+"' and month(q.dpaytime)= '" + month + "') " +
-						"or (year(q.Dsepaytime)='" + year+"' and month(q.Dsepaytime)= '" + month + "')" +
-						"or (year(q.dbalancetime)='" + year+ "' and month(q.dbalancetime)= '" + month + "'))");
-			}
+		//æ”¶å•æ—¶é—´
+		if (year != null && !"".equals(year)&& month != null && !"".equals(month)) {
+			str.append(" and q.dconfirmtime is not null and " +
+					"((year(dconfirmtime) =  '" + year+"' and month(q.dconfirmtime)= '" + month + "') " +
+					"or (year(q.dpaytime)='" + year+"' and month(q.dpaytime)= '" + month + "') " +
+					"or (year(q.Dsepaytime)='" + year+"' and month(q.Dsepaytime)= '" + month + "')" +
+					"or (year(q.dbalancetime)='" + year+ "' and month(q.dbalancetime)= '" + month + "'))");
+		}
 		if(dept !=null && !"".equals(dept)){
 			if(dept.equals("2")){
 				str.append(" AND  q.vpid like 'LCQ2%'");
@@ -965,11 +967,11 @@ public class FinanceQuotationAction {
 			}else if(dept.equals("D")){
 				str.append(" AND  q.vpid like 'LCQD%'");
 			}
-			
-	}
-	if(group !=null && !"".equals(group)){
+
+		}
+		if(group !=null && !"".equals(group)){
 			str.append(" and u.groupid ='"+group+"'");
-	}
+		}
 		String sql="select q.*,oq.remark as remark ,(oq.count*oq.saleprice) as a  from t_quotation as q ,t_sales_order as o,t_sales_order_quoitem as oq,t_user as u where 1=1 and   u.id =o.salesid    and oq.orderid =o.id and o.vpid =q.vpid  "+str +" order by q.dcreatetime desc";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -1041,7 +1043,7 @@ public class FinanceQuotationAction {
 				qt.setPresubcost(rs.getFloat("fpresubcost"));
 				qt.setObject(getAgRemarks(qt.getPid()));
 				qt.setSubcost(getTotalSubCost(qt.getPid(), "fsubcost","fsubcost2"));
-				//µ¥¸öÏîÄ¿µÄ½ğ¶î
+				//å•ä¸ªé¡¹ç›®çš„é‡‘é¢
 				qt.setProjectPrice(rs.getFloat("a"));
 				qt.setPresubcost(getTotalSubCost(qt.getPid(),"fpresubcost", "fpresubcost2"));
 				qt.setAgcost(getTotalAgCost(qt.getPid(), "fagcost"));
@@ -1052,86 +1054,86 @@ public class FinanceQuotationAction {
 				qt.setDeductions(rs.getFloat("fdeductions"));
 				qt.setChannel(rs.getFloat("fchannel"));
 				qt.setQuotype(rs.getString("equotype"));
-				//°²¹æµÄÅÅµ¥ÈËÔ±
+				//å®‰è§„çš„æ’å•äººå‘˜
 				pp.setPid(qt.getPid());
-		    	PhyProject phyProject= PhyProjectAction.getInstance().findByConditions(pp);
-		    	if(phyProject !=null){
-		    		qt.setCreatename(PhyProjectAction.getInstance().findByConditions(pp).getServname());
-		    	}
+				PhyProject phyProject= PhyProjectAction.getInstance().findByConditions(pp);
+				if(phyProject !=null){
+					qt.setCreatename(PhyProjectAction.getInstance().findByConditions(pp).getServname());
+				}
 				listQuotation.add(qt);
 				//---------------------------------2013-03-24--------------------------
-				//±¾ÔÂÊÕ¿î±ÈÀı=ÒÑÊÕ½ğ¶î/±¨¼Û½ğ¶î
-			       String nowYM=new SimpleDateFormat("yyyy-MM").format(new Date());
-			       String payYM="";
-			       	if(qt.getPaytime() !=null && !"".equals(qt.getPaytime())){
-			       		//System.out.println("½øÀ´");
-			       		payYM=new SimpleDateFormat("yyyy-MM").format(qt.getPaytime());//Ò»´ÎÊÕ¿îµÄÄê¡¢ÔÂ
-			       	}
-			       String sepayYM="";
-			       	 if(qt.getSepaytime() !=null && !"".equals(qt.getSepaytime())){
-			       		sepayYM=new SimpleDateFormat("yyyy-MM").format(qt.getSepaytime());//¶ş´ÎÊÕ¿îµÄÄê¡¢ÔÂ
-			       	 }
-			       String balanceYM="";
-			       	 if(qt.getBalancetime() !=null && !"".equals(qt.getBalancetime())){
-			       		balanceYM=new SimpleDateFormat("yyyy-MM").format(qt.getBalancetime());//Î²´ÎÊÕ¿îµÄÄê¡¢ÔÂ
-			       	 }
-			       // Float nowYMPay =qt.getPreadvance() + qt.getSepay() + qt.getBalance();
-			        Float nowYMPay =0f; //±¾ÔÂÊÕ¿î
-			       if(payYM !=null && payYM.equals(nowYM)){ //Èç¹ûÒ»´ÎÊÕ¿îµÈÓÚ±¾ÔÂ
-			      		 nowYMPay +=qt.getPreadvance();
-			       }else if (sepayYM !=null && sepayYM.equals(nowYM)){//Èç¹û¶ş´ÎÊÕ¿îµÈÓÚ±¾ÔÂ
-			       		 nowYMPay +=qt.getSepay();
-			       }else if(balanceYM !=null && balanceYM.equals(nowYM)){//Èç¹ûÎ²´ÎÊÕ¿îµÈÓÚ±¾ÔÂ
-			       		 nowYMPay +=qt.getBalance();
-			       }
-				//±¾ÔÂ±ÈÀı=±¾ÔÂÒÑÊÕ¿î/±¾ÔÂ±¨¼Û×Ü¶î
-			       float nowYMScale =nowYMPay/qt.getTotalprice();
-			       float subcostSum=0f; //×Ü·Ö°ü·Ñ
-			       if(qt.getSubcost()>0){
-			      	 subcostSum +=qt.getSubcost();
-			       }else{
-			       	 subcostSum +=qt.getPresubcost();
-			       }
-			     //  Ô¤¼Æ×ÜÍâ²¿·Ö°ü·Ñ¼ÆÌá=Ô¤¼Æ×ÜÍâ²¿·Ö°ü·Ñ¼ÆÌá*±¾ÔÂ±ÈÀı
-			      float presubcostAccrue=qt.getPresubcost()*nowYMScale;
-			      //Ô¤¼Æ×Ü»ú¹¹ºÏ×÷·Ñ¼ÆÌá=Ô¤¼Æ×Ü»ú¹¹ºÏ×÷·Ñ¼ÆÌá*±¾ÔÂ±ÈÀı
-			      float preagcostAccrue=	 qt.getPreagcost()*nowYMScale;
-			      //×ÜÌØÊâ½Ó´ı·ÑÔ¤Ëã¼ÆÌá=×ÜÌØÊâ½Ó´ı·ÑÔ¤Ëã¼ÆÌá*±¾ÔÂ±ÈÀı
-			      float prespefundAccrue= qt.getPrespefund()*nowYMScale;
-			      //·¢Æ±¼ÆÌá
-			      float taxAccrue=0f;
-			      if(qt.getInvtype().equals("·¢Æ±")){
-			      	taxAccrue=(float) ((qt.getTotalprice()*0.08)*nowYMScale);
-			      }
-			      //±¾ÔÂĞ¡¼Æ
-			      float nowYMSubtotal=nowYMPay-presubcostAccrue-preagcostAccrue-prespefundAccrue-taxAccrue;
-			      myTemp.add(nowYMScale);
-			      myTemp.add(nowYMPay);
-			      myTemp.add(taxAccrue);
-			      myTemp.add(presubcostAccrue);
-			      myTemp.add(preagcostAccrue);
-			      myTemp.add(prespefundAccrue);
-			      myTemp.add(nowYMSubtotal);
-			      listFloat.add(myTemp);
+				//æœ¬æœˆæ”¶æ¬¾æ¯”ä¾‹=å·²æ”¶é‡‘é¢/æŠ¥ä»·é‡‘é¢
+				String nowYM=new SimpleDateFormat("yyyy-MM").format(new Date());
+				String payYM="";
+				if(qt.getPaytime() !=null && !"".equals(qt.getPaytime())){
+					//System.out.println("è¿›æ¥");
+					payYM=new SimpleDateFormat("yyyy-MM").format(qt.getPaytime());//ä¸€æ¬¡æ”¶æ¬¾çš„å¹´ã€æœˆ
+				}
+				String sepayYM="";
+				if(qt.getSepaytime() !=null && !"".equals(qt.getSepaytime())){
+					sepayYM=new SimpleDateFormat("yyyy-MM").format(qt.getSepaytime());//äºŒæ¬¡æ”¶æ¬¾çš„å¹´ã€æœˆ
+				}
+				String balanceYM="";
+				if(qt.getBalancetime() !=null && !"".equals(qt.getBalancetime())){
+					balanceYM=new SimpleDateFormat("yyyy-MM").format(qt.getBalancetime());//å°¾æ¬¡æ”¶æ¬¾çš„å¹´ã€æœˆ
+				}
+				// Float nowYMPay =qt.getPreadvance() + qt.getSepay() + qt.getBalance();
+				Float nowYMPay =0f; //æœ¬æœˆæ”¶æ¬¾
+				if(payYM !=null && payYM.equals(nowYM)){ //å¦‚æœä¸€æ¬¡æ”¶æ¬¾ç­‰äºæœ¬æœˆ
+					nowYMPay +=qt.getPreadvance();
+				}else if (sepayYM !=null && sepayYM.equals(nowYM)){//å¦‚æœäºŒæ¬¡æ”¶æ¬¾ç­‰äºæœ¬æœˆ
+					nowYMPay +=qt.getSepay();
+				}else if(balanceYM !=null && balanceYM.equals(nowYM)){//å¦‚æœå°¾æ¬¡æ”¶æ¬¾ç­‰äºæœ¬æœˆ
+					nowYMPay +=qt.getBalance();
+				}
+				//æœ¬æœˆæ¯”ä¾‹=æœ¬æœˆå·²æ”¶æ¬¾/æœ¬æœˆæŠ¥ä»·æ€»é¢
+				float nowYMScale =nowYMPay/qt.getTotalprice();
+				float subcostSum=0f; //æ€»åˆ†åŒ…è´¹
+				if(qt.getSubcost()>0){
+					subcostSum +=qt.getSubcost();
+				}else{
+					subcostSum +=qt.getPresubcost();
+				}
+				//  é¢„è®¡æ€»å¤–éƒ¨åˆ†åŒ…è´¹è®¡æ=é¢„è®¡æ€»å¤–éƒ¨åˆ†åŒ…è´¹è®¡æ*æœ¬æœˆæ¯”ä¾‹
+				float presubcostAccrue=qt.getPresubcost()*nowYMScale;
+				//é¢„è®¡æ€»æœºæ„åˆä½œè´¹è®¡æ=é¢„è®¡æ€»æœºæ„åˆä½œè´¹è®¡æ*æœ¬æœˆæ¯”ä¾‹
+				float preagcostAccrue=	 qt.getPreagcost()*nowYMScale;
+				//æ€»ç‰¹æ®Šæ¥å¾…è´¹é¢„ç®—è®¡æ=æ€»ç‰¹æ®Šæ¥å¾…è´¹é¢„ç®—è®¡æ*æœ¬æœˆæ¯”ä¾‹
+				float prespefundAccrue= qt.getPrespefund()*nowYMScale;
+				//å‘ç¥¨è®¡æ
+				float taxAccrue=0f;
+				if(qt.getInvtype().equals("å‘ç¥¨")){
+					taxAccrue=(float) ((qt.getTotalprice()*0.08)*nowYMScale);
+				}
+				//æœ¬æœˆå°è®¡
+				float nowYMSubtotal=nowYMPay-presubcostAccrue-preagcostAccrue-prespefundAccrue-taxAccrue;
+				myTemp.add(nowYMScale);
+				myTemp.add(nowYMPay);
+				myTemp.add(taxAccrue);
+				myTemp.add(presubcostAccrue);
+				myTemp.add(preagcostAccrue);
+				myTemp.add(prespefundAccrue);
+				myTemp.add(nowYMSubtotal);
+				listFloat.add(myTemp);
 				//---------------------------------2013-03-24--------------------------
-				
+
 			}
 			list.add(listQuotation);
-		    list.add(listFloat);
-				String sql1="select  sum(q.ftotalprice) as totalprice,sum((q.fpreadvance+q.fsepay+q.fbalance)) as totalperformence from t_quotation as q where 1=1 "+str;
+			list.add(listFloat);
+			String sql1="select  sum(q.ftotalprice) as totalprice,sum((q.fpreadvance+q.fsepay+q.fbalance)) as totalperformence from t_quotation as q where 1=1 "+str;
 //				System.out.println(sql1+"***");
-				pstmt = DB.prepareStatement(conn, sql1);
-				rs = pstmt.executeQuery();
-				if(rs.next()) {
-					totalperformence=rs.getFloat("totalperformence");
-					total=rs.getFloat("totalprice");
-				}
-				
-				
+			pstmt = DB.prepareStatement(conn, sql1);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				totalperformence=rs.getFloat("totalperformence");
+				total=rs.getFloat("totalprice");
+			}
+
+
 			f[0] = totalperformence;
 			f[1] = total;
-			
-		
+
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -1140,11 +1142,11 @@ public class FinanceQuotationAction {
 			DB.close(conn);
 		}
 		return f;
-		
+
 	}
 	/**
-	 * ·Ö°ü·ÑºÏ¼Æ
-	 * 
+	 * åˆ†åŒ…è´¹åˆè®¡
+	 *
 	 * @param pid
 	 * @return
 	 */
@@ -1174,10 +1176,10 @@ public class FinanceQuotationAction {
 		}
 		return totalsubcost;
 	}
-	
+
 	/**
-	 * ¸ù¾İ±¨¼Ûµ¥ºÅÈ¡µÃ×Ü»ú¹¹·ÑÓÃ
-	 * @param pid ±¨¼Ûµ¥ºÅ
+	 * æ ¹æ®æŠ¥ä»·å•å·å–å¾—æ€»æœºæ„è´¹ç”¨
+	 * @param pid æŠ¥ä»·å•å·
 	 * @param str
 	 * @return
 	 */
@@ -1205,37 +1207,13 @@ public class FinanceQuotationAction {
 		}
 		return totalagcost;
 	}
-	
-	//ËÄÉáÎå½ø±£ÁôÁ½Î»Ğ¡ÊıµãµÄ·½·¨
+
+	//å››èˆäº”è¿›ä¿ç•™ä¸¤ä½å°æ•°ç‚¹çš„æ–¹æ³•
 	public  String getFourToFive(Float score_type)
-	 {
-	  double bl=(Math.round(score_type/.01)*.01);
-	  String st=String.valueOf(bl);
-	  /**×¢Òâ,ÕâÀïÓÃ.×÷Îª·Ö¸ô·ûÊÇÊ§Ğ§µÄ,²»ÖªµÀÎªÊ²Ã´,ËùÒÔ²ÉÓÃÌæ»»µÄ°ì·¨*/
-	  st=st.replace(".", "_");
-	  String []st_arr=st.split("_");
-	  String temp="";
-	  if(st_arr[1].length()>2)
-	  {
-	   temp=st_arr[1].substring(0, 1);
-	  }
-	  else
-	  if(st_arr[1].length()<1)
-	  {
-	   temp=st_arr[1]+"0";
-	  }
-	  else
-	  {
-	   temp=st_arr[1];
-	  }
-	  return st_arr[0]+"."+temp;
-	 } 
-	//ËÄÉáÎå½ø±£ÁôÁ½Î»Ğ¡ÊıµãµÄ·½·¨
-	public  String getFourToFive1(double score_type)
 	{
 		double bl=(Math.round(score_type/.01)*.01);
 		String st=String.valueOf(bl);
-		/**×¢Òâ,ÕâÀïÓÃ.×÷Îª·Ö¸ô·ûÊÇÊ§Ğ§µÄ,²»ÖªµÀÎªÊ²Ã´,ËùÒÔ²ÉÓÃÌæ»»µÄ°ì·¨*/
+		/**æ³¨æ„,è¿™é‡Œç”¨.ä½œä¸ºåˆ†éš”ç¬¦æ˜¯å¤±æ•ˆçš„,ä¸çŸ¥é“ä¸ºä»€ä¹ˆ,æ‰€ä»¥é‡‡ç”¨æ›¿æ¢çš„åŠæ³•*/
 		st=st.replace(".", "_");
 		String []st_arr=st.split("_");
 		String temp="";
@@ -1244,21 +1222,45 @@ public class FinanceQuotationAction {
 			temp=st_arr[1].substring(0, 1);
 		}
 		else
-			if(st_arr[1].length()<1)
-			{
-				temp=st_arr[1]+"0";
-			}
-			else
-			{
-				temp=st_arr[1];
-			}
+		if(st_arr[1].length()<1)
+		{
+			temp=st_arr[1]+"0";
+		}
+		else
+		{
+			temp=st_arr[1];
+		}
 		return st_arr[0]+"."+temp;
-	} 
-	
+	}
+	//å››èˆäº”è¿›ä¿ç•™ä¸¤ä½å°æ•°ç‚¹çš„æ–¹æ³•
+	public  String getFourToFive1(double score_type)
+	{
+		double bl=(Math.round(score_type/.01)*.01);
+		String st=String.valueOf(bl);
+		/**æ³¨æ„,è¿™é‡Œç”¨.ä½œä¸ºåˆ†éš”ç¬¦æ˜¯å¤±æ•ˆçš„,ä¸çŸ¥é“ä¸ºä»€ä¹ˆ,æ‰€ä»¥é‡‡ç”¨æ›¿æ¢çš„åŠæ³•*/
+		st=st.replace(".", "_");
+		String []st_arr=st.split("_");
+		String temp="";
+		if(st_arr[1].length()>2)
+		{
+			temp=st_arr[1].substring(0, 1);
+		}
+		else
+		if(st_arr[1].length()<1)
+		{
+			temp=st_arr[1]+"0";
+		}
+		else
+		{
+			temp=st_arr[1];
+		}
+		return st_arr[0]+"."+temp;
+	}
+
 	/***
-	 * Í³¼Æ»·¾³Êı¾İ
-	 * @param year  Äê¶ÈÍ³¼Æ
-	 * @param month ÔÂ¶ÈÍ³¼Æ
+	 * ç»Ÿè®¡ç¯å¢ƒæ•°æ®
+	 * @param year  å¹´åº¦ç»Ÿè®¡
+	 * @param month æœˆåº¦ç»Ÿè®¡
 	 * @return
 	 */
 	public List getEdmManage(String year, String month) {
@@ -1281,72 +1283,72 @@ public class FinanceQuotationAction {
 		}
 		String sql ="select vpid,vclient,Dpaytime,Fpreadvance,vcreditcard,Dinvtime,Vinvcode,dsampltime,vsampling from t_quotation where vpid like '%LCDE%' "+str;
 //		System.out.println(sql);
-		 return new ImsDB().getInfor(temp,sql);
+		return new ImsDB().getInfor(temp,sql);
 	}
-	
+
 	/***
-	 * Éú³ÉÊÕ¾İ±àºÅ
+	 * ç”Ÿæˆæ”¶æ®ç¼–å·
 	 * @return
 	 */
-	 public String receiptNo(String pid){
+	public String receiptNo(String pid){
 //		 System.out.println(pid);
-		 StringBuffer str = new StringBuffer();
-			String last = "";
-			if(pid.indexOf("LCQ1")>-1){
-				str.append("1");
-			}
-			else if(pid.indexOf("LCQ2")>-1){
-				str.append("2");
-			}else if(pid.indexOf("LCQD")>-1){
-				str.append("3");
-			}else if (pid.indexOf("LCQG")>-1){
-				str.append("4");
-			}else{
-				str.append("0");
-			}
-			Connection conn = null;
-			PreparedStatement pstmt = null;
-			ResultSet rs = null;
-			boolean auto = false;
-			String sql = "select distinct(receiptNo) from t_receipt where receiptNo like '"+str+"%' order by dcreatetime desc";
-			try {
-				conn = DB.getConn();
-				auto = conn.getAutoCommit();
-				conn.setAutoCommit(false);
-				pstmt = DB.prepareStatement(conn, sql);
-				rs = pstmt.executeQuery();
-				if (rs.next()) {
-					String sub = rs.getString("receiptNo");
+		StringBuffer str = new StringBuffer();
+		String last = "";
+		if(pid.indexOf("LCQ1")>-1){
+			str.append("1");
+		}
+		else if(pid.indexOf("LCQ2")>-1){
+			str.append("2");
+		}else if(pid.indexOf("LCQD")>-1){
+			str.append("3");
+		}else if (pid.indexOf("LCQG")>-1){
+			str.append("4");
+		}else{
+			str.append("0");
+		}
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		boolean auto = false;
+		String sql = "select distinct(receiptNo) from t_receipt where receiptNo like '"+str+"%' order by dcreatetime desc";
+		try {
+			conn = DB.getConn();
+			auto = conn.getAutoCommit();
+			conn.setAutoCommit(false);
+			pstmt = DB.prepareStatement(conn, sql);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				String sub = rs.getString("receiptNo");
 //					System.out.println(sub);
-					int code = Integer.parseInt(sub.substring(1,sub.length()));
-					code += 1;
-					last =new DecimalFormat("0000000").format(code);
-				} else {
-					last ="0000001";
-				}
-				str.append(last);
-				conn.commit();
-			} catch (SQLException e) {
-				try {
-					conn.rollback();
-				} catch (Exception e1) {
-					e1.printStackTrace();
-				}
-				e.printStackTrace();
-			} finally {
-				try {
-					conn.setAutoCommit(auto);
-				} catch (Exception e2) {
-					e2.printStackTrace();
-				}
-				DB.close(rs);
-				DB.close(pstmt);
-				DB.close(conn);
+				int code = Integer.parseInt(sub.substring(1,sub.length()));
+				code += 1;
+				last =new DecimalFormat("0000000").format(code);
+			} else {
+				last ="0000001";
 			}
-			return str.toString();
-		 
-	 }
-	 public static void main(String[] args) {
-		System.out.println(FinanceQuotationAction.getInstance().receiptNo("ÏúÊÛ¶ş²¿"));
+			str.append(last);
+			conn.commit();
+		} catch (SQLException e) {
+			try {
+				conn.rollback();
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.setAutoCommit(auto);
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+			DB.close(rs);
+			DB.close(pstmt);
+			DB.close(conn);
+		}
+		return str.toString();
+
+	}
+	public static void main(String[] args) {
+		System.out.println(FinanceQuotationAction.getInstance().receiptNo("é”€å”®äºŒéƒ¨"));
 	}
 }
