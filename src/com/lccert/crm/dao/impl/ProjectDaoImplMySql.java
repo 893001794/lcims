@@ -26,15 +26,15 @@ import com.lccert.crm.vo.FinishProject;
 import com.lccert.crm.vo.SalesOrderItem;
 
 /**
- * ËùÓĞÏîÄ¿daoÊµÏÖÀà
- * »ùÓÚmysqlÊı¾İ¿âµÄËùÓĞdaoÊµÏÖÀà
+ * æ‰€æœ‰é¡¹ç›®daoå®ç°ç±»
+ * åŸºäºmysqlæ•°æ®åº“çš„æ‰€æœ‰daoå®ç°ç±»
  * @author Eason
  *
  */
 public class ProjectDaoImplMySql implements ProjectDao {
 
 	/**
-	 * Ìí¼ÓĞÂÏîÄ¿
+	 * æ·»åŠ æ–°é¡¹ç›®
 	 * @param pj
 	 * @param cp
 	 * @return
@@ -46,9 +46,9 @@ public class ProjectDaoImplMySql implements ProjectDao {
 		boolean auto = false;
 		boolean isok = false;
 		String sql = "";
-		
-		if(!("»¯Ñ§²âÊÔ".equals(p.getPtype())||p.getPtype().indexOf("»¯×±Æ·")>-1||p.getPtype().indexOf("»·¾³")>-1)) {
-			p.setRid(makeRid(p));//·Ç»¯Ñ§ÏîÄ¿(°²¹æÏîÄ¿)Éú³É±¨¸æ±àºÅ
+
+		if(!("åŒ–å­¦æµ‹è¯•".equals(p.getPtype())||p.getPtype().indexOf("åŒ–å¦†å“")>-1||p.getPtype().indexOf("ç¯å¢ƒ")>-1)) {
+			p.setRid(makeRid(p));//éåŒ–å­¦é¡¹ç›®(å®‰è§„é¡¹ç›®)ç”ŸæˆæŠ¥å‘Šç¼–å·
 			sql = "insert into t_project (vsid,vpid,vrid,"
 				+ "eptype,etype,elab,isout,fprice,finsubcost,fpresubcost,"
 				+ "vsubname,fpreagcost,vagname,fpreinvprice,einvtype,"
@@ -67,14 +67,14 @@ public class ProjectDaoImplMySql implements ProjectDao {
 				+ "vinvhead,vinvcontent,vbuildname,fpresubcost2,vsubname2,fppreacount,eclientpay,vtestcontent,dbuildtime) values (?,?,?,?,?,?"
 				+ ",?,?,?,?,?,?,?,?,?,?,?,?,?,now())";
 		}
-		
+
 		try {
 			conn = DB.getConn();
 			auto = conn.getAutoCommit();
 			conn.setAutoCommit(false);
-			
+
 			p.setSid(makeSid(p.getPid()));
-			
+
 			pstmt = DB.prepareStatement(conn, sql,Statement.RETURN_GENERATED_KEYS);
 			pstmt.setString(1, p.getSid());
 			pstmt.setString(2, p.getPid());
@@ -96,18 +96,18 @@ public class ProjectDaoImplMySql implements ProjectDao {
 			pstmt.setString(18, p.getClientpay());
 			pstmt.setString(19, p.getTestcontent());
 			pstmt.executeUpdate();
-			
-//			//¸üĞÂÍøÕ¾Êı¾İ
+
+//			//æ›´æ–°ç½‘ç«™æ•°æ®
 //			int key = 0;
 //			rs = pstmt.getGeneratedKeys();
 //			if(rs.next()) {
 //				key = rs.getInt(1);
 //			}
-			
+
 			//---------------------------2010-12-14---------------------------------------
-			
-			if(!("»¯Ñ§²âÊÔ".equals(p.getPtype())||p.getPtype().indexOf("»¯×±Æ·")>-1||p.getPtype().indexOf("»·¾³")>-1))  {
-				sql = "insert into t_phy_project (vsid,vpid,vrid,estatus,istatus) values(?,?,?,'Á¢Ïî',1);";
+
+			if(!("åŒ–å­¦æµ‹è¯•".equals(p.getPtype())||p.getPtype().indexOf("åŒ–å¦†å“")>-1||p.getPtype().indexOf("ç¯å¢ƒ")>-1))  {
+				sql = "insert into t_phy_project (vsid,vpid,vrid,estatus,istatus) values(?,?,?,'ç«‹é¡¹',1);";
 				pstmt = DB.prepareStatement(conn, sql);
 				pstmt.setString(1, p.getSid());
 				pstmt.setString(2, p.getPid());
@@ -115,29 +115,29 @@ public class ProjectDaoImplMySql implements ProjectDao {
 				pstmt.executeUpdate();
 			} else {
 			//---------------------------2010-12-14---------------------------------------
-				sql = "insert into t_chem_project (vsid,vpid,estatus,istatus) values(?,?,'Á¢Ïî',1)";
+				sql = "insert into t_chem_project (vsid,vpid,estatus,istatus) values(?,?,'ç«‹é¡¹',1)";
 				pstmt = DB.prepareStatement(conn, sql);
 				pstmt.setString(1, p.getSid());
 				pstmt.setString(2, p.getPid());
 				pstmt.executeUpdate();
 			}
 
-			
+
 
 			conn.commit();
 
 			updateStatus(p.getPid(),p.getPtype());
-			
-//			//¸üĞÂÍøÕ¾Êı¾İ
+
+//			//æ›´æ–°ç½‘ç«™æ•°æ®
 //			UpdateWebSite up = new UpdateWebSite();
 //			up.setId(key);
 //			up.setType("project");
 //			Thread t = new Thread(up);
 //			t.start();
-//			
+//
 //			UpdateWebSite w = new UpdateWebSite();
 //			w.setId(key);
-//			w.setType("detail");//¸üĞÂÏîÄ¿½ø¶È±í
+//			w.setType("detail");//æ›´æ–°é¡¹ç›®è¿›åº¦è¡¨
 //			Thread th = new Thread(w);
 //			th.start();
 
@@ -162,17 +162,17 @@ public class ProjectDaoImplMySql implements ProjectDao {
 		}
 		return isok;
 	}
-	
-	
-	
+
+
+
 	/**
-	 * Ìí¼ÓÃâ·ÑĞÂÏîÄ¿
+	 * æ·»åŠ å…è´¹æ–°é¡¹ç›®
 	 * @param pj
 	 * @param cp
 	 * @return
 	 */
 	public boolean addFreeStatement(Project p) {
-		
+
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -187,7 +187,7 @@ public class ProjectDaoImplMySql implements ProjectDao {
 			conn = DB.getConn();
 			auto = conn.getAutoCommit();
 			conn.setAutoCommit(false);
-			
+
 			p.setSid(makeSid(p.getPid()));
 			pstmt = DB.prepareStatement(conn, sql,Statement.RETURN_GENERATED_KEYS);
 			pstmt.setString(1, p.getSid());
@@ -209,17 +209,17 @@ public class ProjectDaoImplMySql implements ProjectDao {
 			pstmt.setFloat(17, p.getPpreacount());
 			pstmt.setString(18, p.getClientpay());
 			pstmt.executeUpdate();
-//			//¸üĞÂÍøÕ¾Êı¾İ
+//			//æ›´æ–°ç½‘ç«™æ•°æ®
 //			int key = 0;
 //			rs = pstmt.getGeneratedKeys();
 //			if(rs.next()) {
 //				key = rs.getInt(1);
 //			}
 
-			
+
 			//---------------------------2010-12-14---------------------------------------
-			if(!("»¯Ñ§²âÊÔ".equals(p.getPtype())||"»¯×±Æ·".equals(p.getPtype()))) {
-				sql = "insert into t_phy_project (vsid,vpid,vrid,estatus,istatus) values(?,?,?,'Á¢Ïî',1);";
+			if(!("åŒ–å­¦æµ‹è¯•".equals(p.getPtype())||"åŒ–å¦†å“".equals(p.getPtype()))) {
+				sql = "insert into t_phy_project (vsid,vpid,vrid,estatus,istatus) values(?,?,?,'ç«‹é¡¹',1);";
 				pstmt = DB.prepareStatement(conn, sql);
 				pstmt.setString(1, p.getSid());
 				pstmt.setString(2, p.getPid());
@@ -228,13 +228,13 @@ public class ProjectDaoImplMySql implements ProjectDao {
 				pstmt.executeUpdate();
 			} else {
 			//---------------------------2010-12-14---------------------------------------
-				sql = "insert into t_chem_project (vsid,vpid,estatus,istatus) values(?,?,'Á¢Ïî',1)";
+				sql = "insert into t_chem_project (vsid,vpid,estatus,istatus) values(?,?,'ç«‹é¡¹',1)";
 				pstmt = DB.prepareStatement(conn, sql);
 				pstmt.setString(1, p.getSid());
 				pstmt.setString(2, p.getPid());
 				pstmt.executeUpdate();
 			}
-			
+
 			sql = "update t_quotation set equotype = 'mod' where vpid = ?";
 			pstmt = DB.prepareStatement(conn, sql);
 			pstmt.setString(1, p.getPid());
@@ -243,17 +243,17 @@ public class ProjectDaoImplMySql implements ProjectDao {
 			conn.commit();
 
 			updateStatus(p.getPid(),p.getPtype());
-			
-//			//¸üĞÂÍøÕ¾Êı¾İ
+
+//			//æ›´æ–°ç½‘ç«™æ•°æ®
 //			UpdateWebSite up = new UpdateWebSite();
 //			up.setId(key);
 //			up.setType("project");
 //			Thread t = new Thread(up);
 //			t.start();
-//			
+//
 //			UpdateWebSite w = new UpdateWebSite();
 //			w.setId(key);
-//			w.setType("detail");//¸üĞÂÏîÄ¿½ø¶È±í
+//			w.setType("detail");//æ›´æ–°é¡¹ç›®è¿›åº¦è¡¨
 //			Thread th = new Thread(w);
 //			th.start();
 
@@ -278,10 +278,10 @@ public class ProjectDaoImplMySql implements ProjectDao {
 		}
 		return isok;
 	}
-	
+
 	/**
-	 * ĞŞ¸ÄÄÚ²¿¶ÔÕËµ¥
-	 * 
+	 * ä¿®æ”¹å†…éƒ¨å¯¹è´¦å•
+	 *
 	 * @param p
 	 * @return
 	 */
@@ -291,7 +291,7 @@ public class ProjectDaoImplMySql implements ProjectDao {
 		boolean auto = false;
 		boolean isok = false;
 		String sql = "";
-		if(!("»¯Ñ§²âÊÔ".equals(p.getPtype())||p.getPtype().indexOf("»¯×±Æ·")>-1||p.getPtype().indexOf("»·¾³")>-1))  {
+		if(!("åŒ–å­¦æµ‹è¯•".equals(p.getPtype())||p.getPtype().indexOf("åŒ–å¦†å“")>-1||p.getPtype().indexOf("ç¯å¢ƒ")>-1))  {
 			sql = "update t_project set eptype='" + p.getPtype() + "',etype='" + p.getType() + "',elab='" + p.getLab() + "',"
 				+ "isout='" + p.getIsout() + "',fprice=?,finsubcost=?,fpresubcost=?,"
 				+ "vsubname=?,fpreagcost=?,vagname=?,fpreinvprice=?,einvtype=?,"
@@ -304,7 +304,7 @@ public class ProjectDaoImplMySql implements ProjectDao {
 				+ "vinvhead=?,vinvcontent=?,fpresubcost2=?,vsubname2=?,fppreacount=?,eclientpay=?,vtestcontent=?"
 				+ " where vsid = ?";
 		}
-		
+
 		try {
 			conn = DB.getConn();
 			auto = conn.getAutoCommit();
@@ -350,14 +350,14 @@ public class ProjectDaoImplMySql implements ProjectDao {
 		}
 		return isok;
 	}
-	
-	
+
+
 	//  "dostime=?,dortime=?,dbqtime,doetime"
 	//
-	
-	
+
+
 	/**
-	 * É¾³ıÏîÄ¿
+	 * åˆ é™¤é¡¹ç›®
 	 */
 	public void delProject(String sql,Project p) {
 		Connection conn = null;
@@ -371,13 +371,13 @@ public class ProjectDaoImplMySql implements ProjectDao {
 
 			pstmt = DB.prepareStatement(conn, sql);
 			pstmt.executeUpdate();
-			
+
 			if(p != null) {
 				updateStatus(p.getPid(),p.getPtype());
 			}
-			
+
 			conn.commit();
-			
+
 		} catch (SQLException e) {
 			try {
 				conn.rollback();
@@ -395,10 +395,10 @@ public class ProjectDaoImplMySql implements ProjectDao {
 			DB.close(conn);
 		}
 	}
-	
+
 	/**
-	 * ²éÕÒÏîÄ¿
-	 * @param sql SQLÓï¾ä
+	 * æŸ¥æ‰¾é¡¹ç›®
+	 * @param sql SQLè¯­å¥
 	 * @return
 	 */
 	public Project getProject(String sql) {
@@ -465,8 +465,8 @@ public class ProjectDaoImplMySql implements ProjectDao {
 				p.setTuvpshort(rs.getString("vtuvpshort"));
 				p.setLcrealprice(rs.getFloat("flcrealprice"));
 				p.setOeprice(rs.getFloat("foeprice"));
-				
-				if(!("»¯Ñ§²âÊÔ".equals(p.getPtype())||p.getPtype().indexOf("»¯×±Æ·")>-1||p.getPtype().indexOf("»·¾³")>-1))  {
+
+				if(!("åŒ–å­¦æµ‹è¯•".equals(p.getPtype())||p.getPtype().indexOf("åŒ–å¦†å“")>-1||p.getPtype().indexOf("ç¯å¢ƒ")>-1))  {
 					PhyProject pp = new PhyProject();
 					getPhyProject(pp,p.getSid());
 					p.setObj(pp);
@@ -485,13 +485,13 @@ public class ProjectDaoImplMySql implements ProjectDao {
 		}
 		return p;
 	}
-	
-	
-	
-	
+
+
+
+
 	/**
-	 * ²éÕÒÏîÄ¿
-	 * @param sql SQLÓï¾ä
+	 * æŸ¥æ‰¾é¡¹ç›®
+	 * @param sql SQLè¯­å¥
 	 * @return
 	 */
 	public Flow getFlowByRid(String sql) {
@@ -510,7 +510,7 @@ public class ProjectDaoImplMySql implements ProjectDao {
 				f.setPid(rs.getString("vpid"));
 				f.setRid(rs.getString("vrid"));
 				f.setFid(rs.getString("vfid"));
-				
+
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -521,14 +521,14 @@ public class ProjectDaoImplMySql implements ProjectDao {
 		}
 		return f;
 	}
-	
-	
-	
+
+
+
 	/**
-	 * ²éÕÒËùÓĞÏîÄ¿
-	 * 
-	 * @param sql  sqlÓï¾ä
-	 * @return List<Project> ÏîÄ¿ÁĞ±í
+	 * æŸ¥æ‰¾æ‰€æœ‰é¡¹ç›®
+	 *
+	 * @param sql  sqlè¯­å¥
+	 * @return List<Project> é¡¹ç›®åˆ—è¡¨
 	 */
 	public List<Project> getAllProjects(String sql) {
 		Connection conn = null;
@@ -541,7 +541,7 @@ public class ProjectDaoImplMySql implements ProjectDao {
 			pstmt = DB.prepareStatement(conn, sql);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
-				
+
 				p = new Project();
 				p.setId(rs.getInt("id"));
 				p.setSid(rs.getString("vsid"));
@@ -589,13 +589,13 @@ public class ProjectDaoImplMySql implements ProjectDao {
 				p.setNotes(rs.getString("vnotes"));
 				p.setGranttime(rs.getString("granttime"));
 				//------------------2010-12-15--------------------------
-				if(!("»¯Ñ§²âÊÔ".equals(p.getPtype())||"»¯×±Æ·".equals(p.getPtype())||"»·¾³".equals(p.getPtype()))) {
+				if(!("åŒ–å­¦æµ‹è¯•".equals(p.getPtype())||"åŒ–å¦†å“".equals(p.getPtype())||"ç¯å¢ƒ".equals(p.getPtype()))) {
 					PhyProject pp = new PhyProject();
 					getPhyProject(pp,p.getSid());
 					p.setObj(pp);
 				} else {
 					//------------------2010-12-15--------------------------
-			
+
 					ChemProject cp = new ChemProject();
 					getChemProject(cp,p.getSid());
 					p.setObj(cp);
@@ -612,13 +612,13 @@ public class ProjectDaoImplMySql implements ProjectDao {
 		}
 		return list;
 	}
-	
+
 	/**
-	 * ²éÕÒËùÓĞÏîÄ¿(·ÖÒ³Ä£Ê½)
+	 * æŸ¥æ‰¾æ‰€æœ‰é¡¹ç›®(åˆ†é¡µæ¨¡å¼)
 	 * @param pageNo
 	 * @param pageSize
 	 * @param sql
-	 * @return PageModel ·ÖÒ³Ä£ĞÍ
+	 * @return PageModel åˆ†é¡µæ¨¡å‹
 	 */
 	public PageModel getAllProjects(int pageNo, int pageSize, String sql) {
 		Connection conn = null;
@@ -682,8 +682,8 @@ public class ProjectDaoImplMySql implements ProjectDao {
 				p.setLab(rs.getString("elab"));
 				p.setIsout(rs.getString("isout"));
 				p.setNotes(rs.getString("vnotes"));
-				
-//				if(!"»¯Ñ§²âÊÔ".equals(p.getPtype())) {
+
+//				if(!"åŒ–å­¦æµ‹è¯•".equals(p.getPtype())) {
 //					PhyProject pp = new PhyProject();
 //					getPhyProject(pp,p.getSid());
 //					p.setObj(pp);
@@ -722,25 +722,25 @@ public class ProjectDaoImplMySql implements ProjectDao {
 		}
 		return pm;
 	}
-	
+
 	/**
-	 * ¸ù¾İ¾ÉµÄ±¨¼Ûµ¥ºÅÕÒµ½ĞÂµÄ±¨¼Ûµ¥ĞÅÏ¢
-	 * 
+	 * æ ¹æ®æ—§çš„æŠ¥ä»·å•å·æ‰¾åˆ°æ–°çš„æŠ¥ä»·å•ä¿¡æ¯
+	 *
 	 */
-	
+
 	public List getQuotation(String pid) {
 		String sql ="select  * from t_quotation where vpid like '%"+pid+"'";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		SalesOrderItem soi=null;
 		ResultSet rs = null;
-//		//½áºÏÒ»¼¶ºÍ¶ş¼¶
+//		//ç»“åˆä¸€çº§å’ŒäºŒçº§
 		List list =new ArrayList();
 		int countChilds=0;
 		try {
 			conn = DB.getConn();
 			pstmt = DB.prepareStatement(conn, sql);
-			
+
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				Quotation qt = new Quotation();
@@ -750,7 +750,7 @@ public class ProjectDaoImplMySql implements ProjectDao {
 				qt.setOldPid(rs.getString("voldpid"));
 				list.add(qt);
 			}
-			 
+
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -759,7 +759,7 @@ public class ProjectDaoImplMySql implements ProjectDao {
 			DB.close(conn);
 		}
 		return list;
-	
+
 	}
 	public PageModel searchProjects(int pageNo, int pageSize, String sql) {
 		Connection conn = null;
@@ -790,7 +790,7 @@ public class ProjectDaoImplMySql implements ProjectDao {
 				fp.setPaystatus(rs.getString("a.epaystatus"));
 				fp.setSales(rs.getString("a.vsales"));
 				fp.setStatus(rs.getString("c.estatus"));
-				
+
 				list.add(fp);
 			}
 			int totalRecords = getTotalRecords(conn,sql);
@@ -821,9 +821,9 @@ public class ProjectDaoImplMySql implements ProjectDao {
 		return pm;
 	}
 
-	
+
 	/**
-	 * È¡µÃ°²¹æÏîÄ¿
+	 * å–å¾—å®‰è§„é¡¹ç›®
 	 * @param pp
 	 * @param sid
 	 */
@@ -836,7 +836,7 @@ public class ProjectDaoImplMySql implements ProjectDao {
 			conn = DB.getConn();
 			pstmt = DB.prepareStatement(conn, sql);
 			pstmt.setString(1, sid);
-			
+
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				pp.setRptype(rs.getString("erptype"));
@@ -869,7 +869,7 @@ public class ProjectDaoImplMySql implements ProjectDao {
 	}
 
 	/**
-	 * È¡µÃ»¯Ñ§ÏîÄ¿
+	 * å–å¾—åŒ–å­¦é¡¹ç›®
 	 * @param cp
 	 * @param sid
 	 */
@@ -882,7 +882,7 @@ public class ProjectDaoImplMySql implements ProjectDao {
 			conn = DB.getConn();
 			pstmt = DB.prepareStatement(conn, sql);
 			pstmt.setString(1, sid);
-			
+
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				cp.setContact(rs.getString("vcontact"));
@@ -924,9 +924,9 @@ public class ProjectDaoImplMySql implements ProjectDao {
 		}
 	}
 
-	
+
 	/**
-	 * È¡µÃ×ÜÌõÊı
+	 * å–å¾—æ€»æ¡æ•°
 	 * @param conn
 	 * @param sql
 	 * @return
@@ -948,12 +948,12 @@ public class ProjectDaoImplMySql implements ProjectDao {
 		}
 		return totalRecords;
 	}
-	
-	
-	
+
+
+
 	/**
-	 * Éú³ÉÄÚ²¿¶ÔÕËµ¥ºÅ
-	 * 
+	 * ç”Ÿæˆå†…éƒ¨å¯¹è´¦å•å·
+	 *
 	 * @param pid
 	 * @return
 	 */
@@ -994,11 +994,11 @@ public class ProjectDaoImplMySql implements ProjectDao {
 		}
 		return sid;
 	}
-	
+
 	/**
-	 * ×Ô¶¯Éú³É±¨¸æ±àºÅ
-	 * 
-	 * @return rid ±¨¸æ±àºÅ
+	 * è‡ªåŠ¨ç”ŸæˆæŠ¥å‘Šç¼–å·
+	 *
+	 * @return rid æŠ¥å‘Šç¼–å·
 	 */
 	private synchronized String makeRid(Project p) {
 		String ptype = p.getPtype();
@@ -1011,15 +1011,15 @@ public class ProjectDaoImplMySql implements ProjectDao {
 		String pstr = "";
 		String last = "";
 		str.append("LC");
-		if ("ÖĞÉ½".equals(company)) {
+		if ("ä¸­å±±".equals(company)) {
 			str.append("Z");
-		} else if ("¹ãÖİ".equals(company)) {
+		} else if ("å¹¿å·".equals(company)) {
 			str.append("G");
-		} else if ("¶«İ¸".equals(company)) {
+		} else if ("ä¸œè".equals(company)) {
 			str.append("D");
 		}
-		if ("»¯Ñ§²âÊÔ".equals(ptype)) {
-			if ("¶«İ¸ÊµÑéÊÒ".equals(lab)) {
+		if ("åŒ–å­¦æµ‹è¯•".equals(ptype)) {
+			if ("ä¸œèå®éªŒå®¤".equals(lab)) {
 				//str.append("D");
 				pstr = "D";
 			} else {
@@ -1027,21 +1027,21 @@ public class ProjectDaoImplMySql implements ProjectDao {
 				pstr = "C";
 			}
 
-		} else if ("µç×ÓµçÆ÷°²È«²âÊÔ".equals(ptype)) {
+		} else if ("ç”µå­ç”µå™¨å®‰å…¨æµ‹è¯•".equals(ptype)) {
 			//str.append("S");
 			pstr = "S";
-		} else if ("EMC²âÊÔ".equals(ptype)) {
+		} else if ("EMCæµ‹è¯•".equals(ptype)) {
 			//str.append("E");
 			pstr = "E";
-		} else if ("¹âĞÔÄÜ²âÊÔ".equals(ptype)) {
+		} else if ("å…‰æ€§èƒ½æµ‹è¯•".equals(ptype)) {
 			//str.append("P");
 			pstr = "P";
-		} else if ("ÄÜĞ§²âÊÔ".equals(ptype)) {
+		} else if ("èƒ½æ•ˆæµ‹è¯•".equals(ptype)) {
 			//str.append("P");
 			pstr = "N";
-		}else if ("»¯×±Æ·".equals(ptype)){
+		}else if ("åŒ–å¦†å“".equals(ptype)){
 			pstr = "H";
-		}else if ("»·¾³".equals(ptype)){
+		}else if ("ç¯å¢ƒ".equals(ptype)){
 			pstr = "J";
 		}
 		str.append(pstr);
@@ -1056,17 +1056,17 @@ public class ProjectDaoImplMySql implements ProjectDao {
 		ResultSet rs = null;
 		boolean auto = false;
 		String sql = "";
-		
-		if("»¯Ñ§²âÊÔ".equals(ptype)) {
-			if ("»ú¹¹ºÏ×÷".equals(type)) {
+
+		if("åŒ–å­¦æµ‹è¯•".equals(ptype)) {
+			if ("æœºæ„åˆä½œ".equals(type)) {
 				sql = "Select vrid from t_project where etype = '"
 						+ type + "' and vrid like '%" + keyword
 						+ "%' order by substring(vrid,9,12) desc";
 			} else if ("y".equals(isout)) {
 				sql = "Select vrid from t_project where isout = 'y' and vrid  like '%"
 					+ keyword + "%' order by substring(vrid,9,12) desc";
-			} else if ("×Ô²â".equals(type)) {
-				if ("ÖĞÉ½ÊµÑéÊÒ".equals(lab)) {
+			} else if ("è‡ªæµ‹".equals(type)) {
+				if ("ä¸­å±±å®éªŒå®¤".equals(lab)) {
 					sql = "Select vrid from t_project where isout='n' and etype = '"
 							+ type
 							+ "' and elab = '"
@@ -1101,13 +1101,13 @@ public class ProjectDaoImplMySql implements ProjectDao {
 				code += 1;
 				last = new DecimalFormat("0000").format(code);
 			} else {
-				if("»¯Ñ§²âÊÔ".equals(ptype)) {
-					if ("»ú¹¹ºÏ×÷".equals(type)) {
+				if("åŒ–å­¦æµ‹è¯•".equals(ptype)) {
+					if ("æœºæ„åˆä½œ".equals(type)) {
 						last = "8000";
 					} else if ("y".equals(isout)) {
 						last = "9000";
-					} else if ("×Ô²â".equals(type)) {
-						if ("ÖĞÉ½ÊµÑéÊÒ".equals(lab)) {
+					} else if ("è‡ªæµ‹".equals(type)) {
+						if ("ä¸­å±±å®éªŒå®¤".equals(lab)) {
 							last = "0001";
 						} else {
 							last = "6000";
@@ -1138,12 +1138,12 @@ public class ProjectDaoImplMySql implements ProjectDao {
 		}
 		return str.toString();
 	}
-	
-	
+
+
 	/**
-	 * ĞŞ¸Ä±¨¸æ±àºÅ
-	 * 
-	 * @return rid ±¨¸æ±àºÅ
+	 * ä¿®æ”¹æŠ¥å‘Šç¼–å·
+	 *
+	 * @return rid æŠ¥å‘Šç¼–å·
 	 */
 	private synchronized String modRid(Project p) {
 		String rid = "";
@@ -1157,15 +1157,15 @@ public class ProjectDaoImplMySql implements ProjectDao {
 		String pstr = "";
 		String last = "";
 		str.append("LC");
-		if ("ÖĞÉ½".equals(company)) {
+		if ("ä¸­å±±".equals(company)) {
 			str.append("Z");
-		} else if ("¹ãÖİ".equals(company)) {
+		} else if ("å¹¿å·".equals(company)) {
 			str.append("G");
-		} else if ("¶«İ¸".equals(company)) {
+		} else if ("ä¸œè".equals(company)) {
 			str.append("D");
 		}
-		if ("»¯Ñ§²âÊÔ".equals(ptype)) {
-			if ("¶«İ¸ÊµÑéÊÒ".equals(lab)) {
+		if ("åŒ–å­¦æµ‹è¯•".equals(ptype)) {
+			if ("ä¸œèå®éªŒå®¤".equals(lab)) {
 				//str.append("D");
 				pstr = "D";
 			} else {
@@ -1173,16 +1173,16 @@ public class ProjectDaoImplMySql implements ProjectDao {
 				pstr = "C";
 			}
 
-		} else if ("µç×ÓµçÆ÷°²È«²âÊÔ".equals(ptype)) {
+		} else if ("ç”µå­ç”µå™¨å®‰å…¨æµ‹è¯•".equals(ptype)) {
 			//str.append("S");
 			pstr = "S";
-		} else if ("EMC²âÊÔ".equals(ptype)) {
+		} else if ("EMCæµ‹è¯•".equals(ptype)) {
 			//str.append("E");
 			pstr = "E";
-		} else if ("¹âĞÔÄÜ²âÊÔ".equals(ptype)) {
+		} else if ("å…‰æ€§èƒ½æµ‹è¯•".equals(ptype)) {
 			//str.append("P");
 			pstr = "P";
-		} else if ("ÄÜĞ§²âÊÔ".equals(ptype)) {
+		} else if ("èƒ½æ•ˆæµ‹è¯•".equals(ptype)) {
 			//str.append("P");
 			pstr = "N";
 		}
@@ -1198,17 +1198,17 @@ public class ProjectDaoImplMySql implements ProjectDao {
 		ResultSet rs = null;
 		boolean auto = false;
 		String sql = "";
-		
-		if("»¯Ñ§²âÊÔ".equals(ptype)) {
-			if ("»ú¹¹ºÏ×÷".equals(type)) {
+
+		if("åŒ–å­¦æµ‹è¯•".equals(ptype)) {
+			if ("æœºæ„åˆä½œ".equals(type)) {
 				sql = "Select vrid from t_project where etype = '"
 						+ type + "' and vrid like '%" + keyword
 						+ "%' order by substring(vrid,9,12)";
 			} else if ("y".equals(isout)) {
 				sql = "Select vrid from t_project where isout = 'y' and vrid  like '%"
 					+ keyword + "%' order by substring(vrid,9,12)";
-			} else if ("×Ô²â".equals(type)) {
-				if ("ÖĞÉ½ÊµÑéÊÒ".equals(lab)) {
+			} else if ("è‡ªæµ‹".equals(type)) {
+				if ("ä¸­å±±å®éªŒå®¤".equals(lab)) {
 					sql = "Select vrid from t_project where isout='n' and etype = '"
 							+ type
 							+ "' and elab = '"
@@ -1248,15 +1248,15 @@ public class ProjectDaoImplMySql implements ProjectDao {
 					rid = str.toString() + last;
 					break;
 				}
-			} 
+			}
 			if("".equals(rid)){
-				if("»¯Ñ§²âÊÔ".equals(ptype)) {
-					if ("»ú¹¹ºÏ×÷".equals(type)) {
+				if("åŒ–å­¦æµ‹è¯•".equals(ptype)) {
+					if ("æœºæ„åˆä½œ".equals(type)) {
 						rid = str.append("8000").toString();
 					} else if ("y".equals(isout)) {
 						rid = str.append("9000").toString();
-					} else if ("×Ô²â".equals(type)) {
-						if ("ÖĞÉ½ÊµÑéÊÒ".equals(lab)) {
+					} else if ("è‡ªæµ‹".equals(type)) {
+						if ("ä¸­å±±å®éªŒå®¤".equals(lab)) {
 							rid = str.append("0001").toString();
 						} else {
 							rid = str.append("6000").toString();
@@ -1286,9 +1286,9 @@ public class ProjectDaoImplMySql implements ProjectDao {
 		}
 		return rid;
 	}
-	
+
 	/**
-	 * ÅĞ¶Ï¸ÃridÊÇ·ñ´æÔÚ
+	 * åˆ¤æ–­è¯¥ridæ˜¯å¦å­˜åœ¨
 	 * @param rid
 	 * @return
 	 */
@@ -1314,34 +1314,34 @@ public class ProjectDaoImplMySql implements ProjectDao {
 		}
 		return isexits;
 	}
-	
-	
-	
+
+
+
 	/**
-	 * ·Ö½âÏîÄ¿£¬Í¬Ê±¸üĞÂÏà¹ØÊı¾İ
+	 * åˆ†è§£é¡¹ç›®ï¼ŒåŒæ—¶æ›´æ–°ç›¸å…³æ•°æ®
 	 * @param pid
 	 * @return
 	 */
 	private synchronized boolean updateStatus(String pid,String ptype) {
-		//·ÖÏîÄ¿Æ±¾İ×Ü½ğ¶î
+		//åˆ†é¡¹ç›®ç¥¨æ®æ€»é‡‘é¢
 		float invtotal = 0;
-		//·ÖÏîÄ¿ºËËã»ùÊı×Ü¼Æ
+		//åˆ†é¡¹ç›®æ ¸ç®—åŸºæ•°æ€»è®¡
 		float preacount = 0;
-		//·ÖÏîÄ¿ÊıÁ¿
+		//åˆ†é¡¹ç›®æ•°é‡
 		int projectcount = 0;
-		//ËùÓĞ·Ö°ü·ÑÔ¤¼Æ
+		//æ‰€æœ‰åˆ†åŒ…è´¹é¢„è®¡
 		float presubcost = 0;
-		//ËùÓĞÊµ¼Ê·Ö°ü·Ñ
+		//æ‰€æœ‰å®é™…åˆ†åŒ…è´¹
 		float subcost = 0;
-		//ËùÓĞÄÚ²¿·Ö°ü·Ñ
+		//æ‰€æœ‰å†…éƒ¨åˆ†åŒ…è´¹
 		float insubcost = 0;
-		//ËùÓĞºÏ×÷»ú¹¹·ÑÔ¤¼Æ
+		//æ‰€æœ‰åˆä½œæœºæ„è´¹é¢„è®¡
 		float preagcost = 0;
-		//ËùÓĞÊµ¼ÊºÏ¼Æ»ú¹¹·ÑÓÃ
+		//æ‰€æœ‰å®é™…åˆè®¡æœºæ„è´¹ç”¨
 		float agcost = 0;
-		//·ÖÏîÄ¿×Ü½ğ¶î
+		//åˆ†é¡¹ç›®æ€»é‡‘é¢
 		float price = 0;
-		//±¨¼Ûµ¥½ğ¶î
+		//æŠ¥ä»·å•é‡‘é¢
 		float totalprice = 0;
 		boolean isok = false;
 		String invmethod = "";
@@ -1351,7 +1351,7 @@ public class ProjectDaoImplMySql implements ProjectDao {
 
 		try {
 			conn = DB.getConn();
-			
+
 			String sql = "select sum(fppreacount),sum(fpreinvprice),count(*),sum(fpresubcost),sum(fsubcost),sum(fpresubcost2),sum(fsubcost2),sum(finsubcost),sum(fpreagcost),sum(fagcost),sum(fprice) from t_project where vpid = ?";
 			pstmt = DB.prepareStatement(conn, sql);
 			pstmt.setString(1, pid);
@@ -1367,7 +1367,7 @@ public class ProjectDaoImplMySql implements ProjectDao {
 				agcost = rs.getFloat(10);
 				price = rs.getFloat(11);
 			}
-			
+
 			sql = "select * from t_quotation where vpid = ?";
 			pstmt = DB.prepareStatement(conn, sql);
 			pstmt.setString(1, pid);
@@ -1375,10 +1375,10 @@ public class ProjectDaoImplMySql implements ProjectDao {
 			if (rs.next()) {
 				totalprice = rs.getFloat("ftotalprice");
 			}
-			
-			
-			//¸üĞÂ¶©µ¥·ÖÏîÄ¿ÊıÁ¿¡¢ºËËã»ùÊı¡¢Ô¤¹ÀÍâ²¿·Ö°ü·Ñ¡¢Êµ¼ÊÍâ²¿·Ö°ü·Ñ¡¢ÄÚ²¿·Ö°ü·Ñ¡¢Ô¤¹ÀºÏ×÷»ú¹¹·ÑÓÃ¡¢ºÏ×÷»ú¹¹·ÑÓÃ¡¢¶©µ¥½ø¶È
-			sql = "update t_quotation set iprojectcount=?,fpreacount=?,fpresubcost=?,fsubcost=?,finsubcost=?,fpreagcost=?,fagcost=?,vstatus = '½øĞĞÖĞ' where vpid = ?";
+
+
+			//æ›´æ–°è®¢å•åˆ†é¡¹ç›®æ•°é‡ã€æ ¸ç®—åŸºæ•°ã€é¢„ä¼°å¤–éƒ¨åˆ†åŒ…è´¹ã€å®é™…å¤–éƒ¨åˆ†åŒ…è´¹ã€å†…éƒ¨åˆ†åŒ…è´¹ã€é¢„ä¼°åˆä½œæœºæ„è´¹ç”¨ã€åˆä½œæœºæ„è´¹ç”¨ã€è®¢å•è¿›åº¦
+			sql = "update t_quotation set iprojectcount=?,fpreacount=?,fpresubcost=?,fsubcost=?,finsubcost=?,fpreagcost=?,fagcost=?,vstatus = 'è¿›è¡Œä¸­' where vpid = ?";
 			pstmt = DB.prepareStatement(conn, sql);
 			pstmt.setInt(1, projectcount);
 			pstmt.setFloat(2, preacount);
@@ -1388,10 +1388,10 @@ public class ProjectDaoImplMySql implements ProjectDao {
 			pstmt.setFloat(6, preagcost);
 			pstmt.setFloat(7, agcost);
 			pstmt.setString(8, pid);
-			
+
 			pstmt.executeUpdate();
 
-			
+
 			sql = "select einvmethod from t_quotation where vpid = ?";
 			pstmt = DB.prepareStatement(conn, sql);
 			pstmt.setString(1, pid);
@@ -1399,41 +1399,41 @@ public class ProjectDaoImplMySql implements ProjectDao {
 			if (rs.next()) {
 				invmethod = rs.getString("einvmethod");
 			}
-			
-			//Èç¹ûÎªÆ±¾İÖ§¸¶·½Ê½Îª'·ÖÏîÄ¿'£¬Ôò¼ÆËã·ÖÏîÄ¿×Ü½ğ¶î
-			if("·ÖÏîÄ¿".equals(invmethod)) {
+
+			//å¦‚æœä¸ºç¥¨æ®æ”¯ä»˜æ–¹å¼ä¸º'åˆ†é¡¹ç›®'ï¼Œåˆ™è®¡ç®—åˆ†é¡¹ç›®æ€»é‡‘é¢
+			if("åˆ†é¡¹ç›®".equals(invmethod)) {
 				sql = "update t_quotation set finvcount = ? where vpid = ?";
 				pstmt = DB.prepareStatement(conn, sql);
 				pstmt.setFloat(1, invtotal);
 				pstmt.setString(2, pid);
 				pstmt.executeUpdate();
 			}
-			
-			//Èç¹û·ÖÏîÄ¿×Ü½ğ¶î==¶©µ¥½ğ¶î£¬Ôò¼ÌĞøÅÅµ¥
+
+			//å¦‚æœåˆ†é¡¹ç›®æ€»é‡‘é¢==è®¢å•é‡‘é¢ï¼Œåˆ™ç»§ç»­æ’å•
 			if (price == totalprice) {
-				if(!("»¯Ñ§²âÊÔ".equals(ptype)||"»¯×±Æ·".equals(ptype)||"»·¾³".equals(ptype))){
-				sql = "update t_phy_project set estatus = 'ÅÅµ¥',istatus = 2 where vpid = ? and estatus = 'Á¢Ïî'";
+				if(!("åŒ–å­¦æµ‹è¯•".equals(ptype)||"åŒ–å¦†å“".equals(ptype)||"ç¯å¢ƒ".equals(ptype))){
+				sql = "update t_phy_project set estatus = 'æ’å•',istatus = 2 where vpid = ? and estatus = 'ç«‹é¡¹'";
 				}else{
-				sql = "update t_chem_project set estatus = 'ÅÅµ¥',istatus = 2 where vpid = ? and estatus = 'Á¢Ïî'";
+				sql = "update t_chem_project set estatus = 'æ’å•',istatus = 2 where vpid = ? and estatus = 'ç«‹é¡¹'";
 				}
 				System.out.println(sql);
 				pstmt = DB.prepareStatement(conn, sql);
 				pstmt.setString(1, pid);
 				pstmt.executeUpdate();
 			}
-				
-/**	
-				sql = "update t_quotation set fpreacount = ?,vstatus = '½øĞĞÖĞ' where vpid = ?";
+
+/**
+				sql = "update t_quotation set fpreacount = ?,vstatus = 'è¿›è¡Œä¸­' where vpid = ?";
 				pstmt = DB.prepareStatement(conn, sql);
 				pstmt.setFloat(1, preacount);
 				pstmt.setString(2, pid);
 				pstmt.executeUpdate();
 			}
 
-			// ×¢Òâtotal´óÓÚtotalpriceÊ±µÄÇé¿ö£¬Ó¦¸Ã²»¿ÉÒÔÌí¼ÓĞÅÏ¢
+			// æ³¨æ„totalå¤§äºtotalpriceæ—¶çš„æƒ…å†µï¼Œåº”è¯¥ä¸å¯ä»¥æ·»åŠ ä¿¡æ¯
 			if (total > totalprice) {
 				if (total == totalprice) {
-					sql = "update t_chem_project set estatus = '´íµ¥',istatus = 13 where vpid = ?";
+					sql = "update t_chem_project set estatus = 'é”™å•',istatus = 13 where vpid = ?";
 					pstmt = DB.prepareStatement(conn, sql);
 					pstmt.setString(1, pid);
 					pstmt.executeUpdate();
@@ -1449,9 +1449,9 @@ public class ProjectDaoImplMySql implements ProjectDao {
 		}
 		return isok;
 	}
-	
+
 	/**
-	 * È¡µÃÏîÄ¿Ô¤¾¯
+	 * å–å¾—é¡¹ç›®é¢„è­¦
 	 * @param rid
 	 * @return
 	 */
@@ -1480,9 +1480,9 @@ public class ProjectDaoImplMySql implements ProjectDao {
 		}
 		return warning;
 	}
-	
+
 	/**
-	 * µÃµ½ChemLabTimeĞÅÏ¢
+	 * å¾—åˆ°ChemLabTimeä¿¡æ¯
 	 * @param sid
 	 */
 	private List<ChemLabTime> getChemLabTime(String sid) {
@@ -1517,9 +1517,9 @@ public class ProjectDaoImplMySql implements ProjectDao {
 		}
 		return list;
 	}
-	
+
 	/**
-	 * »ñÈ¡±¨¼Ûµ¥ÀàĞÍ£¨»¯Ñ§/°²¹æ£© 
+	 * è·å–æŠ¥ä»·å•ç±»å‹ï¼ˆåŒ–å­¦/å®‰è§„ï¼‰
 	 * @param pid
 	 * @return
 	 */
@@ -1536,9 +1536,9 @@ public class ProjectDaoImplMySql implements ProjectDao {
 			pstmt.setString(1, pid);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
-				
+
 				status=rs.getString("eptype");
-				
+
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -1549,7 +1549,7 @@ public class ProjectDaoImplMySql implements ProjectDao {
 		}
 		return status;
 	}
-	
+
 	public String getprojectRid(String sid) {
 		String sql = "select vrid from t_project  where vsid = ?";
 		Connection conn = null;
@@ -1563,9 +1563,9 @@ public class ProjectDaoImplMySql implements ProjectDao {
 			pstmt.setString(1, sid);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
-				
+
 				rid=rs.getString("vrid");
-				
+
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -1576,11 +1576,11 @@ public class ProjectDaoImplMySql implements ProjectDao {
 		}
 		return rid;
 	}
-	
-	
-	
+
+
+
 	/**
-	 * ÅĞ¶Ï¸ÃridÊÇ·ñ´æÔÚ
+	 * åˆ¤æ–­è¯¥ridæ˜¯å¦å­˜åœ¨
 	 * @param rid
 	 * @return
 	 */
