@@ -9,6 +9,7 @@
 <%@page import="com.lccert.crm.kis.Order"%>
 <%@page import="java.util.List"%>
 <%@page import="com.lccert.crm.kis.QuoItem"%>
+<%@ page import="java.text.DecimalFormat" %>
 <%
 	request.setCharacterEncoding("GBK");
 	String strid = request.getParameter("id");
@@ -97,6 +98,25 @@
         }
       }
     }
+
+	function getinvprice(invprice) {
+		sumTotalprice();
+		invprice.value = document.getElementById("totalprice").value;
+	}
+
+	function sumTotalprice() {
+		var itemtotals = document.getElementsByName("itemtotal");
+		var totalprice = 0;
+		var temp = 0;
+		for(i=0; i<itemtotals.length; i++){
+			var itemtotal = itemtotals[i].value
+			temp = parseInt(totalprice)+parseInt(itemtotal);
+			if(!isNaN(temp)) {
+				totalprice = temp;
+			}
+		}
+		document.getElementById("totalprice").value = totalprice;
+	}
     //解析返回xml的方法
     function parseMessage(){
       var xmlDoc = req.responseXML.documentElement;//获得返回的XML文档
@@ -134,6 +154,7 @@
 	<body class="body1">
 		<form method="post" name="quotationform" id="quotationform" action="modifyorder_post.jsp?status=modify">
 			<input name="id" id="id" type="hidden" value="<%=order.getId() %>" />
+			<input name="totalprice" id="totalprice" type="hidden" value="" />
 			<table width="95%" border="0" cellspacing="2" cellpadding="2">
 				<tr>
 					<td>&nbsp;
@@ -407,24 +428,24 @@
 						</td>
 						<td>
 							<div align="center">
-								<input type="text" id="saleprice<%=i%>" name="saleprice" size="13" readonly="readonly" value="<%=quoitem.getItem().getStandprice()%>"
+								<input type="text" id="saleprice<%=i+1%>" name="saleprice" size="13" readonly="readonly" value="<%=quoitem.getItem().getStandprice()%>"
 									style="background-color: #FFCC99">
 							</div>
 						</td>
 						<td>
 							<div align="center">
-								<input type="text" id="price<%=i%>" name="price" size="13"  value="<%=quoitem.getPrice()%>">
+								<input type="text" id="price<%=i+1%>" name="price" size="13"  value="<%=quoitem.getPrice()%>">
 							</div>
 						</td>
 						<td>
 							<div align="center">
-								<input type="text" id="itemcount<%=i%>" name="itemcount" size="13" onBlur="getTotal('<%=i %>');" value="<%=quoitem.getCount()%>">
+								<input type="text" id="itemcount<%=i+1%>" name="itemcount" size="13" onBlur="getTotal('<%=i %>');" value="<%=quoitem.getCount()%>">
 							</div>
 						</td>
 						<td>
 							<div align="center">
-								<input type="text" id="itemtotal<%=i%>" name="itemtotal" size="13" readonly="readonly"
-									style="background-color: #FFCC99" onchange="sumTotalprice();" value="<%=quoitem.getCount()*quoitem.getSaleprice()%>">
+								<input type="text" id="itemtotal<%=i+1%>" name="itemtotal" size="13" readonly="readonly"
+									style="background-color: #FFCC99" onchange="sumTotalprice();" value="<%=new DecimalFormat("##").format(quoitem.getCount()*(quoitem.getPrice()>0?quoitem.getPrice():quoitem.getItem().getStandprice()))%>">
 							</div>
 						</td>
 						
@@ -464,30 +485,30 @@
 						</td>
 						<td>
 							<div align="center">
-								<input type="text" id="standprice<%=i%>" name="standprice" size="13" readonly="readonly"
+								<input type="text" id="standprice<%=i+1%>" name="standprice" size="13" readonly="readonly"
 									style="background-color: #FFCC99">
 							</div>
 						</td>
 						<td>
 							<div align="center">
-								<input type="text" id="standprice<%=i%>" name="price" size="13" readonly="readonly"
+								<input type="text" id="standprice<%=i+1%>" name="price" size="13" readonly="readonly"
 									style="background-color: #FFCC99">
 							</div>
 						</td>
 						<td>
 							<div align="center">
-								<input type="text" id="itemcount<%=i%>" name="itemcount" size="13" onBlur="getTotal('<%=i %>');">
+								<input type="text" id="itemcount<%=i+1%>" name="itemcount" size="13" onBlur="getTotal('<%=i %>');">
 							</div>
 						</td>
 						<td>
 							<div align="center">
-								<input type="text" id="itemtotal<%=i%>" name="itemtotal" size="13" readonly="readonly"
+								<input type="text" id="itemtotal<%=i+1%>" name="itemtotal" size="13" readonly="readonly"
 									style="background-color: #FFCC99" onchange="sumTotalprice();">
 							</div>
 						</td>
 						<td>
 							<div align="center">
-								<input type="text" id="remark<%=i%>" name="remark" size="23">
+								<input type="text" id="remark<%=i+1%>" name="remark" size="23">
 							</div>
 						</td>
 					</tr>
@@ -567,7 +588,7 @@
 						</td>
 						<td width="33%">
 							<input name="invcount" id="invcount" type="text" size="40"
-								value="<%=order.getTotalprice()%>" />
+								value="<%=order.getTotalprice()%>" onFocus="getinvprice(this);"  />
 						</td>
 					</tr>
 				</table>

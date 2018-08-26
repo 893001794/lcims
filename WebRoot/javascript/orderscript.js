@@ -63,7 +63,7 @@
 		
 		
 		function goBack() {
-		window.self.location="myorder.jsp";
+		window.self.location="order_manage.jsp";
 	}
 	
 	function getinvprice(invprice) {
