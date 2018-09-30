@@ -106,7 +106,7 @@ public class AttachmentsMail implements Runnable {
 			}
 			// 邮件服务器进行验证
 			Transport tran = session.getTransport("smtp");
-			tran.connect("smtp.lccert.com", "lcims@lccert.com", "Qq789456123");
+			tran.connect("smtp.lccert.com", "lcims@lccert.com", "yFp9iFmjeToGtTL9");
 			tran.sendMessage(msg, msg.getAllRecipients()); // 发送
 			//System.out.println("邮件发送成功");
 		} catch (Exception e) {

@@ -73,7 +73,7 @@ public class EmailConfigure {
 			tran = session.getTransport("smtp");
 //			tran.connect("61.151.239.132", "lcims@lccert.com", "12345678");
 //			tran.connect("smtp2.lccert.com", "lcims@lccert.com", "22833366lc");
-			tran.connect("smtp.lccert.com", "lcims@lccert.com", "Qq789456123");
+			tran.connect("smtp.lccert.com", "lcims@lccert.com", "yFp9iFmjeToGtTL9");
 			
 			// easonchen@lccert.com是用户名，123456是密码
 			tran.sendMessage(msg, msg.getAllRecipients()); // 发送

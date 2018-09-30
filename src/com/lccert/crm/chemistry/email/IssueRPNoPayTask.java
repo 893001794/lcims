@@ -139,7 +139,7 @@ public class IssueRPNoPayTask extends TimerTask {
 			// 邮件服务器进行验证
 			tran = session.getTransport("smtp");
 //			tran.connect("61.151.239.132", "lcims@lccert.com", "12345678");
-			tran.connect("smtp.lccert.com", "lcims@lccert.com", "Qq789456123");
+			tran.connect("smtp.lccert.com", "lcims@lccert.com", "yFp9iFmjeToGtTL9");
 			// easonchen@lccert.com是用户名，123456是密码
 			tran.sendMessage(msg, msg.getAllRecipients()); // 发送
 			// System.out.println("邮件发送成功");
