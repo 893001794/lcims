@@ -3,7 +3,7 @@ package com.lccert.crm.quotation;
 import java.util.Date;
 
 /**
- * ¶©µ¥ÊµÌåÀà
+ * ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½ï¿½ï¿½
  * 
  * @author eason
  * 
@@ -136,42 +136,50 @@ public class Quotation {
 	
 	private String paystatus;
 	
-	private String collRemarks; //ÊÕ¿î±¸×¢
-	private int clientid;  //»ñÈ¡ÓÃ»§ÐÅÏ¢
+	private String collRemarks; //ï¿½Õ¿î±¸×¢
+	private int clientid;  //ï¿½ï¿½È¡ï¿½Ã»ï¿½ï¿½ï¿½Ï¢
 	private String object ;
 	private Object obj;
 	private float sumOtherscost ;
-	private float adjustinvcount;    //¸ü¸Ä±¨¼Ûµ¥µÄ×Ü½ð¶î
-	private String oldPid;   //¹ØÁª¾ÉµÄ±¨¼Ûµ¥
-	private String rpclient; //±¨¸æ¿Í»§Ãû³Æ
-	private String greenchannel;  //ÂÌÉ«Í¨µÀ
-	private float projectPrice ;  //µ¥¸öÏîÄ¿µÄ½ð¶î;
-	private int confirmid ;  //¼ÇÂ¼´òÕÛºóÉóÅú¾­ÀíµÄid
-	private float advarceFactor ; //Ô¤ÊÕ¿îÏµÊý
-	private float sepayFactor ;  //¶þ´ÎÊÕ¿îÏµÊý
-	private float balanceFactor; //Î²´ÎÊÕ¿îÏµÊý
-	private String amstart ; // ÉÏÎç×â³¡¿ªÊ¼Ê±¼ä
-	private String amend  ;  //ÉÏÎç×â³¡½áÊøÊ±¼ä
-	private String pmstart ; //ÏÂÎç ×â³¡¿ªÊ¼Ê±¼ä
-	private String pmend  ;  //ÏÂÎç×â³¡½áÊøÊ±¼ä
-	private String product;  //²úÆ·Ãû³Æ
-	private Date collection ;   //ÊÕ¼þÊ±¼ä
-	private Date test  ;      //²âÊÔÊ±¼ä
-	private Date receipt ;    //ÊÕµ¥Ê±¼ä
-	private Date finish  ;    //±¨¼Ûµ¥Íê³ÉÊ±¼ä
-	private float deductions ; //×·¿îµÖ¿ÛÏµÊý
-	private float channel ; //Í¨µÀÏµÊý
+	private float adjustinvcount;    //ï¿½ï¿½ï¿½Ä±ï¿½ï¿½Ûµï¿½ï¿½ï¿½ï¿½Ü½ï¿½ï¿½
+	private String oldPid;   //ï¿½ï¿½ï¿½ï¿½ï¿½ÉµÄ±ï¿½ï¿½Ûµï¿½
+	private String rpclient; //ï¿½ï¿½ï¿½ï¿½Í»ï¿½ï¿½ï¿½ï¿½ï¿½
+	private String greenchannel;  //ï¿½ï¿½É«Í¨ï¿½ï¿½
+	private float projectPrice ;  //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½Ä½ï¿½ï¿½;
+	private int confirmid ;  //ï¿½ï¿½Â¼ï¿½ï¿½ï¿½Ûºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½id
+	private float advarceFactor ; //Ô¤ï¿½Õ¿ï¿½Ïµï¿½ï¿½
+	private float sepayFactor ;  //ï¿½ï¿½ï¿½ï¿½ï¿½Õ¿ï¿½Ïµï¿½ï¿½
+	private float balanceFactor; //Î²ï¿½ï¿½ï¿½Õ¿ï¿½Ïµï¿½ï¿½
+	private String amstart ; // ï¿½ï¿½ï¿½ï¿½ï¿½â³¡ï¿½ï¿½Ê¼Ê±ï¿½ï¿½
+	private String amend  ;  //ï¿½ï¿½ï¿½ï¿½ï¿½â³¡ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
+	private String pmstart ; //ï¿½ï¿½ï¿½ï¿½ ï¿½â³¡ï¿½ï¿½Ê¼Ê±ï¿½ï¿½
+	private String pmend  ;  //ï¿½ï¿½ï¿½ï¿½ï¿½â³¡ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
+	private String product;  //ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½
+	private Date collection ;   //ï¿½Õ¼ï¿½Ê±ï¿½ï¿½
+	private Date test  ;      //ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
+	private Date receipt ;    //ï¿½Õµï¿½Ê±ï¿½ï¿½
+	private Date finish  ;    //ï¿½ï¿½ï¿½Ûµï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
+	private float deductions ; //×·ï¿½ï¿½Ö¿ï¿½Ïµï¿½ï¿½
+	private float channel ; //Í¨ï¿½ï¿½Ïµï¿½ï¿½
 	
-	private String sampling;  //¼ÇÂ¼¶«Ý¸edm»·¾³²¿²ÉÑùÔ±Ãû³Æ
-	private Date sampltime;  //¼ÇÂ¼¶«Ý¸edm»·¾³²¿²ÉÑùÊ±¼ä 
-	private String createname ;  //ÅÅµ¥ÈËÔ±
-	private String lock ; //Ëø
-	private float fluSum ; //³åºì½ð¶î
-	private String clientContact ; //»ñÈ¡¿Í»§ÇøÓò
-	private String badDebt; //»µÕË¿Û¿î
-	private Integer groupId ;//·Ö×é
-	
-	
+	private String sampling;  //ï¿½ï¿½Â¼ï¿½ï¿½Ý¸edmï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô±ï¿½ï¿½ï¿½ï¿½
+	private Date sampltime;  //ï¿½ï¿½Â¼ï¿½ï¿½Ý¸edmï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ 
+	private String createname ;  //ï¿½Åµï¿½ï¿½ï¿½Ô±
+	private String lock ; //ï¿½ï¿½
+	private String sealup ; //ï¿½ï¿½
+	private float fluSum ; //ï¿½ï¿½ï¿½ï¿½ï¿½
+	private String clientContact ; //ï¿½ï¿½È¡ï¿½Í»ï¿½ï¿½ï¿½ï¿½ï¿½
+	private String badDebt; //ï¿½ï¿½ï¿½Ë¿Û¿ï¿½
+	private Integer groupId ;//ï¿½ï¿½ï¿½ï¿½
+
+	public String getSealup() {
+		return sealup;
+	}
+
+	public void setSealup(String sealup) {
+		this.sealup = sealup;
+	}
+
 	public float getFluSum() {
 		return fluSum;
 	}

@@ -143,6 +143,7 @@ public class FinanceQuotationAction {
 				qt.setBalance(rs.getFloat("fbalance"));
 				qt.setPaynotes(rs.getString("vpaynotes"));
 				qt.setInvcode(rs.getString("vinvcode"));
+				qt.setSealup(rs.getString("sealup"));
 				list.add(qt);
 			}
 			String tsql=null;
@@ -404,6 +405,62 @@ public class FinanceQuotationAction {
 
 			pstmt = DB.prepareStatement(conn, sql);
 			pstmt.setString(1, qt.getLock());
+			pstmt.setString(2, qt.getPid());
+			pstmt.executeUpdate();
+			conn.commit();
+			isok = true;
+		} catch (SQLException e) {
+			isok = false;
+			try {
+				conn.rollback();
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.setAutoCommit(auto);
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+			DB.close(pstmt);
+			DB.close(conn);
+		}
+		return isok;
+	}
+
+
+	/**
+	 * 解锁和枷锁
+	 *
+	 * @param qt
+	 * @return
+	 */
+	public boolean quotationSealUp(Quotation qt) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		boolean auto = false;
+		boolean isok = false;
+
+		String sql = "update t_quotation set sealup=? where vpid = ?";
+		try {
+			conn = DB.getConn();
+			auto = conn.getAutoCommit();
+			conn.setAutoCommit(false);
+
+			pstmt = DB.prepareStatement(conn, sql);
+
+			String sealup = qt.getSealup();
+			if(sealup.equals("y")){
+				sealup = "n";
+			}
+			if(sealup.equals("n")){
+				sealup = "y";
+			}
+			if(sealup.equals("")){
+				sealup = "y";
+			}
+			pstmt.setString(1, qt.getSealup());
 			pstmt.setString(2, qt.getPid());
 			pstmt.executeUpdate();
 			conn.commit();

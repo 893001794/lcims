@@ -17,8 +17,8 @@
 	int pageNo = 1;
 	int pageSize = 20;
 	String pageNoStr = request.getParameter("pageNo");
-	String lockType = request.getParameter("lockType");
-	String lock = request.getParameter("lock");
+	String sealupType = request.getParameter("sealupType");
+	String sealupParam = request.getParameter("sealupParam");
 	if (pageNoStr != null && !"".equals(pageNoStr)) {
 		pageNo = Integer.parseInt(pageNoStr);
 	}
@@ -54,20 +54,20 @@
 	fqu.setStatus("LCQD");
 	}
 	
-	if(lockType !=null&& "1".equals(lockType)){
-	if(lock!=null&&lock!=""){
-		if(lock.equals("n")){
-		lock ="y";
+	if(sealupType !=null&& "1".equals(sealupType)){
+	if(sealupParam!=null&&sealupParam!=""){
+		if(sealupParam.equals("n")){
+			sealupParam ="y";
 		}else{
-		lock ="n";
+			sealupParam ="n";
 		}
 	}
-	//System.out.println(lock);
+	//System.out.println(sealup);
 	Quotation qt =new Quotation();
 	String pidStr = request.getParameter("pidStr");
 	qt.setPid(pid);
-	qt.setLock(lock);
-	FinanceQuotationAction.getInstance().quotationLock(qt);
+	qt.setSealup(sealupParam);
+	FinanceQuotationAction.getInstance().quotationSealUp(qt);
 	}
 	pm = FinanceQuotationAction.getInstance().searchQuotations(fqu,"");
 	if (pm == null) {
@@ -106,12 +106,11 @@ function delpay()
 			document.getElementsByName("selectFlag")[i].checked = document.getElementById("ifAll").checked;
 		}
 	}
-	function lock(Object,lock){
+	function sealup(Object,sealup){
 	//alert(document.getElementById("start").value);
 	    var myForm =document.getElementById("form1");
-	   // var lock =document.getElementById("lock").value;
-		alert(lock);
-			myForm.action="quotation_manage.jsp?lockType=1&pid="+Object+"&lock="+lock;
+	   // var sealup =document.getElementById("sealup").value;
+			myForm.action="quotation_manage.jsp?sealupType=1&pid="+Object+"&sealupParam="+sealup;
 			myForm.submit();
 			return ;
 			//}
@@ -338,10 +337,11 @@ function delpay()
 				if (list != null) {
 					for (int i = 0; i < list.size(); i++) {
 						Quotation qt = list.get(i);
-						String lockStr="加锁";
-						if(qt.getLock() !=null && qt.getLock() !=""){
-							if(qt.getLock().equals("y")){
-							lockStr="解锁";
+						System.out.println("封存======"+qt.getSealup());
+						String sealupStr="封存";
+						if(qt.getSealup() !=null && qt.getSealup() !=""){
+							if(qt.getSealup().equals("y")){
+							sealupStr="解封";
 							}
 						}
 						//System.out.println(qt.getId());
@@ -451,6 +451,9 @@ function delpay()
 						<%
 							if (qt.getAcount() == 0) {
 						%>
+
+
+
 						<a
 							href="quotationlog.jsp?pid=<%=qt.getPid()%>/,&pageNo=<%=pm.getPageNo()%>&type=1"
 							style="color: blue">登记款项</a>
@@ -469,12 +472,21 @@ function delpay()
 					<a href="quotationlog.jsp?pid=<%=qt.getPid()%>/,&pageNo=<%=pm.getPageNo()%>&type=modi"
 							style="color: blue">修改</a>
 					<%
-					}else if(user.getId()!=233){
-						%>
-				<!-- 	<input type="button" name ="lock" id="lock" value="<%=lockStr%>" onclick="lock('<%=qt.getPid()%>','<%=qt.getLock()%>')"> -->
+					}
+					else if(user.getId()!=233){%>
+				<input type="button" name ="sealup" id="sealup" value="<%=sealupStr%>" onclick="sealup('<%=qt.getPid()%>','<%=qt.getSealup()%>')">
 					<%
 					}
 					 %>
+						<%--<input type="button" name ="sealup" id="sealup" value="<%=sealupStr%>" onclick="sealup('<%=qt.getPid()%>','<%=qt.getSealup()%>')">--%>
+						<%
+						if(qt.getSealup().equals("n")){%>
+						<a href="#" onclick="sealup('<%=qt.getPid()%>','<%=qt.getSealup()%>')" style="color: green"><%=sealupStr%></a>
+						<%}else{%>
+						<a href="#" onclick="sealup('<%=qt.getPid()%>','<%=qt.getSealup()%>')" style="color: red"><%=sealupStr%></a>
+						<%
+							}
+						%>
 					 <!--  <a
 							href="../../cashcount/editfincome.jsp?pid=<%=qt.getPid()%>"
 							style="color: blue">修改入账</a>-->
