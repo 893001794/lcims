@@ -1252,7 +1252,6 @@ public class OrderAction {
 	 * 搜索所有销售订单
 	 * @param pageNo
 	 * @param pageSize
-	 * @param salesid
 	 * @param pid
 	 * @param clientid
 	 * @param parttype
