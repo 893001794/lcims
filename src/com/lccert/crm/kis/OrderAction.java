@@ -1259,23 +1259,32 @@ public class OrderAction {
 	 * @return
 	 */
 	public PageModel searchOrder(int pageNo,int pageSize,String pid,String uid, int clientid,String parttype) {
+		String whereStr="";
+		String countSql="select count(*) from t_sales_order where 1=1 ";
 		StringBuffer str = new StringBuffer();
 		str.append("select * from t_sales_order where 1=1");
 		if(pid != null && !"".equals(pid)) {
-			str.append(" and vpid like '%" + pid + "%'");
+			whereStr=" and vpid like '%" + pid + "%'";
+			//str.append(" and vpid like '%" + pid + "%'");
 		}
 		if(uid != null && !"".equals(uid)) {
-			str.append(" and UI like '%" + uid + "%'");
+			whereStr+=" and UI like '%" + uid + "%'";
+			//str.append(" and UI like '%" + uid + "%'");
 		}
 		if(clientid != 0) {
-			str.append(" and clientid = " + clientid);
+			whereStr+=" and clientid = " + clientid;
+			//str.append(" and clientid = " + clientid);
 		}
 		if ("no".equals(parttype)) {
-			str.append(" and status = 'n'");
+			whereStr+= "and status = 'n'";
+			//str.append(" and status = 'n'");
 		} else if("yes".equals(parttype)){
-			str.append(" and status = 'y'");
+			whereStr+= "and status = 'y'";
+			//str.append(" and status = 'y'");
 		}
+		str.append(whereStr);
 		str.append(" order by id desc");
+		countSql+=whereStr;
 		String sql = str.toString();
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -1338,7 +1347,7 @@ public class OrderAction {
 				order.setProjectcontent(projectcontent.toString());
 				list.add(order);
 			}
-			int totalRecords = getSalesTotalRecords(conn, sql);
+			int totalRecords = getSalesTotalRecords(conn, countSql);
 			pm.setPageNo(pageNo);
 			pm.setPageSize(pageSize);
 			pm.setList(list);
