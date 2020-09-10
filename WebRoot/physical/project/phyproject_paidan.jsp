@@ -171,14 +171,16 @@
 				<td width="49%" class="rd6">
 					<font size="3pt" style="font-weight: bolder">¿Í»§Ãû³Æ</font>
 			</tr>
+			<%if(qt !=null){%>
 			<tr align="center">
 				<td class="rd8"><%=qt.getPid()==null?"":qt.getPid() %></td>
 				<%
-					ClientForm client = ClientAction.getInstance().getClientByName(qt.getClient());
-					if(client == null) client = new ClientForm();
+						ClientForm client = ClientAction.getInstance().getClientByName(qt.getClient());
+						if(client == null) client = new ClientForm();
 				%>
 				<td class="rd8"><a href="../../client/clientdetail.jsp?clientid=<%=client.getClientid() %>"><%=qt.getClient()==null?"":qt.getClient() %></a></td>
 			</tr>
+			<%}%>
 		</table>
 		<p>
 			&nbsp;

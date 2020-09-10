@@ -337,7 +337,6 @@ function delpay()
 				if (list != null) {
 					for (int i = 0; i < list.size(); i++) {
 						Quotation qt = list.get(i);
-						System.out.println("·â´æ======"+qt.getSealup());
 						String sealupStr="·â´æ";
 						if(qt.getSealup() !=null && qt.getSealup() !=""){
 							if(qt.getSealup().equals("y")){
