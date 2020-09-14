@@ -45,7 +45,7 @@ public interface PhyProjectDao {
 	 * @param pid
 	 * @return
 	 */
-	public PageModel getAllPhyProjects(int pageNo, int pageSize, String sql);
+	public PageModel getAllPhyProjects(int pageNo, int pageSize, String sql,String countSql);
 	
 	/**
 	 * 取消安规项目

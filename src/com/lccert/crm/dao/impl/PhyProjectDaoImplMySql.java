@@ -321,7 +321,7 @@ public class PhyProjectDaoImplMySql implements PhyProjectDao {
 	 * @param pid
 	 * @return
 	 */
-	public PageModel getAllPhyProjects(int pageNo, int pageSize, String sql) {
+	public PageModel getAllPhyProjects(int pageNo, int pageSize, String sql,String countSql) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -329,12 +329,12 @@ public class PhyProjectDaoImplMySql implements PhyProjectDao {
 		PageModel pm = new PageModel();
 		List<Project> list = new ArrayList<Project>();
 		Project p = null;
-		String str = sql + "  limit " + (pageNo - 1) * pageSize + ", " + pageSize;
+		//String str = sql + "  limit " + (pageNo - 1) * pageSize + ", " + pageSize;
 		try {
 			conn = DB.getConn();
 			auto = conn.getAutoCommit();
 			conn.setAutoCommit(false);
-			pstmt = DB.prepareStatement(conn, str);
+			pstmt = DB.prepareStatement(conn, sql);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				p = new Project();
@@ -404,7 +404,7 @@ public class PhyProjectDaoImplMySql implements PhyProjectDao {
 
 				list.add(p);
 			}
-			int totalRecords = getTotalRecords(conn,sql);
+			int totalRecords = getTotalRecords(conn,countSql);
 			pm = new PageModel();
 			pm.setPageNo(pageNo);
 			pm.setPageSize(pageSize);
@@ -568,15 +568,26 @@ public class PhyProjectDaoImplMySql implements PhyProjectDao {
 	 * @param sql
 	 * @return
 	 */
-	private int getTotalRecords(Connection conn , String sql) {
+	public  int getTotalRecords(Connection conn1 , String sql) {
+		/*if(sql.indexOf("limit")>-1){
+			sql=sql.substring(0,sql.indexOf("limit"));
+		}*/
+		Connection conn = DB.getConn();
 		int totalRecords = 0;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
 			pstmt = DB.prepareStatement(conn, sql);
 			rs = pstmt.executeQuery();
-			rs.last();
-			totalRecords = rs.getRow();
+			if(sql.indexOf("count")>-1){
+				if (rs.next()) {
+					totalRecords = rs.getInt(1);
+				}
+			}else{
+				rs.last();
+				totalRecords = rs.getRow();
+			}
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

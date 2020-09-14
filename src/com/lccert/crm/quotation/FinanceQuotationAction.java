@@ -449,19 +449,96 @@ public class FinanceQuotationAction {
 			conn.setAutoCommit(false);
 
 			pstmt = DB.prepareStatement(conn, sql);
-
 			String sealup = qt.getSealup();
-			if(sealup.equals("y")){
+			/*if(sealup.equals("y")){
 				sealup = "n";
-			}
-			if(sealup.equals("n")){
+			}else{
 				sealup = "y";
+			}*/
+			boolean orderFlag=orderSealUp(qt.getPid(),sealup);
+			boolean projectFlag=projectSealUp(qt.getPid(),sealup);
+			if(orderFlag==true){
+				pstmt.setString(1, sealup);
+				pstmt.setString(2, qt.getPid());
+				pstmt.executeUpdate();
+				conn.commit();
+				isok = true;
 			}
-			if(sealup.equals("")){
-				sealup = "y";
+		} catch (SQLException e) {
+			isok = false;
+			try {
+				conn.rollback();
+			} catch (Exception e1) {
+				e1.printStackTrace();
 			}
-			pstmt.setString(1, qt.getSealup());
-			pstmt.setString(2, qt.getPid());
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.setAutoCommit(auto);
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+			DB.close(pstmt);
+			DB.close(conn);
+		}
+		return isok;
+	}
+	private boolean orderSealUp(String vpid,String sealup) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		boolean auto = false;
+		boolean isok = false;
+
+		String sql = "update t_sales_order set sealup=? where vpid = ?";
+		try {
+			conn = DB.getConn();
+			auto = conn.getAutoCommit();
+			conn.setAutoCommit(false);
+
+			pstmt = DB.prepareStatement(conn, sql);
+
+
+			pstmt.setString(1, sealup);
+			pstmt.setString(2,vpid);
+			pstmt.executeUpdate();
+			conn.commit();
+			isok = true;
+		} catch (SQLException e) {
+			isok = false;
+			try {
+				conn.rollback();
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.setAutoCommit(auto);
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+			DB.close(pstmt);
+			DB.close(conn);
+		}
+		return isok;
+	}
+	private boolean projectSealUp(String vpid,String sealup) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		boolean auto = false;
+		boolean isok = false;
+
+		String sql = "update t_project set sealup=? where vpid = ?";
+		try {
+			conn = DB.getConn();
+			auto = conn.getAutoCommit();
+			conn.setAutoCommit(false);
+
+			pstmt = DB.prepareStatement(conn, sql);
+
+
+			pstmt.setString(1, sealup);
+			pstmt.setString(2,vpid);
 			pstmt.executeUpdate();
 			conn.commit();
 			isok = true;

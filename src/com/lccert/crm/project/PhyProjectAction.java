@@ -81,7 +81,7 @@ public class PhyProjectAction {
 		if(status != null && !"".equals(status)) {
 			str.append(" and b.estatus = '" + status + "'");
 		}
-		String sql = "select * from t_project a,t_phy_project b where a.vsid = b.vsid" + str.toString() + " and a.dbuildtime >='2011-01-01' order by a.dbuildtime desc";
+		String sql = "select * from t_project a,t_phy_project b where a.vsid = b.vsid and a.sealup='n' " + str.toString() + " and a.dbuildtime >='2011-01-01' order by a.dbuildtime desc";
 		return DaoFactory.getInstance().getPhyProjectDao().getAllPhyProject(sql);
 	}
 	
@@ -95,14 +95,18 @@ public class PhyProjectAction {
 	 */
 	public PageModel searchPhyProjects(int pageNo, int pageSize, String keyword, String type) {
 		String sql = "";
+		String countSql="";
 		if("pid".equals(type)) {
-			sql = "select * from t_project a,t_phy_project b where a.vsid = b.vsid and a.vpid='" + keyword + "' order by b.dcreatetime desc";
+			sql = "select * from t_project a,t_phy_project b where a.vsid = b.vsid and a.sealup='n' and a.vpid='" + keyword + "' order by b.dcreatetime desc limit " + (pageNo - 1) * pageSize + ", " + pageSize;;
+			countSql = "select count(*) from t_project a,t_phy_project b where a.vsid = b.vsid and a.sealup='n' and a.vpid='" + keyword + "'";
 		} else if("rid".equals(type)) {
-			sql = "select * from t_project a,t_phy_project b where a.vsid = b.vsid and a.vrid like '%" + keyword + "%' order by b.dcreatetime desc";
+			sql = "select * from t_project a,t_phy_project b where a.vsid = b.vsid and a.sealup='n' and a.vrid like '%" + keyword + "%' order by b.dcreatetime desc limit " + (pageNo - 1) * pageSize + ", " + pageSize;;
+			countSql = "select count(*) from t_project a,t_phy_project b where a.vsid = b.vsid and a.sealup='n' and a.vrid like '%" + keyword +"%'";
 		} else {
-			sql = "select * from t_project a,t_phy_project b where a.vsid = b.vsid order by b.dcreatetime desc";
+			sql = "select * from t_project a,t_phy_project b where a.vsid = b.vsid and a.sealup='n' order by b.dcreatetime desc  limit " + (pageNo - 1) * pageSize + ", " + pageSize;;
+			countSql = "select count(*) from t_project a,t_phy_project b where a.vsid = b.vsid and a.sealup='n' " ;
 		}
-		return DaoFactory.getInstance().getPhyProjectDao().getAllPhyProjects(pageNo, pageSize, sql);
+		return DaoFactory.getInstance().getPhyProjectDao().getAllPhyProjects(pageNo, pageSize, sql,countSql);
 	}
 	
 	/**

@@ -985,7 +985,7 @@ public class QuotationAction {
 	 * @return
 	 */
 	public Quotation getQuotationByPid(String pid) {
-		String sql = "select * from t_quotation where vpid like '%"+pid+"%'";
+		String sql = "select * from t_quotation where vpid like '%"+pid+"%' and sealup='n'";
 		System.out.println(sql);
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -1585,7 +1585,7 @@ public float findSumOtherscost(String pid){
 			str =" and eisfinish = 'y'";	
 			}
 		} 
-		String sql="select * from t_quotation  where 1=1 "+str+" order by dcreatetime desc";
+		String sql="select * from t_quotation  where 1=1 and sealup='n' "+str+" order by dcreatetime desc";
 		System.out.println(sql);
 		Connection conn = null;
 		PreparedStatement pstmt = null;

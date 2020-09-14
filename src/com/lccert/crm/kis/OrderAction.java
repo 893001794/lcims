@@ -1259,9 +1259,9 @@ public class OrderAction {
 	 */
 	public PageModel searchOrder(int pageNo,int pageSize,String pid,String uid, int clientid,String parttype) {
 		String whereStr="";
-		String countSql="select count(*) from t_sales_order where 1=1 ";
+		String countSql="select count(*) from t_sales_order where 1=1 and sealup='n' ";
 		StringBuffer str = new StringBuffer();
-		str.append("select * from t_sales_order where 1=1");
+		str.append("select * from t_sales_order where 1=1  and sealup='n' ");
 		if(pid != null && !"".equals(pid)) {
 			whereStr=" and vpid like '%" + pid + "%'";
 			//str.append(" and vpid like '%" + pid + "%'");

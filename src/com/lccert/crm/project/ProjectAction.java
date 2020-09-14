@@ -127,7 +127,7 @@ public class ProjectAction {
 	 * @return
 	 */
 	public List<Project> getAllProjectByPid(String pid) {
-		String sql = "select * from t_project where vpid = '" + pid + "' ORDER BY vsid  ";
+		String sql = "select * from t_project where vpid = '" + pid + "' and sealup='n' ORDER BY vsid  ";
 		System.out.println(sql);
 //		return null;
 		return DaoFactory.getInstance().getProjectDao().getAllProjects(sql);
