@@ -32,7 +32,6 @@
 	if(qt == null) {
 		qt = new Quotation();
 	}
-
 %>
 
 <html>
